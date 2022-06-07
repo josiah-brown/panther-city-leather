@@ -1,3 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;600;700&display=swap");
+
+:root {
+  --c-bg: #fff;
+  --c-text: #000;
+}
+
+html,
 body {
-  color: steelblue;
+  color: var(--c-text);
+  background: var(--c-bg);
+  font-family: "Montserrat", sans-serif;
+}
+
+button,
+button:active,
+button:focus {
+  border: none !important;
+  box-shadow: none !important;
 }
