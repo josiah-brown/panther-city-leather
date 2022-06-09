@@ -1,12 +1,13 @@
-import { Link } from "react-router-dom";
 import Nav from "../../components/nav/Nav";
+import "./about.css";
 
 export default function About() {
   return (
     <main>
-      <Nav />
+      <Nav color="nav-white" />
+      <div className="spacer-static"></div>
       <h1>About</h1>
-      {/* <Link to="/">Home</Link> */}
+      <div className="spacer"></div>
     </main>
   );
 }

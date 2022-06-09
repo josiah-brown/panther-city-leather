@@ -1,0 +1,8 @@
+.spacer {
+  height: 100vh;
+}
+
+.spacer-static {
+  height: 96.5px;
+  z-index: -1;
+}
