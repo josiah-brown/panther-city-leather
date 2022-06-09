@@ -1,12 +1,10 @@
-import Nav from "../../components/nav/Nav";
 import HOME from "../../assets/example-hero.jpg";
 import "./home.css";
 
 export default function Home() {
   return (
     <main className="page-wrapper">
-      <Nav />
-      <div id="#home-hero">
+      <div id="home-hero">
         <img src={HOME} alt="leather bag" />
       </div>
       <div id="home-message">

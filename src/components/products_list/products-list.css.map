@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,SAAS,CAAC;EACR,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,OAAO;EAC9B,GAAG,EAAE,IAAI;EACT,OAAO,EAAE,MAAM;CAChB",
+    "sources": [
+        "products-list.scss"
+    ],
+    "names": [],
+    "file": "products-list.css"
+}

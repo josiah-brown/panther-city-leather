@@ -4,7 +4,6 @@ import "./about.css";
 export default function About() {
   return (
     <main>
-      <Nav color="nav-white" />
       <div className="spacer-static"></div>
       <h1>About</h1>
       <div className="spacer"></div>
