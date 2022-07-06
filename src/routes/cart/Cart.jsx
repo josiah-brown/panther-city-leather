@@ -1,7 +1,9 @@
 import React from "react";
+import Nav2 from "../../components/nav/Nav2";
 import CartItem from "./cart_item/CartItem";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import Footer from "../../components/footer/Footer";
 
 const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
   const renderEmptyMessage = () => {
@@ -40,6 +42,7 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
 
   return (
     <div className="cart">
+      <Nav2 />
       <h4 className="cart__heading">Your Shopping Cart</h4>
       {cart.line_items ? (
         <div>
@@ -51,15 +54,18 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
               <button className="cart__btn-empty" onClick={handleEmptyCart}>
                 Empty cart
               </button>
-              <Link className="cart__btn-checkout" to="/checkout">
-                Checkout
-              </Link>
+              <button>
+                <Link className="cart__btn-checkout" to="/checkout">
+                  Checkout
+                </Link>
+              </button>
             </div>
           ) : null}
         </div>
       ) : (
         "Loading Cart..."
       )}
+      <Footer />
     </div>
   );
 };

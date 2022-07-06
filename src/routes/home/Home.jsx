@@ -1,9 +1,12 @@
 import HOME from "../../assets/example-hero.jpg";
 import "./home.css";
+import Nav2 from "../../components/nav/Nav2";
+import Footer from "../../components/footer/Footer";
 
 export default function Home() {
   return (
     <main className="page-wrapper">
+      <Nav2 />
       <div id="home-hero">
         <img src={HOME} alt="leather bag" />
       </div>
@@ -33,6 +36,7 @@ export default function Home() {
           <p>FOOTER</p>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }

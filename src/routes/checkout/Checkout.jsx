@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import commerce from "../../lib/commerce";
-// import Nav from "../../components/nav/Nav";
+import Nav2 from "../../components/nav/Nav2";
 
 const Checkout = ({ cart }) => {
   const [checkoutToken, setCheckoutToken] = useState({});
@@ -39,9 +39,9 @@ const Checkout = ({ cart }) => {
           console.log(token);
           return token;
         })
-        .then((token) => {
-          fetchShippingCountries(token.id);
-        })
+        // .then((token) => {
+        //   fetchShippingCountries(token.id);
+        // })
         .catch((error) => {
           console.log("There was an error in generating a token", error);
         });
@@ -203,7 +203,7 @@ const Checkout = ({ cart }) => {
           onChange={handleFormChanges}
         />
 
-        <label className="checkout__label" htmlFor="shippingCountry">
+        {/* <label className="checkout__label" htmlFor="shippingCountry">
           Country
         </label>
         <select
@@ -223,7 +223,7 @@ const Checkout = ({ cart }) => {
               })
             : console.log("There are no countries")}
           ;
-        </select>
+        </select> */}
 
         {/*<label className="checkout__label" htmlFor="shippingStateProvince">
           State/province
@@ -332,6 +332,7 @@ const Checkout = ({ cart }) => {
 
   return (
     <main>
+      <Nav2 />
       <h1>Checkout</h1>
       {renderCheckoutForm()}
     </main>

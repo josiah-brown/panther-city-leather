@@ -1,8 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
 // import { AiOutlineShopping } from "react-icons/ai";
-// import { AiOutlineMenu } from "react-icons/ai";
-// import { IoLogoVk } from "react-icons/io";
-// import { BiX } from "react-icons/bi";
 
 const Nav2 = () => {
   return (
@@ -11,19 +9,19 @@ const Nav2 = () => {
         <div>
           <ul>
             <li>
-              <a href="/">HOME</a>
+              <Link to="/">HOME</Link>
             </li>
             <li>
-              <a href="/products">PRODUCTS</a>
+              <Link to="/products">PRODUCTS</Link>
             </li>
             <li>
-              <a href="/about">ABOUT</a>
+              <Link to="/about">ABOUT</Link>
             </li>
             <li>
-              <a href="/cart">CART</a>
+              <Link to="/cart">CART</Link>
             </li>
             <li>
-              <a href="/checkout">CHECKOUT</a>
+              <Link to="/checkout">CHECKOUT</Link>
             </li>
           </ul>
         </div>
