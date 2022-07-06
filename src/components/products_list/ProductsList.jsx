@@ -3,11 +3,15 @@ import PropTypes from "prop-types";
 import ProductItem from "../product_item/ProductItem";
 import "./products-list.css";
 
-const ProductsList = ({ products }) => {
+const ProductsList = ({ products, onAddToCart }) => {
   return (
     <div className="products" id="products">
       {products.map((product) => (
-        <ProductItem key={product.id} product={product} />
+        <ProductItem
+          key={product.id}
+          product={product}
+          onAddToCart={onAddToCart}
+        />
       ))}
     </div>
   );

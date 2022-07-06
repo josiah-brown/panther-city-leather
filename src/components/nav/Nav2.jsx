@@ -19,6 +19,9 @@ const Nav2 = () => {
             <li>
               <a href="/about">ABOUT</a>
             </li>
+            <li>
+              <a href="/cart">CART</a>
+            </li>
           </ul>
         </div>
       </div>

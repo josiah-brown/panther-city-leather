@@ -1,10 +1,14 @@
 import React from "react";
-import { stripHtml } from "string-strip-html";
+// import { stripHtml } from "string-strip-html";
 import PropTypes from "prop-types";
 import "./product-item.css";
 
-const ProductItem = ({ product }) => {
-  const { result } = stripHtml(product.description);
+const ProductItem = ({ product, onAddToCart }) => {
+  // const { result } = stripHtml(product.description);
+
+  const handleAddToCart = () => {
+    onAddToCart(product.id, 1);
+  };
 
   return (
     <div className="product__card">
@@ -23,6 +27,13 @@ const ProductItem = ({ product }) => {
           <p className="product__price">
             {product.price.formatted_with_symbol}
           </p>
+          <button
+            name="Add to cart"
+            className="product__btn"
+            onClick={handleAddToCart}
+          >
+            Quick add
+          </button>
         </div>
       </div>
     </div>
