@@ -85,17 +85,25 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchProducts();
-    fetchCart();
+    // fetchProducts();
+    // fetchCart();
   }, []);
 
   return (
     <div className="app-wrapper">
-      {/* <Nav2 /> */}
-
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={
+              <Home
+                products={products}
+                fetchProducts={fetchProducts}
+                cart={cart}
+                fetchCart={fetchCart}
+              />
+            }
+          />
           <Route path="about" element={<About />} />
           <Route
             path="products"
@@ -103,6 +111,7 @@ const App = () => {
               <Products
                 products={products}
                 onAddToCart={handleAddToCart}
+                fetchProducts={fetchProducts}
                 loading={loading}
               />
             }
@@ -115,10 +124,14 @@ const App = () => {
                 onUpdateCartQty={handleUpdateCartQty}
                 onRemoveFromCart={handleRemoveFromCart}
                 onEmptyCart={handleEmptyCart}
+                fetchCart={fetchCart}
               />
             }
           />
-          <Route path="checkout" element={<Checkout cart={cart} />} />
+          <Route
+            path="checkout"
+            element={<Checkout cart={cart} fetchCart={fetchCart} />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

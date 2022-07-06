@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Nav2 from "../../components/nav/Nav2";
 import CartItem from "./cart_item/CartItem";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Footer from "../../components/footer/Footer";
 
-const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
+const Cart = ({
+  cart,
+  onUpdateCartQty,
+  onRemoveFromCart,
+  onEmptyCart,
+  fetchCart,
+}) => {
   const renderEmptyMessage = () => {
     if (cart.total_unique_items > 0) {
       return;
@@ -39,6 +45,10 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
   const handleEmptyCart = () => {
     onEmptyCart();
   };
+
+  useEffect(() => {
+    fetchCart();
+  }, []);
 
   return (
     <div className="cart">
