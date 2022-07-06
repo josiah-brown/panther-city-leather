@@ -1,5 +1,5 @@
 import React from "react";
-import CartItem from "./CartItem";
+import CartItem from "./cart_item/CartItem";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 

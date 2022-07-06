@@ -1,4 +1,4 @@
-import ProductsList from "../../components/products_list/ProductsList.jsx";
+import ProductsList from "./products_list/ProductsList.jsx";
 
 const Products = ({ products, onAddToCart, loading }) => {
   return (

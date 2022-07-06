@@ -22,6 +22,9 @@ const Nav2 = () => {
             <li>
               <a href="/cart">CART</a>
             </li>
+            <li>
+              <a href="/checkout">CHECKOUT</a>
+            </li>
           </ul>
         </div>
       </div>
