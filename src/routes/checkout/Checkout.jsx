@@ -1,77 +1,66 @@
 import React, { useEffect, useState } from "react";
 import commerce from "../../lib/commerce";
+import "./checkout.css";
 import Nav2 from "../../components/nav/Nav2";
-import CheckoutForm from "./checkout_form/CheckoutForm";
 
-const Checkout = ({ cart, fetchCart, onCaptureCheckout }) => {
+const Checkout = (props) => {
+  // STATE VARIABLES
+  // Checkout token (generated when checkout is loaded)
   const [checkoutToken, setCheckoutToken] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [fields, setFields] = useState({
-    // Customer details
-    firstName: "Jane",
-    lastName: "Doe",
-    email: "janedoe@email.com",
-    // Shipping details
-    shippingName: "Jane Doe",
-    shippingStreet: "123 Fake St",
-    shippingCity: "San Francisco",
-    shippingStateProvince: "TX",
-    shippingPostalZipCode: "94107",
-    shippingCountry: "US",
-    // Payment details
-    cardNum: "4242 4242 4242 4242",
-    expMonth: "11",
-    expYear: "2023",
-    ccv: "123",
-    billingPostalZipcode: "94107",
-    // Shipping and fulfillment data
-    shippingCountries: {},
-    shippingSubdivisions: {},
-    shippingOptions: [],
-    shippingOption: "",
-  });
 
-  const generateCheckoutToken = () => {
-    if (cart.line_items.length) {
-      return commerce.checkout
-        .generateToken(cart.id, { type: "cart" })
+  // Contact details
+  const [firstName, setFirstName] = useState("Jane");
+  const [lastName, setLastName] = useState("Doe");
+  const [email, setEmail] = useState("janedoe@gmail.com");
+
+  // Shipping details
+  const [shippingName, setShippingName] = useState("Jane Doe");
+  const [shippingStreet, setShippingStreet] = useState("123 Fake St");
+  const [shippingCity, setShippingCity] = useState("San Francisco");
+  const [shippingStateProvince, setShippingStateProvince] = useState("");
+  const [shippingPostalZipCode, setShippingPostalZipCode] = useState("94107");
+  const [shippingCountry, setShippingCountry] = useState("");
+
+  // Payment details
+  const [cardNum, setCardNum] = useState("4242 4242 4242 4242");
+  const [expMonth, setExpMonth] = useState("11");
+  const [expYear, setExpYear] = useState("2023");
+  const [ccv, setCcv] = useState("123");
+  const [billingPostalZipcode, setBillingPostalZipcode] = useState("94107");
+
+  // Shipping and fulfillment data
+  const [shippingCountries, setShippingCountries] = useState({});
+  const [shippingSubdivisions, setShippingSubdivisions] = useState({});
+  const [shippingOptions, setShippingOptions] = useState([]);
+  const [shippingOption, setShippingOption] = useState("");
+
+  function generateCheckoutToken() {
+    if (props.cart.line_items.length) {
+      commerce.checkout
+        .generateToken(props.cart.id, { type: "cart" })
         .then((token) => {
-          setCheckoutToken(token);
-          return console.log("1 - Checkout Token Set");
+          return setCheckoutToken(token);
         })
         .then(() => {
-          fetchShippingCountries(checkoutToken.id);
-          return console.log("2 - Shipping Countries Set");
+          return console.log("1 - Token successfully generated.");
         })
         .then(() => {
-          fetchShippingOptions(checkoutToken.id, fields.shippingCountry);
-          return console.log("3 - Shipping Options Set");
+          return fetchShippingCountries(checkoutToken.id);
         })
         .then(() => {
-          setLoading(false);
-          return console.log("4 - Loading Set To False");
-        })
-        .then(() => {
-          return console.log("Current Field Values: ", fields);
+          return console.log("2 - Shipping countries fetched successfully");
         })
         .catch((error) => {
           console.log("There was an error in generating a token", error);
         });
-    } else {
-      console.log("Cart is empty");
     }
-  };
+  }
 
-  const fetchShippingCountries = (checkoutTokenId) => {
+  function fetchShippingCountries(checkoutTokenId) {
     commerce.services
       .localeListShippingCountries(checkoutTokenId)
       .then((countries) => {
-        let fieldsCopy = structuredClone(fields);
-        fieldsCopy.shippingCountries = countries.countries;
-        setFields({
-          ...fields,
-          shippingCountries: countries.countries,
-        });
+        setShippingCountries(countries.countries);
       })
       .catch((error) => {
         console.log(
@@ -79,46 +68,90 @@ const Checkout = ({ cart, fetchCart, onCaptureCheckout }) => {
           error
         );
       });
-  };
+  }
 
-  const fetchSubdivisions = (countryCode) => {
+  function fetchSubdivisions(countryCode) {
     commerce.services
       .localeListSubdivisions(countryCode)
       .then((subdivisions) => {
-        setFields({
-          ...fields,
-          shippingSubdivisions: subdivisions.subdivisions,
-        });
+        setShippingSubdivisions(subdivisions.subdivisions);
       })
       .catch((error) => {
         console.log("There was an error fetching the subdivisions", error);
       });
-  };
+  }
 
-  const fetchShippingOptions = (
+  function fetchShippingOptions(
     checkoutTokenId,
     country,
     stateProvince = null
-  ) => {
+  ) {
     commerce.checkout
       .getShippingOptions(checkoutTokenId, {
         country: country,
         region: stateProvince,
       })
       .then((options) => {
-        const shippingOption = options[0] || null;
-        setFields({
-          ...fields,
-          shippingOptions: options,
-          shippingOption: shippingOption,
-        });
+        const shipOption = options[0] || null;
+        setShippingOptions(options);
+        setShippingOption(shipOption);
       })
       .catch((error) => {
         console.log("There was an error fetching the shipping methods", error);
       });
-  };
+  }
 
-  const renderCheckoutForm = () => {
+  //Contact detail change handlers
+  function handleFirstNameChange(e) {
+    setFirstName(e.target.value);
+  }
+  function handleLastNameChange(e) {
+    setLastName(e.target.value);
+  }
+  function handleEmailChange(e) {
+    setEmail(e.target.value);
+  }
+
+  //Shipping detail change handlers
+  function handleShippingNameChange(e) {
+    setShippingName(e.target.value);
+  }
+  function handleShippingStreetChange(e) {
+    setShippingStreet(e.target.value);
+  }
+  function handleShippingCityChange(e) {
+    setShippingCity(e.target.value);
+  }
+  function handleShippingPostalZipCodeChange(e) {
+    setShippingPostalZipCode(e.target.value);
+  }
+
+  //Payment detail change handlers
+  function handleCardNumChange(e) {
+    setCardNum(e.target.value);
+  }
+  function handleExpMonthChange(e) {
+    setExpMonth(e.target.value);
+  }
+  function handleExpYearChange(e) {
+    setExpYear(e.target.value);
+  }
+  function handleCcvChange(e) {
+    setCcv(e.target.value);
+  }
+
+  //Fulfillment change handlers
+  function handleShippingCountryChange(e) {
+    setShippingCountry(e.target.value);
+  }
+  function handleShippingStateProvinceChange(e) {
+    setShippingStateProvince(e.target.value);
+  }
+  function handleShippingOptionChange(e) {
+    setShippingOption(e.target.value);
+  }
+
+  function renderCheckoutForm() {
     return (
       <form className="checkout__form">
         <h4 className="checkout__subheading">Customer information</h4>
@@ -129,11 +162,11 @@ const Checkout = ({ cart, fetchCart, onCaptureCheckout }) => {
         <input
           className="checkout__input"
           type="text"
-          value={fields.firstName}
+          onChange={handleFirstNameChange}
+          value={firstName}
           name="firstName"
           placeholder="Enter your first name"
           required
-          onChange={handleFormChanges}
         />
 
         <label className="checkout__label" htmlFor="lastName">
@@ -142,11 +175,11 @@ const Checkout = ({ cart, fetchCart, onCaptureCheckout }) => {
         <input
           className="checkout__input"
           type="text"
-          value={fields.lastName}
+          onChange={handleLastNameChange}
+          value={lastName}
           name="lastName"
           placeholder="Enter your last name"
           required
-          onChange={handleFormChanges}
         />
 
         <label className="checkout__label" htmlFor="email">
@@ -155,11 +188,11 @@ const Checkout = ({ cart, fetchCart, onCaptureCheckout }) => {
         <input
           className="checkout__input"
           type="text"
-          value={fields.email}
+          onChange={handleEmailChange}
+          value={email}
           name="email"
           placeholder="Enter your email"
           required
-          onChange={handleFormChanges}
         />
 
         <h4 className="checkout__subheading">Shipping details</h4>
@@ -170,11 +203,11 @@ const Checkout = ({ cart, fetchCart, onCaptureCheckout }) => {
         <input
           className="checkout__input"
           type="text"
-          value={fields.shippingName}
+          onChange={handleShippingNameChange}
+          value={shippingName}
           name="shippingName"
           placeholder="Enter your shipping full name"
           required
-          onChange={handleFormChanges}
         />
 
         <label className="checkout__label" htmlFor="shippingStreet">
@@ -183,11 +216,11 @@ const Checkout = ({ cart, fetchCart, onCaptureCheckout }) => {
         <input
           className="checkout__input"
           type="text"
-          value={fields.shippingStreet}
+          onChange={handleShippingStreetChange}
+          value={shippingStreet}
           name="shippingStreet"
           placeholder="Enter your street address"
           required
-          onChange={handleFormChanges}
         />
 
         <label className="checkout__label" htmlFor="shippingCity">
@@ -196,11 +229,11 @@ const Checkout = ({ cart, fetchCart, onCaptureCheckout }) => {
         <input
           className="checkout__input"
           type="text"
-          value={fields.shippingCity}
+          onChange={handleShippingCityChange}
+          value={shippingCity}
           name="shippingCity"
           placeholder="Enter your city"
           required
-          onChange={handleFormChanges}
         />
 
         <label className="checkout__label" htmlFor="shippingPostalZipCode">
@@ -209,88 +242,81 @@ const Checkout = ({ cart, fetchCart, onCaptureCheckout }) => {
         <input
           className="checkout__input"
           type="text"
-          value={fields.shippingPostalZipCode}
+          onChange={handleShippingPostalZipCodeChange}
+          value={shippingPostalZipCode}
           name="shippingPostalZipCode"
           placeholder="Enter your postal/zip code"
           required
-          onChange={handleFormChanges}
         />
 
         <label className="checkout__label" htmlFor="shippingCountry">
           Country
         </label>
         <select
-          value={fields.shippingCountry}
+          defaultValue={shippingCountry}
           name="shippingCountry"
           className="checkout__select"
-          onChange={handleFormChanges}
+          onChange={handleShippingCountryChange}
         >
           <option disabled>Country</option>
-
-          {console.log(fields)}
-
-          {/* {fields.shippingCountries
-            ? fields.shippingCountries.map((index) => {
-                return (
-                  <option value={index} key={index}>
-                    {fields.shippingCountries[index]}
-                  </option>
-                );
-              })
-            : console.log("There are no countries")}
-          ; */}
+          {/* <option selected disabled>
+            Select Country
+          </option> */}
+          {Object.keys(shippingCountries).map((index) => {
+            return (
+              <option value={index} key={index}>
+                {shippingCountries[index]}
+              </option>
+            );
+          })}
+          ;
         </select>
 
         <label className="checkout__label" htmlFor="shippingStateProvince">
-          State/province
+          State/Province
         </label>
         <select
-          value={fields.shippingStateProvince}
+          value={shippingStateProvince}
           name="shippingStateProvince"
-          onChange={handleFormChanges}
           className="checkout__select"
+          onChange={handleShippingStateProvinceChange}
         >
           <option className="checkout__option" disabled>
             State/province
           </option>
-
-          {/* {fields.shippingStateProvince?.length
-            ? fields.shippingStateProvince.map((index) => {
-                return (
-                  <option value={index} key={index}>
-                    {fields.shippingStateProvince[index]}
-                  </option>
-                );
-              })
-            : console.log("There are no state provinces")}
-          ; */}
+          {Object.keys(shippingSubdivisions).map((index) => {
+            return (
+              <option value={index} key={index}>
+                {shippingSubdivisions[index]}
+              </option>
+            );
+          })}
+          ;
         </select>
 
-        {/* <label className="checkout__label" htmlFor="shippingOption">
+        <label className="checkout__label" htmlFor="shippingOption">
           Shipping method
         </label>
         <select
-          value={fields.shippingOption.id}
+          value={shippingOption.id}
           name="shippingOption"
-          onChange={handleFormChanges}
           className="checkout__select"
+          onChange={handleShippingOptionChange}
         >
           <option className="checkout__select-option" disabled>
             Select a shipping method
           </option>
-          {fields.shippingOptions?.length
-            ? fields.shippingOptions.map((method, index) => {
-                return (
-                  <option
-                    className="checkout__select-option"
-                    value={method.id}
-                    key={index}
-                  >{`${method.description} - $${method.price.formatted_with_code}`}</option>
-                );
-              })
-            : console.log("There are no shipping options")}
+          {shippingOptions.map((method, index) => {
+            return (
+              <option
+                className="checkout__select-option"
+                value={method.id}
+                key={index}
+              >{`${method.description} - $${method.price.formatted_with_code}`}</option>
+            );
+          })}
           ;
-        </select> */}
+        </select>
 
         <h4 className="checkout__subheading">Payment information</h4>
 
@@ -301,9 +327,9 @@ const Checkout = ({ cart, fetchCart, onCaptureCheckout }) => {
           className="checkout__input"
           type="text"
           name="cardNum"
-          value={fields.cardNum}
+          onChange={handleCardNumChange}
+          value={cardNum}
           placeholder="Enter your card number"
-          onChange={handleFormChanges}
         />
 
         <label className="checkout__label" htmlFor="expMonth">
@@ -313,9 +339,9 @@ const Checkout = ({ cart, fetchCart, onCaptureCheckout }) => {
           className="checkout__input"
           type="text"
           name="expMonth"
-          value={fields.expMonth}
+          onChange={handleExpMonthChange}
+          value={expMonth}
           placeholder="Card expiry month"
-          onChange={handleFormChanges}
         />
 
         <label className="checkout__label" htmlFor="expYear">
@@ -325,9 +351,9 @@ const Checkout = ({ cart, fetchCart, onCaptureCheckout }) => {
           className="checkout__input"
           type="text"
           name="expYear"
-          value={fields.expYear}
+          onChange={handleExpYearChange}
+          value={expYear}
           placeholder="Card expiry year"
-          onChange={handleFormChanges}
         />
 
         <label className="checkout__label" htmlFor="ccv">
@@ -337,90 +363,43 @@ const Checkout = ({ cart, fetchCart, onCaptureCheckout }) => {
           className="checkout__input"
           type="text"
           name="ccv"
-          value={fields.ccv}
+          onChange={handleCcvChange}
+          value={ccv}
           placeholder="CCV (3 digits)"
-          onChange={handleFormChanges}
         />
 
-        <button onClick={onCaptureCheckout} className="checkout__btn-confirm">
+        <button
+          className="checkout__btn-confirm"
+          onClick={(e) => {
+            e.preventDefault();
+            console.log(shippingCountry);
+          }}
+        >
           Confirm order
         </button>
       </form>
     );
-  };
-
-  const sanitizedLineItems = (lineItems) => {
-    return lineItems.reduce((data, lineItem) => {
-      const item = data;
-      let variantData = null;
-      if (lineItem.selected_options.length) {
-        variantData = {
-          [lineItem.selected_options[0].group_id]:
-            lineItem.selected_options[0].option_id,
-        };
-      }
-      item[lineItem.id] = {
-        quantity: lineItem.quantity,
-        variants: variantData,
-      };
-      return item;
-    }, {});
-  };
-
-  const handleCaptureCheckout = (e) => {
-    e.preventDefault();
-    const orderData = {
-      line_items: sanitizedLineItems(cart.line_items),
-      customer: {
-        firstname: fields.firstName,
-        lastname: fields.lastName,
-        email: fields.email,
-      },
-      shipping: {
-        name: fields.shippingName,
-        street: fields.shippingStreet,
-        town_city: fields.shippingCity,
-        county_state: fields.shippingStateProvince,
-        postal_zip_code: fields.shippingPostalZipCode,
-        country: fields.shippingCountry,
-      },
-      fulfillment: {
-        shipping_method: fields.shippingOption.id,
-      },
-      payment: {
-        gateway: "test_gateway",
-        card: {
-          number: fields.cardNum,
-          expiry_month: fields.expMonth,
-          expiry_year: fields.expYear,
-          cvc: fields.ccv,
-          postal_zip_code: fields.billingPostalZipcode,
-        },
-      },
-    };
-    onCaptureCheckout(checkoutToken.id, orderData);
-  };
-
-  const handleFormChanges = (e) => {
-    setFields({ ...fields, [e.target.name]: e.target.value });
-  };
+  }
 
   useEffect(() => {
-    generateCheckoutToken();
-  }, []);
+    if (props.cart.line_items) {
+      generateCheckoutToken();
+    }
+  }, [props.cart]);
 
-  // useEffect(() => {
-  //   fetchShippingOptions(checkoutToken.id, fields.shippingCountry);
-  // });
+  useEffect(() => {
+    if (shippingCountry && shippingCountry != "") {
+      fetchSubdivisions(shippingCountry);
+      fetchShippingOptions(checkoutToken.id, shippingCountry);
+    }
+  }, [shippingCountry]);
 
   return (
-    <main>
+    <div>
       <Nav2 />
       <h1>Checkout</h1>
-      {
-        loading ? "Loading..." : renderCheckoutForm() // <CheckoutForm fields={fields} handleFormChanges={handleFormChanges} />
-      }
-    </main>
+      {renderCheckoutForm()}
+    </div>
   );
 };
 

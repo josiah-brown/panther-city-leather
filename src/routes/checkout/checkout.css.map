@@ -2,8 +2,8 @@
     "version": 3,
     "mappings": "AAAA,AAAA,KAAK;AACL,KAAK,CAAC;EACJ,OAAO,EAAE,KAAK;CACf;;AAED,AAAA,EAAE,CAAC;EACD,UAAU,EAAE,IAAI;CACjB",
     "sources": [
-        "checkout-form.scss"
+        "checkout.scss"
     ],
     "names": [],
-    "file": "checkout-form.css"
+    "file": "checkout.css"
 }

@@ -2,14 +2,8 @@ import HOME from "../../assets/example-hero.jpg";
 import "./home.css";
 import Nav2 from "../../components/nav/Nav2";
 import Footer from "../../components/footer/Footer";
-import { useEffect } from "react";
 
 const Home = (props) => {
-  useEffect(() => {
-    props.fetchProducts();
-    props.fetchCart();
-  }, []);
-
   return (
     <main className="page-wrapper">
       <Nav2 />
