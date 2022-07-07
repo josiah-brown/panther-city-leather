@@ -10,6 +10,8 @@ import commerce from "./lib/commerce";
 const App = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
+  const [order, setOrder] = useState({});
+  const [merchant, setMerchant] = useState();
   const [loading, setLoading] = useState(true);
 
   const fetchProducts = () => {
@@ -84,6 +86,36 @@ const App = () => {
       });
   };
 
+  const refreshCart = () => {
+    commerce.cart
+      .refresh()
+      .then((newCart) => {
+        setCart(newCart);
+      })
+      .catch((error) => {
+        console.log("There was an error refreshing your cart", error);
+      });
+  };
+
+  const handleCaptureCheckout = (checkoutTokenId, newOrder) => {
+    commerce.checkout
+      .capture(checkoutTokenId, newOrder)
+      .then((order) => {
+        // Save the order into state
+        setOrder(order);
+        // Clear the cart
+        refreshCart();
+        // Send the user to the receipt
+        this.props.history.push("/confirmation");
+        // Store the order in session storage so we can show it again if the
+        // user refreshes the page!
+        window.sessionStorage.setItem("order_receipt", JSON.stringify(order));
+      })
+      .catch((error) => {
+        console.log("There was an error confirming your order", error);
+      });
+  };
+
   useEffect(() => {
     // fetchProducts();
     // fetchCart();
@@ -130,7 +162,13 @@ const App = () => {
           />
           <Route
             path="checkout"
-            element={<Checkout cart={cart} fetchCart={fetchCart} />}
+            element={
+              <Checkout
+                cart={cart}
+                fetchCart={fetchCart}
+                onCaptureCheckout={handleCaptureCheckout}
+              />
+            }
           />
         </Routes>
       </BrowserRouter>

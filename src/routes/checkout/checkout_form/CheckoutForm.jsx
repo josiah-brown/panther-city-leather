@@ -121,51 +121,55 @@ const CheckoutForm = ({ fields, handleFormChanges }) => {
         ;
       </select>
 
-      {/*<label className="checkout__label" htmlFor="shippingStateProvince">
-                  State/province
-                </label>
-                <select
-                  value={fields.shippingStateProvince}
-                  name="shippingStateProvince"
-                  onChange={handleFormChanges}
-                  className="checkout__select"
-                >
-                  <option className="checkout__option" disabled>
-                    State/province
-                  </option>
-                  {fields.shippingSubdivisions.map((index) => {
-                    return (
-                      <option value={index} key={index}>
-                        {fields.shippingSubdivisions[index]}
-                      </option>
-                    );
-                  })}
-                  ;
-                </select>
-        
-                <label className="checkout__label" htmlFor="shippingOption">
-                  Shipping method
-                </label>
-                <select
-                  value={fields.shippingOption.id}
-                  name="shippingOption"
-                  onChange={handleFormChanges}
-                  className="checkout__select"
-                >
-                  <option className="checkout__select-option" disabled>
-                    Select a shipping method
-                  </option>
-                  {fields.shippingOptions.map((method, index) => {
-                    return (
-                      <option
-                        className="checkout__select-option"
-                        value={method.id}
-                        key={index}
-                      >{`${method.description} - $${method.price.formatted_with_code}`}</option>
-                    );
-                  })}
-                  ;
-                </select> */}
+      <label className="checkout__label" htmlFor="shippingStateProvince">
+        State/province
+      </label>
+      <select
+        value={fields.shippingStateProvince}
+        name="shippingStateProvince"
+        onChange={handleFormChanges}
+        className="checkout__select"
+      >
+        <option className="checkout__option" disabled>
+          State/province
+        </option>
+        {fields.shippingStateProvince?.length
+          ? fields.shippingStateProvince.map((index) => {
+              return (
+                <option value={index} key={index}>
+                  {fields.shippingStateProvince[index]}
+                </option>
+              );
+            })
+          : console.log("There are no state provinces")}
+        ;
+      </select>
+
+      <label className="checkout__label" htmlFor="shippingOption">
+        Shipping method
+      </label>
+      <select
+        value={fields.shippingOption.id}
+        name="shippingOption"
+        onChange={handleFormChanges}
+        className="checkout__select"
+      >
+        <option className="checkout__select-option" disabled>
+          Select a shipping method
+        </option>
+        {fields.shippingOptions?.length
+          ? fields.shippingOptions.map((method, index) => {
+              return (
+                <option
+                  className="checkout__select-option"
+                  value={method.id}
+                  key={index}
+                >{`${method.description} - $${method.price.formatted_with_code}`}</option>
+              );
+            })
+          : console.log("There are no shipping options")}
+        ;
+      </select>
 
       <h4 className="checkout__subheading">Payment information</h4>
 
