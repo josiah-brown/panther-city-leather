@@ -17,9 +17,9 @@ const Checkout = (props) => {
   const [shippingName, setShippingName] = useState("Jane Doe");
   const [shippingStreet, setShippingStreet] = useState("123 Fake St");
   const [shippingCity, setShippingCity] = useState("San Francisco");
-  const [shippingStateProvince, setShippingStateProvince] = useState("");
+  const [shippingStateProvince, setShippingStateProvince] = useState("AL");
   const [shippingPostalZipCode, setShippingPostalZipCode] = useState("94107");
-  const [shippingCountry, setShippingCountry] = useState("");
+  const [shippingCountry, setShippingCountry] = useState("US");
 
   // Payment details
   const [cardNum, setCardNum] = useState("4242 4242 4242 4242");
@@ -50,6 +50,18 @@ const Checkout = (props) => {
         .then(() => {
           return console.log("2 - Shipping countries fetched successfully");
         })
+        .then(() => {
+          return fetchSubdivisions("US");
+        })
+        .then(() => {
+          return console.log("3 - Subdivisions fetched successfully");
+        })
+        .then(() => {
+          return fetchShippingOptions(checkoutToken.id, "US", null);
+        })
+        .then(() => {
+          return console.log("4 - Shipping options fetched successfully");
+        })
         .catch((error) => {
           console.log("There was an error in generating a token", error);
         });
@@ -75,6 +87,7 @@ const Checkout = (props) => {
       .localeListSubdivisions(countryCode)
       .then((subdivisions) => {
         setShippingSubdivisions(subdivisions.subdivisions);
+        setShippingStateProvince(Object.keys(subdivisions.subdivisions)[0]);
       })
       .catch((error) => {
         console.log("There was an error fetching the subdivisions", error);
@@ -142,10 +155,15 @@ const Checkout = (props) => {
 
   //Fulfillment change handlers
   function handleShippingCountryChange(e) {
-    setShippingCountry(e.target.value);
+    const currVal = e.target.value;
+    setShippingCountry(currVal);
+    fetchSubdivisions(currVal);
+    fetchShippingOptions(checkoutToken.id, currVal, null);
   }
   function handleShippingStateProvinceChange(e) {
-    setShippingStateProvince(e.target.value);
+    const currVal = e.target.value;
+    setShippingStateProvince(currVal);
+    fetchShippingOptions(checkoutToken.id, shippingCountry, currVal);
   }
   function handleShippingOptionChange(e) {
     setShippingOption(e.target.value);
@@ -253,21 +271,23 @@ const Checkout = (props) => {
           Country
         </label>
         <select
-          defaultValue={shippingCountry}
+          value={shippingCountry}
           name="shippingCountry"
           className="checkout__select"
           onChange={handleShippingCountryChange}
         >
-          <option disabled>Country</option>
-          {/* <option selected disabled>
-            Select Country
-          </option> */}
+          <option className="checkout__option" disabled>
+            Country
+          </option>
+          <option value={"US"} key={"US"}>
+            {"United States"}
+          </option>
           {Object.keys(shippingCountries).map((index) => {
-            return (
+            return index != "US" ? (
               <option value={index} key={index}>
                 {shippingCountries[index]}
               </option>
-            );
+            ) : null;
           })}
           ;
         </select>
@@ -372,7 +392,14 @@ const Checkout = (props) => {
           className="checkout__btn-confirm"
           onClick={(e) => {
             e.preventDefault();
-            console.log(shippingCountry);
+            console.log(
+              "Country: ",
+              shippingCountry,
+              "State: ",
+              shippingStateProvince,
+              "Option: ",
+              shippingOption
+            );
           }}
         >
           Confirm order
@@ -383,16 +410,10 @@ const Checkout = (props) => {
 
   useEffect(() => {
     if (props.cart.line_items) {
+      console.log("Cart loaded successfully");
       generateCheckoutToken();
     }
   }, [props.cart]);
-
-  useEffect(() => {
-    if (shippingCountry && shippingCountry != "") {
-      fetchSubdivisions(shippingCountry);
-      fetchShippingOptions(checkoutToken.id, shippingCountry);
-    }
-  }, [shippingCountry]);
 
   return (
     <div>

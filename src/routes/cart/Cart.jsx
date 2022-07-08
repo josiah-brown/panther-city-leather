@@ -4,7 +4,6 @@ import CartItem from "./cart_item/CartItem";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Footer from "../../components/footer/Footer";
-import { type } from "@testing-library/user-event/dist/type";
 
 const Cart = (props) => {
   // Displays message if cart is empty
