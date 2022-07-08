@@ -18,7 +18,7 @@ const Checkout = (props) => {
   const [shippingStreet, setShippingStreet] = useState("123 Fake St");
   const [shippingCity, setShippingCity] = useState("San Francisco");
   const [shippingStateProvince, setShippingStateProvince] = useState("AL");
-  const [shippingPostalZipCode, setShippingPostalZipCode] = useState("94107");
+  const [shippingPostalZipCode, setShippingPostalZipCode] = useState("76140");
   const [shippingCountry, setShippingCountry] = useState("US");
 
   // Payment details
@@ -26,7 +26,7 @@ const Checkout = (props) => {
   const [expMonth, setExpMonth] = useState("11");
   const [expYear, setExpYear] = useState("2023");
   const [ccv, setCcv] = useState("123");
-  const [billingPostalZipcode, setBillingPostalZipcode] = useState("94107");
+  const [billingPostalZipcode, setBillingPostalZipcode] = useState("76140");
 
   // Shipping and fulfillment data
   const [shippingCountries, setShippingCountries] = useState({});
@@ -152,6 +152,9 @@ const Checkout = (props) => {
   function handleCcvChange(e) {
     setCcv(e.target.value);
   }
+  function handleBillingPostalZipcodeChange(e) {
+    setBillingPostalZipcode(e.target.value);
+  }
 
   //Fulfillment change handlers
   function handleShippingCountryChange(e) {
@@ -169,7 +172,71 @@ const Checkout = (props) => {
     setShippingOption(e.target.value);
   }
 
+  function sanitizedLineItems(lineItems) {
+    return lineItems.reduce((data, lineItem) => {
+      const item = data;
+      let variantData = null;
+      if (lineItem.selected_options.length) {
+        variantData = {
+          [lineItem.selected_options[0].group_id]:
+            lineItem.selected_options[0].option_id,
+        };
+      }
+      item[lineItem.id] = {
+        quantity: lineItem.quantity,
+        variants: variantData,
+      };
+      return item;
+    }, {});
+  }
+
+  function handleCaptureCheckout(e) {
+    e.preventDefault();
+    const orderData = {
+      line_items: sanitizedLineItems(props.cart.line_items),
+      customer: {
+        firstname: firstName,
+        lastname: lastName,
+        email: email,
+      },
+      shipping: {
+        name: shippingName,
+        street: shippingStreet,
+        town_city: shippingCity,
+        county_state: shippingStateProvince,
+        postal_zip_code: shippingPostalZipCode,
+        country: shippingCountry,
+      },
+      billing: {
+        name: shippingName,
+        street: shippingStreet,
+        town_city: shippingCity,
+        county_state: shippingStateProvince,
+        postal_zip_code: shippingPostalZipCode,
+        country: shippingCountry,
+      },
+      fulfillment: {
+        shipping_method: shippingOption.id,
+      },
+      payment: {
+        gateway: "test_gateway",
+        card: {
+          number: cardNum,
+          expiry_month: expMonth,
+          expiry_year: expYear,
+          cvc: ccv,
+          postal_zip_code: billingPostalZipcode,
+        },
+      },
+    };
+    props.onCaptureCheckout(checkoutToken.id, orderData);
+  }
+
   function renderCheckoutForm() {
+    if (props.cart.line_items < 1) {
+      return <h1>Your cart is empty.</h1>;
+    }
+
     return (
       <form className="checkout__form">
         <h4 className="checkout__subheading">Customer information</h4>
@@ -283,7 +350,7 @@ const Checkout = (props) => {
             {"United States"}
           </option>
           {Object.keys(shippingCountries).map((index) => {
-            return index != "US" ? (
+            return index !== "US" ? (
               <option value={index} key={index}>
                 {shippingCountries[index]}
               </option>
@@ -388,19 +455,21 @@ const Checkout = (props) => {
           placeholder="CCV (3 digits)"
         />
 
+        <label className="checkout__label" htmlFor="billingPostalZipcode">
+          Billing Zip Code
+        </label>
+        <input
+          className="checkout__input"
+          type="text"
+          name="billingPostalZipcode"
+          onChange={handleBillingPostalZipcodeChange}
+          value={billingPostalZipcode}
+          placeholder="CCV (3 digits)"
+        />
+
         <button
           className="checkout__btn-confirm"
-          onClick={(e) => {
-            e.preventDefault();
-            console.log(
-              "Country: ",
-              shippingCountry,
-              "State: ",
-              shippingStateProvince,
-              "Option: ",
-              shippingOption
-            );
-          }}
+          onClick={handleCaptureCheckout}
         >
           Confirm order
         </button>
@@ -413,6 +482,7 @@ const Checkout = (props) => {
       console.log("Cart loaded successfully");
       generateCheckoutToken();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.cart]);
 
   return (

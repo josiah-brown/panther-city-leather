@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./routes/home/Home";
 import About from "./routes/about/About";
 import Products from "./routes/products/Products";
 import Cart from "./routes/cart/Cart";
 import Checkout from "./routes/checkout/Checkout";
+import Confirmation from "./routes/confirmation/Confirmation";
 import commerce from "./lib/commerce";
 
 const App = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
+  const [order, setOrder] = useState({});
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const fetchProducts = () => {
     commerce.products
@@ -83,56 +86,102 @@ const App = () => {
       });
   };
 
+  const refreshCart = () => {
+    commerce.cart
+      .refresh()
+      .then((newCart) => {
+        setCart(newCart);
+      })
+      .catch((error) => {
+        console.log("There was an error refreshing your cart", error);
+      });
+  };
+
+  const handleCaptureCheckout = (checkoutTokenId, newOrder) => {
+    commerce.checkout
+      .capture(checkoutTokenId, newOrder)
+      .then((order) => {
+        // Save the order into state
+        setOrder(order);
+        // Clear the cart
+        refreshCart();
+        // Send the user to the receipt
+        navigate("/confirmation");
+        // Store the order in session storage so we can show it again if the
+        // user refreshes the page!
+        window.sessionStorage.setItem("order_receipt", JSON.stringify(order));
+      })
+      .catch((error) => {
+        console.log("There was an error confirming your order", error);
+      });
+  };
+
   useEffect(() => {
     fetchCart();
-    // console.log(typeof cart);
   }, []);
 
   return (
     <div className="app-wrapper">
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                products={products}
-                fetchProducts={fetchProducts}
-                cart={cart}
-                fetchCart={fetchCart}
-              />
-            }
-          />
-          <Route path="about" element={<About />} />
-          <Route
-            path="products"
-            element={
-              <Products
-                products={products}
-                onAddToCart={handleAddToCart}
-                fetchProducts={fetchProducts}
-                loading={loading}
-              />
-            }
-          />
-          <Route
-            path="cart"
-            element={
-              <Cart
-                cart={cart}
-                fetchCart={fetchCart}
-                onUpdateCartQty={handleUpdateCartQty}
-                onRemoveFromCart={handleRemoveFromCart}
-                onEmptyCart={handleEmptyCart}
-              />
-            }
-          />
-          <Route
-            path="checkout"
-            element={<Checkout cart={cart} fetchCart={fetchCart} />}
-          />
-        </Routes>
-      </BrowserRouter>
+      {/* <BrowserRouter> */}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              products={products}
+              fetchProducts={fetchProducts}
+              cart={cart}
+              fetchCart={fetchCart}
+            />
+          }
+        />
+        <Route path="about" element={<About />} />
+        <Route
+          path="products"
+          element={
+            <Products
+              products={products}
+              onAddToCart={handleAddToCart}
+              fetchProducts={fetchProducts}
+              loading={loading}
+            />
+          }
+        />
+        <Route
+          path="cart"
+          element={
+            <Cart
+              cart={cart}
+              fetchCart={fetchCart}
+              onUpdateCartQty={handleUpdateCartQty}
+              onRemoveFromCart={handleRemoveFromCart}
+              onEmptyCart={handleEmptyCart}
+            />
+          }
+        />
+        <Route
+          path="checkout"
+          element={
+            <Checkout
+              cart={cart}
+              fetchCart={fetchCart}
+              onCaptureCheckout={handleCaptureCheckout}
+            />
+          }
+        />
+        <Route
+          path="confirmation"
+          element={
+            <Confirmation
+              order={order}
+              onBackToHome={() =>
+                window.localStorage.removeItem("order_receipt")
+              }
+            />
+          }
+        />
+      </Routes>
+      {/* </BrowserRouter> */}
     </div>
   );
 };
