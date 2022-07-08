@@ -1,13 +1,41 @@
-.nav-announce > p {
-  padding: 1rem;
-  background: #000;
-  color: #fff;
-  text-align: center;
-  font-size: 0.7rem;
-  letter-spacing: 0.1rem;
+button {
+  border: none;
+  background: none;
 }
 
-.nav-main {
+a {
+  color: var(--c-text);
+}
+
+.nav-links {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 0;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+  background: white;
+  padding: 2rem 0 0 2rem;
+  z-index: 1000;
+}
+
+.nav-links li {
+  padding: 2rem 0;
+  border-bottom: 1px solid black;
+  width: 80%;
+}
+
+.nav-links li:last-child {
+  border: none;
+}
+
+.nav-links .x-icon {
+  padding: 0;
+  border: none;
+}
+
+.nav-content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -15,172 +43,19 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 15px 18px;
-  background: transparent;
-  border-bottom: 0.2px solid rgba(255, 255, 255, 0.5);
-  -webkit-transition: background-color 300ms ease-in-out;
-  transition: background-color 300ms ease-in-out;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 10vh;
+  padding: 0 1rem;
 }
 
-.nav-main * {
-  -webkit-transition: color 300ms ease-in-out;
-  transition: color 300ms ease-in-out;
-}
-
-.nav-main * .nav-icon {
-  font-size: 1.5rem;
-}
-
-.nav-main * .nav-logo > * {
-  font-size: 4rem;
-  color: white;
-}
-
-.nav-main .nav-center {
-  position: relative;
-}
-
-.nav-main .nav-center .nav-links-mobile {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  background: #333;
-  padding: 2rem;
-  width: 80%;
-  -webkit-transition: all 300ms ease;
-  transition: all 300ms ease;
-}
-
-.nav-main .nav-center .nav-links-mobile ul {
-  margin-top: 2rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  gap: 2rem;
-}
-
-.nav-main .nav-center .nav-links-mobile ul .spacer-line {
-  height: 0.5px;
-  width: 100%;
-  background: #ccc;
-}
-
-.nav-main .nav-center .nav-links-mobile * {
-  color: white;
-}
-
-.nav-main .nav-center .nav-links-mobile::after {
-  content: "";
-  height: 100%;
-  width: 20%;
-  right: 0;
-  top: 0;
-  position: fixed;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.nav-unstuck {
-  position: absolute;
-  left: 0;
-  top: 2.7rem;
-  right: 0;
-}
-
-.nav-unstuck * {
-  color: white;
-}
-
-.nav-stuck {
-  position: fixed;
-  left: 0;
-  top: 0rem;
-  right: 0;
-  background: white;
-}
-
-.nav-stuck * {
-  color: #000;
-}
-
-.nav-white {
-  background: white;
-  color: black;
-  border-bottom: 1px solid rgba(51, 51, 51, 0.5);
-}
-
-.nav-white * {
-  color: black;
-}
-
-.nav-links-large {
-  display: none;
-}
-
-@media (min-width: 960px) {
-  nav .nav-main {
-    padding: 0 5rem;
-  }
-  nav .nav-main .btn-toggle-menu {
-    visibility: hidden;
-    width: 80.2px;
-  }
-  nav .nav-main .nav-center {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    padding-top: 2rem;
-    left: 0;
-    top: 0;
-  }
-  nav .nav-main .nav-center .nav-links-large {
-    display: block;
-    padding: 1rem 0 2rem;
-  }
-  nav .nav-main .nav-center .nav-links-large ul {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    gap: 5rem;
-  }
-  nav .nav-main .nav-center .nav-links-large ul li {
-    position: relative;
-  }
-  nav .nav-main .nav-center .nav-links-large ul li a {
-    font-size: 0.7rem;
-    letter-spacing: 0.2rem;
-  }
-  nav .nav-main:hover {
-    background: white;
-    color: black;
-  }
-  nav .nav-main:hover *,
-  nav .nav-main:hover * * {
-    color: black;
-  }
+.nav-icon {
+  font-size: 2rem;
+  color: var(--c-text);
+  cursor: pointer;
 }
 /*# sourceMappingURL=nav.css.map */

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Nav2 from "../../components/nav/Nav2";
+import Nav from "../../components/nav/Nav";
 import CartItem from "./cart_item/CartItem";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -54,9 +54,9 @@ const Cart = (props) => {
 
   return (
     <div className="cart">
-      <Nav2 />
+      <Nav />
       <h4 className="cart__heading">Your Shopping Cart</h4>
-      {props.cart.line_items != undefined ? (
+      {props.cart.line_items !== undefined ? (
         <div>
           {renderItems()}
           {props.cart.total_unique_items > 0 ? renderTotal() : null}

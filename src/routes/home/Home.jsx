@@ -1,12 +1,12 @@
 import HOME from "../../assets/example-hero.jpg";
 import "./home.css";
-import Nav2 from "../../components/nav/Nav2";
+import Nav from "../../components/nav/Nav";
 import Footer from "../../components/footer/Footer";
 
 const Home = (props) => {
   return (
     <main className="page-wrapper">
-      <Nav2 />
+      <Nav />
       <div id="home-hero">
         <img src={HOME} alt="leather bag" />
       </div>

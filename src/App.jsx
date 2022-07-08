@@ -122,19 +122,8 @@ const App = () => {
 
   return (
     <div className="app-wrapper">
-      {/* <BrowserRouter> */}
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              products={products}
-              fetchProducts={fetchProducts}
-              cart={cart}
-              fetchCart={fetchCart}
-            />
-          }
-        />
+        <Route path="/" element={<Home />} />
         <Route path="about" element={<About />} />
         <Route
           path="products"
@@ -181,7 +170,6 @@ const App = () => {
           }
         />
       </Routes>
-      {/* </BrowserRouter> */}
     </div>
   );
 };

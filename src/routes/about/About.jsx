@@ -1,11 +1,11 @@
 import "./about.css";
-import Nav2 from "../../components/nav/Nav2";
+import Nav from "../../components/nav/Nav";
 import Footer from "../../components/footer/Footer";
 
 export default function About() {
   return (
     <main>
-      <Nav2 />
+      <Nav />
       <h1>About</h1>
       <Footer />
     </main>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import { AiOutlineShopping } from "react-icons/ai";
+import { AiOutlineShopping } from "react-icons/ai";
 
 const Nav2 = () => {
   return (

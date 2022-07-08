@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import commerce from "../../lib/commerce";
 import "./checkout.css";
-import Nav2 from "../../components/nav/Nav2";
+import Nav from "../../components/nav/Nav";
 
 const Checkout = (props) => {
   // STATE VARIABLES
@@ -487,7 +487,7 @@ const Checkout = (props) => {
 
   return (
     <div>
-      <Nav2 />
+      <Nav />
       <h1>Checkout</h1>
       {renderCheckoutForm()}
     </div>

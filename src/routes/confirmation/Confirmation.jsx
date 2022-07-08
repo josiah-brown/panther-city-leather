@@ -1,5 +1,6 @@
 import React from "react";
-import Nav2 from "../../components/nav/Nav2";
+import Nav from "../../components/nav/Nav";
+import Footer from "../../components/footer/Footer";
 import { Link } from "react-router-dom";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 
@@ -40,8 +41,9 @@ const Confirmation = (props) => {
 
   return (
     <div>
-      <Nav2 />
+      <Nav />
       {renderOrderSummary()}
+      <Footer />
     </div>
   );
 };
