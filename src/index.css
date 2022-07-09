@@ -6,7 +6,10 @@
   --c-bg: #fff;
   --c-text: #000;
 
+  --font-main: "Montserrat", sans-serif;
+
   --trans-def: all 300ms ease;
+  --margin-def: 0 2rem;
 }
 
 * {
@@ -21,7 +24,7 @@ html,
 body {
   color: var(--c-text);
   background: var(--c-bg);
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-main);
   letter-spacing: 0.2rem;
 }
 
@@ -34,4 +37,41 @@ body {
 .page-section {
   padding: 2rem 0;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.wrapper {
+  margin: var(--margin-def);
+}
+
+.h-main {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.h-sub {
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+.btn-def-black {
+  color: var(--c-bg);
+  background: var(--c-text);
+  font-family: var(--font-main);
+  letter-spacing: 0.2rem;
+  font-size: 0.8rem;
+  font-weight: 200;
+  width: fit-content;
+  padding: 1rem 1.3rem;
+}
+
+.btn-def-white {
+  color: var(--c-text);
+  background: var(--c-bg);
+  font-family: var(--font-main);
+  letter-spacing: 0.2rem;
+  font-size: 0.8rem;
+  font-weight: 200;
+  width: fit-content;
+  padding: 1rem 1.3rem;
 }

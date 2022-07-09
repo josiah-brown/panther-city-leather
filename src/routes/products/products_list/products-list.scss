@@ -4,3 +4,11 @@
   gap: 1rem;
   padding: 0 1rem;
 }
+
+@media (min-width: 960px) {
+  #products {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2rem;
+    padding: 0 3rem;
+  }
+}

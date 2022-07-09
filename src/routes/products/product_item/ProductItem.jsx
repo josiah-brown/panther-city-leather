@@ -18,22 +18,18 @@ const ProductItem = ({ product, onAddToCart }) => {
         alt={product.name}
       />
       <div className="product__info">
-        <h4 className="product__name">{product.name}</h4>
-        {/* <p className="product__description"> */}
-        {/* product description stripped of html tags */}
-        {/* {result} */}
-        {/* </p> */}
+        <h4 className="product__name h-sub">{product.name.toUpperCase()}</h4>
         <div className="product__details">
-          <p className="product__price">
-            {product.price.formatted_with_symbol}
+          <p className="product__price h-sub">
+            FROM {product.price.formatted_with_symbol}
           </p>
-          <button
+          {/* <button
             name="Add to cart"
             className="product__btn"
             onClick={handleAddToCart}
           >
             Quick add
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

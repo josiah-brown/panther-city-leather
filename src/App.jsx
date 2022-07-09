@@ -118,12 +118,13 @@ const App = () => {
 
   useEffect(() => {
     fetchCart();
+    fetchProducts();
   }, []);
 
   return (
     <div className="app-wrapper">
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home products={products} />} />
         <Route path="about" element={<About />} />
         <Route
           path="products"
