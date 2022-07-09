@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const Home = (props) => {
   return (
     <main className="page-wrapper">
-      <Nav />
+      <Nav cart={props.cart} />
       <div className="page-content">
         <div id="home-hero">
           <img src={HOME} alt="leather bag" />

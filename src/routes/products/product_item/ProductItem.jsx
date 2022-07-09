@@ -1,11 +1,8 @@
 import React from "react";
-// import { stripHtml } from "string-strip-html";
 import PropTypes from "prop-types";
 import "./product-item.css";
 
 const ProductItem = ({ product, onAddToCart }) => {
-  // const { result } = stripHtml(product.description);
-
   const handleAddToCart = () => {
     onAddToCart(product.id, 1);
   };
@@ -32,6 +29,15 @@ const ProductItem = ({ product, onAddToCart }) => {
           </button> */}
         </div>
       </div>
+
+      <button
+        name="Add to cart"
+        type="button"
+        className="product__btn btn-def"
+        onClick={handleAddToCart}
+      >
+        Quick add
+      </button>
     </div>
   );
 };

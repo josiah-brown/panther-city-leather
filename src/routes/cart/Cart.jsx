@@ -54,7 +54,7 @@ const Cart = (props) => {
 
   return (
     <div className="cart">
-      <Nav />
+      <Nav cart={props.cart} />
       <h4 className="cart__heading">Your Shopping Cart</h4>
       {props.cart.line_items !== undefined ? (
         <div>

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { AiOutlineShopping } from "react-icons/ai";
 import { HiMenuAlt1 } from "react-icons/hi";
 import { IoLogoVk } from "react-icons/io";
 import { BiX } from "react-icons/bi";
 import "./nav.css";
+import NavCartIcon from "./nav_cart_icon/NavCartIcon";
 
-const Nav = () => {
+const Nav = (props) => {
   const [linksVisible, setLinksVisible] = useState(false);
 
   return (
@@ -121,11 +121,8 @@ const Nav = () => {
           </ul>
         </div>
 
-        <button className="nav-icon" id="cart-icon">
-          <Link to="/cart">
-            <AiOutlineShopping />
-          </Link>
-        </button>
+        {/* this cart button could be converted to a component... */}
+        <NavCartIcon cart={props.cart} />
       </div>
       <div className="nav-spacer"></div>
     </nav>

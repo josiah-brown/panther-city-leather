@@ -64,6 +64,20 @@ a {
   cursor: pointer;
 }
 
+#cart-icon-link {
+  position: relative;
+  .full-bubble::after {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    width: 0.8rem;
+    height: 0.8rem;
+    background: black;
+    border-radius: 100%;
+  }
+}
+
 // MEDIA QUERY DESKTOP
 @media (min-width: 960px) {
   .nav-links-mobile {

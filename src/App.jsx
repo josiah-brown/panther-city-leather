@@ -32,6 +32,7 @@ const App = () => {
     commerce.cart
       .retrieve()
       .then((cart) => {
+        console.log("Cart loaded successfully");
         setCart(cart);
       })
       .catch((error) => {
@@ -48,6 +49,7 @@ const App = () => {
       .catch((error) => {
         console.error("There was an error adding the item to the cart", error);
       });
+    console.log("Item added");
   };
 
   const handleUpdateCartQty = (lineItemId, quantity) => {
@@ -79,7 +81,10 @@ const App = () => {
     commerce.cart
       .empty()
       .then((resp) => {
-        setCart(resp.cart);
+        return setCart(resp.cart);
+      })
+      .then(() => {
+        fetchCart();
       })
       .catch((error) => {
         console.error("There was an error emptying the cart", error);
@@ -124,12 +129,13 @@ const App = () => {
   return (
     <div className="app-wrapper">
       <Routes>
-        <Route path="/" element={<Home products={products} />} />
-        <Route path="about" element={<About />} />
+        <Route path="/" element={<Home cart={cart} products={products} />} />
+        <Route path="about" element={<About cart={cart} />} />
         <Route
           path="products"
           element={
             <Products
+              cart={cart}
               products={products}
               onAddToCart={handleAddToCart}
               fetchProducts={fetchProducts}
