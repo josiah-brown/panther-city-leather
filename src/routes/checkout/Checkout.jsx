@@ -487,7 +487,7 @@ const Checkout = (props) => {
 
   return (
     <div>
-      <Nav />
+      <Nav cart={props.cart} />
       <h1>Checkout</h1>
       {renderCheckoutForm()}
     </div>

@@ -2,10 +2,10 @@ import "./index.css";
 import Nav from "./components/nav/Nav";
 import Footer from "./components/footer/Footer";
 
-const DefaultPage = () => {
+const DefaultPage = (props) => {
   return (
     <main className="page-wrapper">
-      <Nav />
+      <Nav cart={props.cart} />
       <div className="page-content">
         <section className="page-section" id="section-1">
           <p>Section 1</p>

@@ -77,12 +77,12 @@ const Nav = (props) => {
           </li>
           <li>
             <Link
-              to="/cart"
+              to="/contact"
               onClick={() => {
                 setLinksVisible(!linksVisible);
               }}
             >
-              CART
+              CONTACT
             </Link>
           </li>
         </ul>
@@ -97,11 +97,6 @@ const Nav = (props) => {
               <Link className="hover-underline" to="/">
                 HOME
               </Link>
-            </li>
-            <li>
-              <a className="hover-underline" href="/">
-                TEST
-              </a>
             </li>
             <li>
               <Link className="hover-underline" to="/about">
@@ -121,7 +116,6 @@ const Nav = (props) => {
           </ul>
         </div>
 
-        {/* this cart button could be converted to a component... */}
         <NavCartIcon cart={props.cart} />
       </div>
       <div className="nav-spacer"></div>

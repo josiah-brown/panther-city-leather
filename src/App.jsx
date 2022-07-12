@@ -3,10 +3,12 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./routes/home/Home";
 import About from "./routes/about/About";
 import Products from "./routes/products/Products";
+import Product from "./routes/product/Product";
 import Cart from "./routes/cart/Cart";
 import Checkout from "./routes/checkout/Checkout";
 import Confirmation from "./routes/confirmation/Confirmation";
 import commerce from "./lib/commerce";
+import Contact from "./routes/contact/Contact";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -144,6 +146,16 @@ const App = () => {
           }
         />
         <Route
+          path="products/:id"
+          element={
+            <Product
+              cart={cart}
+              products={products}
+              onAddToCart={handleAddToCart}
+            />
+          }
+        />
+        <Route
           path="cart"
           element={
             <Cart
@@ -176,6 +188,7 @@ const App = () => {
             />
           }
         />
+        <Route path="/contact" element={<Contact cart={cart} />} />
       </Routes>
     </div>
   );
