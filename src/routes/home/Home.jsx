@@ -46,18 +46,25 @@ const Home = (props) => {
             <br />
 
             <p className="h-sub">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic
-              quidem quod fugit optio facilis ipsa, tenetur ipsam enim nemo
-              nulla. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Saepe, placeat!
+              Panther City Leather was started by Isaac Brown in 2022. Every
+              single product is made with locally sourced materials and an
+              intense attention to detail. It is our hope that every PCL product
+              will be passed down for generations.
             </p>
             <br />
             <p className="h-sub">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima
-              ullam maiores atque.
+              The company began in Fort Worth, Texas yet every item has a modern
+              twist on the classic country theme. Each design is carefully
+              studied and tweaked to result in a luxury, modern product that
+              should last for many years.
             </p>
             <br />
-            <p className="h-sub">Lorem ipsum dolor sit amet consectetur.</p>
+            <p className="h-sub">
+              Thanks for checking out the shop. Check back soon for more
+              products!
+            </p>
+            <br />
+            <br />
           </div>
         </section>
 

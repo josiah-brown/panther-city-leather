@@ -1,8 +1,8 @@
-import ProductsList from "./products_list/ProductsList.jsx";
+import { useEffect } from "react";
 import Nav from "../../components/nav/Nav.jsx";
 import Footer from "../../components/footer/Footer.jsx";
-import { useEffect } from "react";
-import { AiFillPropertySafety } from "react-icons/ai";
+import ProductsList from "./products_list/ProductsList.jsx";
+import "./products.css";
 
 const Products = (props) => {
   useEffect(() => {
@@ -10,19 +10,23 @@ const Products = (props) => {
   }, []);
 
   return (
-    <div>
+    <main className="page-wrapper">
       <Nav cart={props.cart} />
-      <h1>Products</h1>
-      {props.loading ? (
-        <p>Loading...</p>
-      ) : (
-        <ProductsList
-          products={props.products}
-          onAddToCart={props.onAddToCart}
-        />
-      )}
+      <div className="page-content">
+        <h1 className="h-main">Products</h1>
+        <section className="page-section" id="products-item-list">
+          {props.loading ? (
+            <p>Loading...</p>
+          ) : (
+            <ProductsList
+              products={props.products}
+              onAddToCart={props.onAddToCart}
+            />
+          )}
+        </section>
+      </div>
       <Footer />
-    </div>
+    </main>
   );
 };
 

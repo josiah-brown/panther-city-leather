@@ -1,0 +1,49 @@
+.product-about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+
+  p {
+    width: 90%;
+  }
+}
+
+.product-form {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  select {
+    width: 100%;
+    height: 3rem;
+    padding: 0 1rem;
+    font-size: 1rem;
+    font-weight: 300;
+    font-family: var(--font-main);
+    border: 1px solid black;
+  }
+
+  .qtyCounter {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    font-size: 1.2rem;
+    height: 3rem;
+    width: fit-content;
+    padding: 0 1rem;
+    border: 1px solid black;
+  }
+
+  button {
+    height: 3rem;
+    border: 1px solid black;
+    font-size: 1rem;
+    font-weight: 300;
+    width: 100%;
+    font-family: var(--font-main);
+    letter-spacing: 0.2rem;
+  }
+}

@@ -1,5 +1,9 @@
+//*========== GENERAL IMPORTS ==========*//
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import commerce from "./lib/commerce";
+
+//*========== IMPORT ROUTES ==========*//
 import Home from "./routes/home/Home";
 import About from "./routes/about/About";
 import Products from "./routes/products/Products";
@@ -7,10 +11,13 @@ import Product from "./routes/product/Product";
 import Cart from "./routes/cart/Cart";
 import Checkout from "./routes/checkout/Checkout";
 import Confirmation from "./routes/confirmation/Confirmation";
-import commerce from "./lib/commerce";
 import Contact from "./routes/contact/Contact";
 
+//*========== TOP LEVEL APP COMPONENT ==========*//
+// This is the parent component of the entire app.
+// Everything else will flow downward from here.
 const App = () => {
+  // Initialize state variables
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
   const [order, setOrder] = useState({});
@@ -42,11 +49,14 @@ const App = () => {
       });
   };
 
-  const handleAddToCart = (productId, quantity) => {
+  const handleAddToCart = (productId, quantity, variantObject = null) => {
     commerce.cart
-      .add(productId, quantity)
+      .add(productId, quantity, variantObject)
       .then((item) => {
-        setCart(item.cart);
+        return setCart(item.cart);
+      })
+      .then(() => {
+        navigate("/cart");
       })
       .catch((error) => {
         console.error("There was an error adding the item to the cart", error);
@@ -115,7 +125,7 @@ const App = () => {
         // Send the user to the receipt
         navigate("/confirmation");
         // Store the order in session storage so we can show it again if the
-        // user refreshes the page!
+        // user refreshes the page
         window.sessionStorage.setItem("order_receipt", JSON.stringify(order));
       })
       .catch((error) => {

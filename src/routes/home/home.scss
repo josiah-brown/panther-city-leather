@@ -17,8 +17,13 @@
 
 #home-about {
   div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     p {
       text-align: left;
+      letter-spacing: 0.05rem;
+      width: 60%;
     }
   }
 

@@ -23,25 +23,18 @@ const ProductItem = ({ product, onAddToCart }) => {
             <p className="product__price h-sub">
               FROM {product.price.formatted_with_symbol}
             </p>
-            {/* <button
-            name="Add to cart"
-            className="product__btn"
-            onClick={handleAddToCart}
-          >
-            Quick add
-          </button> */}
           </div>
         </div>
       </Link>
 
-      <button
+      {/* <button
         name="Add to cart"
         type="button"
         className="product__btn btn-def"
         onClick={handleAddToCart}
       >
         Quick add
-      </button>
+      </button> */}
     </div>
   );
 };

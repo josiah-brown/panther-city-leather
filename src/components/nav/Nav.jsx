@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { HiMenuAlt1 } from "react-icons/hi";
-import { IoLogoVk } from "react-icons/io";
 import { BiX } from "react-icons/bi";
+// import { IoLogoVk } from "react-icons/io";
+import { GiTripleClaws } from "react-icons/gi";
+// import { GiTigerHead } from "react-icons/gi";
 import "./nav.css";
 import NavCartIcon from "./nav_cart_icon/NavCartIcon";
 
@@ -89,7 +91,8 @@ const Nav = (props) => {
 
         <div className="nav-content-center">
           <Link to="/" className="nav-icon" id="logo-icon">
-            <IoLogoVk />
+            {/* <IoLogoVk /> */}
+            <GiTripleClaws />
           </Link>
 
           <ul className="nav-links-desktop">
