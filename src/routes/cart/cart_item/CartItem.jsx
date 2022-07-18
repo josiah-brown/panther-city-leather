@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import "./cart_item.css";
+import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineMinus } from "react-icons/ai";
 
 const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
   const handleUpdateCartQty = (lineItemId, quantity) => {
@@ -11,37 +13,57 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
     onRemoveFromCart(item.id);
   };
 
+  useEffect(() => {
+    console.log(item);
+  }, []);
+
   return (
     <div className="cart-item">
-      <img className="cart-item__image" src={item.image.url} alt={item.name} />
-      <div className="cart-item__details">
-        <h4 className="cart-item__details-name">{item.name}</h4>
-        <div className="cart-item__details-qty">
-          <button
-            type="button"
-            onClick={() => handleUpdateCartQty(item.id, item.quantity - 1)}
-          >
-            -
-          </button>
-          <p>{item.quantity}</p>
-          <button
-            type="button"
-            onClick={() => handleUpdateCartQty(item.id, item.quantity + 1)}
-          >
-            +
-          </button>
+      <div className="cart-item-img-container">
+        <img className="cart-item-img" src={item.image.url} alt={item.name} />
+      </div>
+      <div className="cart-item-content">
+        <div className="cart-item-text">
+          <h4 className="h-sub">{item.name}</h4>
+          <div className="cart-item-variants h-sub">
+            {item.selected_options.length > 0
+              ? item.selected_options.map((option) => {
+                  return <p key={option.option_id}>{option.option_name}</p>;
+                })
+              : null}
+          </div>
+          <div className="h-sub">{item.line_total.formatted_with_symbol}</div>
         </div>
-        <div className="cart-item__details-price">
-          {item.line_total.formatted_with_symbol}
+
+        <div className="cart-item-content-bottom-row">
+          <div className="cart-item-qty">
+            <button
+              type="button"
+              onClick={() => handleUpdateCartQty(item.id, item.quantity - 1)}
+            >
+              <AiOutlineMinus className="qty-icon" />
+            </button>
+            <p className="h-sub">{item.quantity}</p>
+            <button
+              type="button"
+              className=" h-sub"
+              onClick={() => handleUpdateCartQty(item.id, item.quantity + 1)}
+            >
+              <AiOutlinePlus className="qty-icon" />
+            </button>
+          </div>
+
+          <div>
+            <button
+              type="button"
+              id="item-remove"
+              onClick={handleRemoveFromCart}
+            >
+              REMOVE
+            </button>
+          </div>
         </div>
       </div>
-      <button
-        type="button"
-        className="cart-item__remove"
-        onClick={handleRemoveFromCart}
-      >
-        Remove
-      </button>
     </div>
   );
 };

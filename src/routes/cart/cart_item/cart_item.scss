@@ -1,5 +1,116 @@
-.cart-item__image {
-  overflow: hidden;
-  width: 100px;
-  height: 99px;
+.cart-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: fit-content;
+  margin: 3rem 2rem;
+
+  .cart-item-img-container {
+    overflow: hidden;
+    width: 30%;
+    aspect-ratio: 1/1;
+    .cart-item-img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+    }
+  }
+
+  .cart-item-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-left: 2rem;
+    width: 65%;
+
+    .cart-item-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.3rem;
+    }
+
+    h4 {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .cart-item-variants {
+      text-align: left;
+    }
+
+    .cart-item-content-bottom-row {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-between;
+
+      .cart-item-qty {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border: 0.5px solid rgba($color: #000000, $alpha: 0.5);
+        width: 35%;
+        padding: 0.25rem 0.5rem;
+
+        * {
+          font-size: 1.2rem;
+          font-weight: 100;
+        }
+
+        .qty-icon {
+          font-size: 0.8rem;
+        }
+      }
+
+      #item-remove {
+        margin-right: 2rem;
+        font-size: 0.6rem;
+        font-weight: 100;
+        letter-spacing: 0.15rem;
+      }
+    }
+  }
+}
+
+// MEDIA QUERY DESKTOP
+@media (min-width: 960px) {
+  .cart-item {
+    margin: 2rem 10rem;
+    justify-content: flex-start;
+
+    .cart-item-img-container {
+      width: 10%;
+      aspect-ratio: 1/1;
+      .cart-item-img {
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+      }
+    }
+
+    .cart-item-content {
+      margin-left: 5%;
+      width: 85%;
+      flex-direction: row;
+      align-items: flex-start;
+      text-align: left;
+
+      .cart-item-text {
+        width: 50%;
+      }
+
+      .cart-item-content-bottom-row {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.7rem;
+        width: 50%;
+
+        div > #item-remove {
+          margin: 0;
+        }
+      }
+    }
+  }
 }

@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
-import Nav from "../../components/nav/Nav";
-import CartItem from "./cart_item/CartItem";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+
+import Nav from "../../components/nav/Nav";
 import Footer from "../../components/footer/Footer";
+import CartItem from "./cart_item/CartItem";
+import "./cart.css";
 
 const Cart = (props) => {
   // Displays message if cart is empty
@@ -11,11 +13,7 @@ const Cart = (props) => {
     if (props.cart.total_unique_items > 0) {
       return;
     }
-    return (
-      <p className="cart__none">
-        You have no items in your shopping cart, start adding some!
-      </p>
-    );
+    return <p>You have no items in your shopping cart, start adding some!</p>;
   };
 
   // Renders the items in the cart
@@ -26,7 +24,6 @@ const Cart = (props) => {
         key={lineItem.id}
         onUpdateCartQty={props.onUpdateCartQty}
         onRemoveFromCart={props.onRemoveFromCart}
-        className="cart__inner"
       />
     ));
   };
@@ -34,12 +31,9 @@ const Cart = (props) => {
   // Renders the total price of the order
   const renderTotal = () => {
     return (
-      <div className="cart__total">
-        <p className="cart__total-title">Subtotal:</p>
-        <p className="cart__total-price">
-          {props.cart.subtotal.formatted_with_symbol}
-        </p>
-      </div>
+      <p>
+        Subtotal: <b>{props.cart.subtotal.formatted_with_symbol}</b>
+      </p>
     );
   };
 
@@ -53,33 +47,45 @@ const Cart = (props) => {
   }, []);
 
   return (
-    <div className="cart">
+    <main className="page-wrapper">
       <Nav cart={props.cart} />
-      <h4 className="cart__heading">Your Shopping Cart</h4>
-      {props.cart.line_items !== undefined ? (
-        <div>
-          {renderItems()}
-          {props.cart.total_unique_items > 0 ? renderTotal() : null}
-          {props.cart.total_unique_items > 0 ? (
-            <div className="cart__footer">
-              <button className="cart__btn-empty" onClick={handleEmptyCart}>
-                Empty cart
-              </button>
-              <button>
-                <Link className="cart__btn-checkout" to="/checkout">
-                  Checkout
-                </Link>
-              </button>
+
+      <div className="page-content">
+        <h4 className="h-main" id="cart-heading">
+          Cart
+        </h4>
+        <section className="page-section" id="cart-table-heading">
+          <p>PRODUCT</p>
+          <p>QUANTITY</p>
+        </section>
+        <section className="page-section" id="cart-items">
+          {props.cart.line_items !== undefined ? (
+            <div>
+              {renderItems()}
+              {props.cart.total_unique_items > 0 ? (
+                <div className="cart-footer">
+                  <div className="top-row">
+                    {renderTotal()}
+                    <button onClick={handleEmptyCart}>EMPTY CART</button>
+                  </div>
+                  <button>
+                    <div className="checkout-btn-bg">
+                      <Link to="/checkout">CHECKOUT</Link>
+                    </div>
+                  </button>
+                </div>
+              ) : (
+                renderEmptyMessage()
+              )}
             </div>
           ) : (
-            renderEmptyMessage()
+            <h1>"Loading Cart..."</h1>
           )}
-        </div>
-      ) : (
-        "Loading Cart..."
-      )}
+        </section>
+      </div>
+
       <Footer />
-    </div>
+    </main>
   );
 };
 
