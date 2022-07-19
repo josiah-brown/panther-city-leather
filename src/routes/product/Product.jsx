@@ -1,9 +1,9 @@
 import Nav from "../../components/nav/Nav";
 import { useParams } from "react-router-dom";
-import ProductItem from "../products/product_item/ProductItem";
 import Footer from "../../components/footer/Footer";
 import { useEffect, useState } from "react";
 import "./product.css";
+import { BsDot } from "react-icons/bs";
 
 const Product = (props) => {
   const params = useParams();
@@ -60,67 +60,85 @@ const Product = (props) => {
   const renderProduct = () => {
     if (productLoaded) {
       return (
-        <div>
-          <ProductItem
-            key={currProduct.id}
-            product={currProduct}
-            onAddToCart={props.onAddToCart}
+        <div id="product-content">
+          <img
+            className="product-image"
+            src={currProduct.image?.url}
+            alt={currProduct.name}
           />
-
-          <div className="product-about">
-            <p className="h-sub">
-              The F1 is a minimalist wallet made with the finest of full grain
-              leathers. Handcrafted to fit your minimalist lifestyle and made to
-              last.
-            </p>
-            <br />
-            <p className="h-sub">Features:</p>
-            <p className="h-sub">
-              - Option of Machine Stitched or Hand Stitched with Japanese
-              thread.
-              <br />- Rose gold foiled logo on closure strap
-              <br />- Hand finished dyed edges
-            </p>
-          </div>
-
-          <br />
-
-          <form className="product-form">
-            {currProduct.variant_groups.map((group) => {
-              return (
-                <div key={group.id + "container"}>
-                  <h2 className="h-main">{group.name}</h2>
-                  <select
-                    name={group.name}
-                    key={group.id}
-                    id={group.id}
-                    value={variants[group.id]}
-                    onChange={handleVariantsChange}
-                  >
-                    {group.options.map((variation) => {
-                      return (
-                        <option value={variation.id} key={variation.id}>
-                          {variation.name + " ($" + variation.price.raw + ")"}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-              );
-            })}
-            <br />
-
-            <div className="qtyCounter h-sub">
-              <span onClick={handleQtyChange}>-</span>
-              <span>{qty}</span>
-              <span onClick={handleQtyChange}>+</span>
+          <div className="right-side">
+            <div className="product-heading">
+              <h4 className="h-sub">{currProduct.name.toUpperCase()}</h4>
+              <p className="h-sub">
+                FROM {currProduct.price.formatted_with_symbol}
+              </p>
             </div>
+
+            <div className="product-about">
+              <p className="h-sub">
+                The F1 is a minimalist wallet made with the finest of full grain
+                leathers. Handcrafted to fit your minimalist lifestyle and made
+                to last.
+              </p>
+              <br />
+              <p className="h-sub">
+                <BsDot /> Option of Machine Stitched or Hand Stitched with
+                Japanese thread.
+              </p>
+              <p className="h-sub">
+                <BsDot /> Rose gold foiled logo on closure strap
+              </p>
+              <p className="h-sub">
+                <BsDot /> Hand finished dyed edges
+              </p>
+            </div>
+
             <br />
 
-            <button onClick={handleAddToCart}>
-              Add To Cart - ${getTotalPrice()} USD
-            </button>
-          </form>
+            <form className="product-form">
+              {currProduct.variant_groups.map((group) => {
+                return (
+                  <div
+                    key={group.id + "container"}
+                    className="product-form-row"
+                  >
+                    <h2 className="h-main">{group.name.toUpperCase()}</h2>
+                    <select
+                      name={group.name}
+                      key={group.id}
+                      id={group.id}
+                      value={variants[group.id]}
+                      onChange={handleVariantsChange}
+                    >
+                      {group.options.map((variation) => {
+                        return (
+                          <option value={variation.id} key={variation.id}>
+                            {variation.name + " ($" + variation.price.raw + ")"}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                );
+              })}
+              <br />
+
+              <div className="qtyCounter h-sub">
+                <span onClick={handleQtyChange} className="qty-change-btn">
+                  -
+                </span>
+                <span>{qty}</span>
+                <span onClick={handleQtyChange} className="qty-change-btn">
+                  +
+                </span>
+              </div>
+              <br />
+
+              <button onClick={handleAddToCart} id="add-to-cart-btn">
+                Add To Cart - ${getTotalPrice()} USD
+              </button>
+            </form>
+          </div>
         </div>
       );
     } else {
@@ -158,7 +176,9 @@ const Product = (props) => {
     <main className="page-wrapper">
       <Nav cart={props.cart} />
       <div className="page-content">
-        <section className="page-section">{renderProduct()}</section>
+        <section className="page-section" id="product-page">
+          {renderProduct()}
+        </section>
       </div>
       <Footer />
     </main>
