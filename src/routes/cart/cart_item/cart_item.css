@@ -138,6 +138,10 @@
     -o-object-fit: cover;
        object-fit: cover;
   }
+  .cart-item .cart-item-img-container .cart-item-img:hover {
+    width: 110%;
+    margin: -5% 0 0 -5%;
+  }
   .cart-item .cart-item-content {
     margin-left: 5%;
     width: 85%;

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./cart_item.css";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -20,7 +21,9 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
   return (
     <div className="cart-item">
       <div className="cart-item-img-container">
-        <img className="cart-item-img" src={item.image.url} alt={item.name} />
+        <Link to={"/products/" + item.product_id}>
+          <img className="cart-item-img" src={item.image.url} alt={item.name} />
+        </Link>
       </div>
       <div className="cart-item-content">
         <div className="cart-item-text">
