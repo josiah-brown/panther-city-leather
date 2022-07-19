@@ -62,20 +62,16 @@ const Product = (props) => {
       return (
         <div id="product-content">
           <img
-            className="product__image-solo"
+            className="product-image"
             src={currProduct.image?.url}
             alt={currProduct.name}
           />
           <div className="right-side">
-            <div className="product__info-solo">
-              <h4 className="product__name-solo h-sub">
-                {currProduct.name.toUpperCase()}
-              </h4>
-              <div className="product__details-solo">
-                <p className="product__price-solo h-sub">
-                  FROM {currProduct.price.formatted_with_symbol}
-                </p>
-              </div>
+            <div className="product-heading">
+              <h4 className="h-sub">{currProduct.name.toUpperCase()}</h4>
+              <p className="h-sub">
+                FROM {currProduct.price.formatted_with_symbol}
+              </p>
             </div>
 
             <div className="product-about">
@@ -88,8 +84,12 @@ const Product = (props) => {
               <p className="h-sub">
                 <BsDot /> Option of Machine Stitched or Hand Stitched with
                 Japanese thread.
-                <br />- Rose gold foiled logo on closure strap
-                <br />- Hand finished dyed edges
+              </p>
+              <p className="h-sub">
+                <BsDot /> Rose gold foiled logo on closure strap
+              </p>
+              <p className="h-sub">
+                <BsDot /> Hand finished dyed edges
               </p>
             </div>
 
@@ -98,10 +98,11 @@ const Product = (props) => {
             <form className="product-form">
               {currProduct.variant_groups.map((group) => {
                 return (
-                  <div key={group.id + "container"}>
-                    <h2 className="variant-title">
-                      {group.name.toUpperCase()}
-                    </h2>
+                  <div
+                    key={group.id + "container"}
+                    className="product-form-row"
+                  >
+                    <h2 className="h-main">{group.name.toUpperCase()}</h2>
                     <select
                       name={group.name}
                       key={group.id}
@@ -123,13 +124,17 @@ const Product = (props) => {
               <br />
 
               <div className="qtyCounter h-sub">
-                <span onClick={handleQtyChange}>-</span>
+                <span onClick={handleQtyChange} className="qty-change-btn">
+                  -
+                </span>
                 <span>{qty}</span>
-                <span onClick={handleQtyChange}>+</span>
+                <span onClick={handleQtyChange} className="qty-change-btn">
+                  +
+                </span>
               </div>
               <br />
 
-              <button onClick={handleAddToCart} id="add-to-cart">
+              <button onClick={handleAddToCart} id="add-to-cart-btn">
                 Add To Cart - ${getTotalPrice()} USD
               </button>
             </form>
@@ -165,7 +170,9 @@ const Product = (props) => {
     <main className="page-wrapper">
       <Nav cart={props.cart} />
       <div className="page-content">
-        <section className="page-section">{renderProduct()}</section>
+        <section className="page-section" id="product-page">
+          {renderProduct()}
+        </section>
       </div>
       <Footer />
     </main>
