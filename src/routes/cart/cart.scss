@@ -19,11 +19,16 @@
       flex-direction: row;
       justify-content: space-between;
 
-      & > button {
+      button {
         margin-right: 2rem;
         font-size: 0.6rem;
         font-weight: 100;
         letter-spacing: 0.15rem;
+        cursor: pointer;
+      }
+
+      button:hover {
+        text-decoration: underline;
       }
     }
 

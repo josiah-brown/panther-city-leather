@@ -7,7 +7,6 @@ const NavCartIcon = (props) => {
 
   useEffect(() => {
     if (Object.keys(props.cart).length !== 0) {
-      console.log("Cart has loaded");
       setCartLoaded(true);
     }
   }, [props.cart]);

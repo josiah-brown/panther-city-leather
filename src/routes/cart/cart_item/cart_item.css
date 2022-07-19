@@ -112,6 +112,7 @@
 
 .cart-item .cart-item-content .cart-item-content-bottom-row .cart-item-qty .qty-icon {
   font-size: 0.8rem;
+  cursor: pointer;
 }
 
 .cart-item .cart-item-content .cart-item-content-bottom-row #item-remove {

@@ -17,7 +17,7 @@ const Products = (props) => {
     <main className="page-wrapper">
       <Nav cart={props.cart} />
       <div className="page-content">
-        <h1 className="h-main">Products</h1>
+        <h1 className="h-main">PRODUCTS</h1>
         <section className="page-section" id="products-item-list">
           {props.loading ? (
             <p>Loading...</p>

@@ -1,0 +1,29 @@
+#confirm-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  width: 80%;
+  align-items: center;
+  margin: 3rem auto;
+
+  #return-home-btn {
+    padding: 0.7rem 1.7rem;
+    background: black;
+    color: white;
+    cursor: pointer;
+  }
+
+  #return-home-btn:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+  }
+}
+
+@media (min-width: 960px) {
+  #confirm-content {
+    #return-home-btn {
+      width: 40%;
+    }
+  }
+}

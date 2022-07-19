@@ -32,11 +32,16 @@
           justify-content: space-between;
 }
 
-.page-content .cart-footer .top-row > button {
+.page-content .cart-footer .top-row button {
   margin-right: 2rem;
   font-size: 0.6rem;
   font-weight: 100;
   letter-spacing: 0.15rem;
+  cursor: pointer;
+}
+
+.page-content .cart-footer .top-row button:hover {
+  text-decoration: underline;
 }
 
 .page-content .cart-footer .checkout-btn {

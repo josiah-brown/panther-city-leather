@@ -14,10 +14,6 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
     onRemoveFromCart(item.id);
   };
 
-  useEffect(() => {
-    console.log(item);
-  }, []);
-
   return (
     <div className="cart-item">
       <div className="cart-item-img-container">

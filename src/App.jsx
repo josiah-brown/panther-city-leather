@@ -12,6 +12,7 @@ import Cart from "./routes/cart/Cart";
 import Checkout from "./routes/checkout/Checkout";
 import Confirmation from "./routes/confirmation/Confirmation";
 import Contact from "./routes/contact/Contact";
+import ContactConfirmation from "./routes/contact_confirmation/ContactConfirmation";
 
 //*========== TOP LEVEL APP COMPONENT ==========*//
 // This is the parent component of the entire app.
@@ -199,6 +200,10 @@ const App = () => {
           }
         />
         <Route path="/contact" element={<Contact cart={cart} />} />
+        <Route
+          path="/contact/confirmation"
+          element={<ContactConfirmation cart={cart} />}
+        />
       </Routes>
     </div>
   );
