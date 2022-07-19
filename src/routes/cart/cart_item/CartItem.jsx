@@ -24,15 +24,24 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
       </div>
       <div className="cart-item-content">
         <div className="cart-item-text">
-          <h4 className="h-sub">{item.name}</h4>
+          <h4 className="h-sub">{item.name.toUpperCase()}</h4>
           <div className="cart-item-variants h-sub">
             {item.selected_options.length > 0
               ? item.selected_options.map((option) => {
-                  return <p key={option.option_id}>{option.option_name}</p>;
+                  return (
+                    <p key={option.option_id}>
+                      {option.option_name.toUpperCase()}
+                    </p>
+                  );
                 })
               : null}
           </div>
-          <div className="h-sub">{item.line_total.formatted_with_symbol}</div>
+          <div className="h-sub" id="item-total-mobile">
+            {item.line_total.formatted_with_symbol}
+          </div>
+          <div className="h-sub" id="item-total-desktop">
+            {item.price.formatted_with_symbol}
+          </div>
         </div>
 
         <div className="cart-item-content-bottom-row">
@@ -62,6 +71,9 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
               REMOVE
             </button>
           </div>
+        </div>
+        <div className="line-item-total">
+          {item.line_total.formatted_with_symbol}
         </div>
       </div>
     </div>

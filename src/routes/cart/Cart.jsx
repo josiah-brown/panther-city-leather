@@ -32,7 +32,7 @@ const Cart = (props) => {
   const renderTotal = () => {
     return (
       <p>
-        Subtotal: <b>{props.cart.subtotal.formatted_with_symbol}</b>
+        TOTAL: <b>{props.cart.subtotal.formatted_with_symbol}</b>
       </p>
     );
   };
@@ -46,17 +46,25 @@ const Cart = (props) => {
     props.fetchCart();
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <main className="page-wrapper">
       <Nav cart={props.cart} />
 
       <div className="page-content">
         <h4 className="h-main" id="cart-heading">
-          Cart
+          CART
         </h4>
         <section className="page-section" id="cart-table-heading">
+          {/* <div className="spacer"></div>
+          <div className="cart-table-inner-box"> */}
           <p>PRODUCT</p>
-          <p>QUANTITY</p>
+          <p className="special-margin">QUANTITY</p>
+          <p>TOTAL</p>
+          {/* </div> */}
         </section>
         <section className="page-section" id="cart-items">
           {props.cart.line_items !== undefined ? (
@@ -65,14 +73,15 @@ const Cart = (props) => {
               {props.cart.total_unique_items > 0 ? (
                 <div className="cart-footer">
                   <div className="top-row">
-                    {renderTotal()}
                     <button onClick={handleEmptyCart}>EMPTY CART</button>
+                    {renderTotal()}
                   </div>
-                  <button>
-                    <div className="checkout-btn-bg">
-                      <Link to="/checkout">CHECKOUT</Link>
-                    </div>
-                  </button>
+                  <Link to="/products" className="continue-btn btn-lg">
+                    CONTINUE SHOPPING
+                  </Link>
+                  <Link to="/checkout" className="checkout-btn btn-lg">
+                    CHECKOUT
+                  </Link>
                 </div>
               ) : (
                 renderEmptyMessage()
