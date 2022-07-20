@@ -15,7 +15,30 @@ const Cart = () => {
     if (cart.total_unique_items > 0) {
       return;
     }
-    return <p>You have no items in your shopping cart, start adding some!</p>;
+    return (
+      <div id="cart-is-empty-content">
+        <p id="cart-is-empty-message">
+          You have no items in your shopping cart. Start adding some!
+        </p>
+        <Link to="/products" id="cart-is-empty-btn">
+          VIEW PRODUCTS
+        </Link>
+      </div>
+    );
+  };
+
+  const renderHeader = () => {
+    return (
+      <section
+        className="page-section"
+        id="cart-table-heading"
+        style={cart.total_unique_items > 0 ? null : { display: "none" }}
+      >
+        <p>PRODUCT</p>
+        <p className="special-margin">QUANTITY</p>
+        <p>TOTAL</p>
+      </section>
+    );
   };
 
   // Renders the items in the cart
@@ -25,12 +48,22 @@ const Cart = () => {
     ));
   };
 
-  // Renders the total price of the order
-  const renderTotal = () => {
+  const renderFooter = () => {
     return (
-      <p>
-        TOTAL: <b>{cart.subtotal.formatted_with_symbol}</b>
-      </p>
+      <div className="cart-footer">
+        <div className="top-row">
+          <button onClick={emptyCart}>EMPTY CART</button>
+          <p>
+            TOTAL: <b>{cart.subtotal.formatted_with_symbol}</b>
+          </p>
+        </div>
+        <Link to="/products" className="continue-btn btn-lg">
+          CONTINUE SHOPPING
+        </Link>
+        <Link to="/checkout" className="checkout-btn btn-lg">
+          CHECKOUT
+        </Link>
+      </div>
     );
   };
 
@@ -46,27 +79,14 @@ const Cart = () => {
         <h4 className="h-main" id="cart-heading">
           CART
         </h4>
-        <section className="page-section" id="cart-table-heading">
-          <p>PRODUCT</p>
-          <p className="special-margin">QUANTITY</p>
-          <p>TOTAL</p>
-        </section>
-        <section className="page-section" id="cart-items">
+        <section className="page-section">
           {cart.line_items !== undefined ? (
             <div>
-              {renderItems()}
               {cart.total_unique_items > 0 ? (
-                <div className="cart-footer">
-                  <div className="top-row">
-                    <button onClick={emptyCart}>EMPTY CART</button>
-                    {renderTotal()}
-                  </div>
-                  <Link to="/products" className="continue-btn btn-lg">
-                    CONTINUE SHOPPING
-                  </Link>
-                  <Link to="/checkout" className="checkout-btn btn-lg">
-                    CHECKOUT
-                  </Link>
+                <div>
+                  {renderHeader()}
+                  {renderItems()}
+                  {renderFooter()}
                 </div>
               ) : (
                 renderEmptyMessage()

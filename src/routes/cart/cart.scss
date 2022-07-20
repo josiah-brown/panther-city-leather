@@ -65,6 +65,30 @@
       color: white;
     }
   }
+
+  #cart-is-empty-content {
+    margin: 4rem 0 2rem;
+
+    #cart-is-empty-message {
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    #cart-is-empty-btn {
+      background: black;
+      color: white;
+      padding: 1rem 1.5rem;
+      display: block;
+      margin: 3rem auto 1rem;
+      width: fit-content;
+    }
+
+    #cart-is-empty-btn:hover {
+      background: white;
+      color: black;
+      border: 1px solid black;
+    }
+  }
 }
 
 // MEDIA QUERY DESKTOP
@@ -78,7 +102,7 @@
     #cart-table-heading {
       display: flex;
       flex-direction: row;
-      margin: 3rem 10rem -2rem;
+      margin: 3rem 10rem 0rem;
       justify-content: space-between;
       position: relative;
 

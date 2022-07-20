@@ -123,6 +123,10 @@
   border: 1px solid black;
 }
 
+#product-content .right-side .product-form .qtyCounter .qty-change-btn {
+  cursor: pointer;
+}
+
 #product-content .right-side .product-form #add-to-cart-btn {
   height: 3rem;
   color: white;
@@ -132,6 +136,7 @@
   width: 100%;
   font-family: var(--font-main);
   letter-spacing: 0.2rem;
+  cursor: pointer;
 }
 
 #product-content .right-side .product-form #add-to-cart-btn:hover {

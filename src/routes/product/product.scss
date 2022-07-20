@@ -83,6 +83,10 @@
         width: fit-content;
         padding: 0 1rem;
         border: 1px solid black;
+
+        .qty-change-btn {
+          cursor: pointer;
+        }
       }
 
       #add-to-cart-btn {
@@ -94,6 +98,7 @@
         width: 100%;
         font-family: var(--font-main);
         letter-spacing: 0.2rem;
+        cursor: pointer;
       }
 
       #add-to-cart-btn:hover {

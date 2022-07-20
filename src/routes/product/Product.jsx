@@ -1,20 +1,36 @@
-import Nav from "../../components/nav/Nav";
-import { useParams } from "react-router-dom";
-import Footer from "../../components/footer/Footer";
+//========== 3RD PARTY IMPORTS ==========//
 import { useEffect, useState } from "react";
-import "./product.css";
+import { useParams } from "react-router-dom";
+
+//========== COMPONENT IMPORTS ==========//
+import Nav from "../../components/nav/Nav";
+import Footer from "../../components/footer/Footer";
+
+//========== ASSET IMPORTS ==========//
 import { BsDot } from "react-icons/bs";
+
+//========== CONTEXT IMPORTS ==========//
 import { useCartDispatch } from "../../context/CartContext";
 import { useProductsState } from "../../context/ProductsContext";
 
+//========== CSS IMPORTS ==========//
+import "./product.css";
+
+//========== INDIVIDUAL PRODUCT PAGE COMPONENT ==========//
 const Product = () => {
+  // Get url params
   const params = useParams();
+
+  // Set context variables
   const { addToCart } = useCartDispatch();
   const products = useProductsState();
+
+  // Set state variables
   const [currProduct, setCurrProduct] = useState({});
   const [variants, setVariants] = useState(null);
   const [qty, setQty] = useState(1);
 
+  // Updates the variants state when one of the variation dropdowns is changed
   const handleVariantsChange = (e) => {
     setVariants((variants) => {
       const groupId = e.target.id;
@@ -24,11 +40,13 @@ const Product = () => {
     });
   };
 
+  // Updates 'qty' state when changed via button or input
   const handleQtyChange = (e) => {
     const operation = e.target.textContent;
     if (operation === "+") {
       setQty((qty) => qty + 1);
     } else if (operation === "-") {
+      // Make sure qty does not go negative
       if (qty > 1) {
         setQty((qty) => qty - 1);
       } else {
@@ -39,11 +57,13 @@ const Product = () => {
     }
   };
 
+  // Calls the cart context 'addToCart' method
   const handleAddToCart = (e) => {
     e.preventDefault();
     addToCart(currProduct.id, qty, variants);
   };
 
+  // Calculates the total price of the item based on variations selected and qty
   const getTotalPrice = () => {
     const basePrice = currProduct.price.raw;
     let variantsPrice = 0;
@@ -60,6 +80,8 @@ const Product = () => {
     return (basePrice + variantsPrice) * qty;
   };
 
+  // Renders the product page only if the products have loaded in,
+  // the currProduct has been set, and the variants have been set.
   const renderProduct = () => {
     if (!products.loading && variants && currProduct !== {}) {
       return (
@@ -149,6 +171,7 @@ const Product = () => {
     }
   };
 
+  // Hook that sets the 'currProduct' and 'variants' after products have loaded into page.
   useEffect(() => {
     if (products.loading) {
       return console.log("Products have not loaded yet.");

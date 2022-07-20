@@ -84,6 +84,32 @@
   color: white;
 }
 
+.page-content #cart-is-empty-content {
+  margin: 4rem 0 2rem;
+}
+
+.page-content #cart-is-empty-content #cart-is-empty-message {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.page-content #cart-is-empty-content #cart-is-empty-btn {
+  background: black;
+  color: white;
+  padding: 1rem 1.5rem;
+  display: block;
+  margin: 3rem auto 1rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.page-content #cart-is-empty-content #cart-is-empty-btn:hover {
+  background: white;
+  color: black;
+  border: 1px solid black;
+}
+
 @media (min-width: 960px) {
   .page-content #cart-heading {
     margin-bottom: -2rem;
@@ -97,7 +123,7 @@
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
-    margin: 3rem 10rem -2rem;
+    margin: 3rem 10rem 0rem;
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
