@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import commerce from "./lib/commerce";
 import { useCartDispatch } from "./context/CartContext";
-// import { useProductsDispatch } from "./context/ProductsContext";
 
 //*========== IMPORT ROUTES ==========*//
 import Home from "./routes/home/Home";
@@ -22,12 +21,9 @@ import ContactConfirmation from "./routes/contact_confirmation/ContactConfirmati
 const App = () => {
   // Initialize context variables
   const { refreshCart } = useCartDispatch();
-  // const { setProducts } = useProductsDispatch();
 
   // Initialize state variables
-  // const [products, setProducts] = useState([]);
   const [order, setOrder] = useState({});
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const handleCaptureCheckout = (checkoutTokenId, newOrder) => {

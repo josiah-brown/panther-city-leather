@@ -5,11 +5,12 @@ import { useEffect, useState } from "react";
 import "./product.css";
 import { BsDot } from "react-icons/bs";
 import { useCartDispatch } from "../../context/CartContext";
+import { useProductsState } from "../../context/ProductsContext";
 
-const Product = (props) => {
+const Product = () => {
   const params = useParams();
   const { addToCart } = useCartDispatch();
-  const [productLoaded, setProductLoaded] = useState(false);
+  const products = useProductsState();
   const [currProduct, setCurrProduct] = useState({});
   const [variants, setVariants] = useState(null);
   const [qty, setQty] = useState(1);
@@ -60,7 +61,7 @@ const Product = (props) => {
   };
 
   const renderProduct = () => {
-    if (productLoaded) {
+    if (!products.loading && variants && currProduct !== {}) {
       return (
         <div id="product-content">
           <img
@@ -144,29 +145,30 @@ const Product = (props) => {
         </div>
       );
     } else {
-      return <p>No product found with that id</p>;
+      return <p>Loading the product...</p>;
     }
   };
 
   useEffect(() => {
-    if (props.products.length === 0) {
+    if (products.loading) {
       return console.log("Products have not loaded yet.");
     }
-    setProductLoaded(true);
-    for (var i = 0; i < props.products.length; i++) {
-      if (props.products[i].id === params.id) {
-        const newProduct = props.products[i];
-        setCurrProduct(newProduct);
-        setVariants(() => {
-          const tempVariant = {};
-          newProduct.variant_groups.forEach((group) => {
-            tempVariant[group.id] = group.options[0].id;
+    if (!products.loading) {
+      for (var i = 0; i < products.data.length; i++) {
+        if (products.data[i].id === params.id) {
+          const newProduct = products.data[i];
+          setCurrProduct(newProduct);
+          setVariants(() => {
+            const tempVariant = {};
+            newProduct.variant_groups.forEach((group) => {
+              tempVariant[group.id] = group.options[0].id;
+            });
+            return tempVariant;
           });
-          return tempVariant;
-        });
+        }
       }
     }
-  }, [props.products]);
+  }, [products.loading]);
 
   return (
     <main className="page-wrapper">

@@ -28,7 +28,7 @@ const Home = (props) => {
           <br />
           <br />
           <div className="featured-items">
-            <ProductsList products={props.products} onAddToCart={() => {}} />
+            <ProductsList />
           </div>
           <div id="home-featured-btn">
             <a className="btn-def-black" href="/products">
