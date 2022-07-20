@@ -1,0 +1,49 @@
+.confirmation__wrapper {
+  margin: 3rem 10vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 2rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+}
+
+.confirmation__wrapper > h4 {
+  font-size: 1.8rem;
+}
+
+.confirmation__wrapper > div {
+  font-weight: 100;
+}
+
+.confirmation__wrapper > div > p {
+  margin: 0.5rem 0;
+}
+
+.confirmation__wrapper > div #order-ref-num {
+  font-weight: 600;
+}
+
+.confirmation__wrapper > div #email-notice {
+  margin-top: 2rem;
+}
+
+.confirmation__wrapper > a {
+  background: black;
+  color: white;
+  padding: 1rem 1.5rem;
+  margin-bottom: 10rem;
+}
+
+.confirmation__wrapper > a:hover {
+  background: white;
+  color: black;
+  border: 1px solid black;
+}
+/*# sourceMappingURL=confirmation.css.map */

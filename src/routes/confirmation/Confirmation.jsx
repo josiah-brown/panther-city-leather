@@ -3,10 +3,12 @@ import Nav from "../../components/nav/Nav";
 import Footer from "../../components/footer/Footer";
 import { Link } from "react-router-dom";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
+import "./confirmation.css";
 
 const Confirmation = (props) => {
   function renderOrderSummary() {
-    const { order, onBackToHome } = props;
+    const order = props.order;
+    const onBackToHome = props.onBackToHome;
 
     if (!order) {
       console.log("Not Order...");
@@ -16,23 +18,17 @@ const Confirmation = (props) => {
     return (
       <div className="confirmation">
         <div className="confirmation__wrapper">
-          <div className="confirmation__wrapper-message">
-            <h4>
-              Thank you for your purchase, {order.customer.firstname}{" "}
-              {order.customer.lastname}!
-            </h4>
-            <p className="confirmation__wrapper-reference">
-              <span>Order ref:</span> {order.customer_reference}
+          <h4>Thank you for your purchase, {order.customer.firstname}!</h4>
+          <div>
+            <p>Order reference #:</p>
+            <p id="order-ref-num">{order.customer_reference}</p>
+            <p id="email-notice">
+              You should receive a confirmation email shortly.
             </p>
           </div>
-          <Link
-            className="confirmation__wrapper-back"
-            type="button"
-            to="/"
-            onClick={onBackToHome}
-          >
-            <BsFillArrowLeftCircleFill />
-            <span>Back to home</span>
+          <Link type="button" to="/" onClick={onBackToHome}>
+            {/* <BsFillArrowLeftCircleFill /> */}
+            <span>RETURN HOME</span>
           </Link>
         </div>
       </div>
@@ -41,7 +37,7 @@ const Confirmation = (props) => {
 
   return (
     <div>
-      <Nav />
+      <Nav cart={props.cart} />
       {renderOrderSummary()}
       <Footer />
     </div>

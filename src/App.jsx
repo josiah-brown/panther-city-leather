@@ -193,6 +193,7 @@ const App = () => {
           element={
             <Confirmation
               order={order}
+              cart={cart}
               onBackToHome={() =>
                 window.localStorage.removeItem("order_receipt")
               }

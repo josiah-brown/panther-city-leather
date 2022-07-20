@@ -39,29 +39,34 @@ const Checkout = (props) => {
       commerce.checkout
         .generateToken(props.cart.id, { type: "cart" })
         .then((token) => {
-          return setCheckoutToken(token);
+          // console.log("Token: ", token);
+          setCheckoutToken(token);
+          return token;
         })
-        .then(() => {
-          return console.log("1 - Token successfully generated.");
+        // .then(() => {
+        //   return console.log("1 - Token successfully generated.");
+        // })
+        .then((token) => {
+          fetchShippingCountries(token.id);
+          return token;
         })
-        .then(() => {
-          return fetchShippingCountries(checkoutToken.id);
+        // .then(() => {
+        //   return console.log("2 - Shipping countries fetched successfully");
+        // })
+        .then((token) => {
+          fetchSubdivisions("US");
+          return token;
         })
-        .then(() => {
-          return console.log("2 - Shipping countries fetched successfully");
+        // .then(() => {
+        //   return console.log("3 - Subdivisions fetched successfully");
+        // })
+        .then((token) => {
+          fetchShippingOptions(token.id, "US", null);
+          return token;
         })
-        .then(() => {
-          return fetchSubdivisions("US");
-        })
-        .then(() => {
-          return console.log("3 - Subdivisions fetched successfully");
-        })
-        .then(() => {
-          return fetchShippingOptions(checkoutToken.id, "US", null);
-        })
-        .then(() => {
-          return console.log("4 - Shipping options fetched successfully");
-        })
+        // .then(() => {
+        //   return console.log("4 - Shipping options fetched successfully");
+        // })
         .catch((error) => {
           console.log("There was an error in generating a token", error);
         });
@@ -385,7 +390,7 @@ const Checkout = (props) => {
           Shipping method
         </label>
         <select
-          value={shippingOption.id}
+          value={shippingOption.id ? shippingOption.id : ""}
           name="shippingOption"
           className="checkout__select"
           onChange={handleShippingOptionChange}
@@ -489,6 +494,7 @@ const Checkout = (props) => {
     <div>
       <Nav cart={props.cart} />
       <h1>Checkout</h1>
+      {/* {shippingOption ? renderCheckoutForm() : <h1>Loading...</h1>} */}
       {renderCheckoutForm()}
     </div>
   );
