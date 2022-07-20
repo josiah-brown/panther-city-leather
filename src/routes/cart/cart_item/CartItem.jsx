@@ -1,17 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./cart_item.css";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineMinus } from "react-icons/ai";
+import { useCartDispatch } from "../../../context/CartContext";
 
-const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
+const CartItem = ({ item }) => {
+  const { updateCartQty, removeFromCart } = useCartDispatch();
+
   const handleUpdateCartQty = (lineItemId, quantity) => {
-    onUpdateCartQty(lineItemId, quantity);
+    updateCartQty(lineItemId, quantity);
   };
 
   const handleRemoveFromCart = () => {
-    onRemoveFromCart(item.id);
+    removeFromCart(item.id);
   };
 
   return (

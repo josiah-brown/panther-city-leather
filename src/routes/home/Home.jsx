@@ -1,16 +1,15 @@
 import HOME from "../../assets/example-hero.jpg";
 import SHOP_IMG from "../../assets/wallet.webp";
-import ABOUT_IMG from "../../assets/about.jpeg";
+// import ABOUT_IMG from "../../assets/about.jpeg";
 import "./home.css";
 import Nav from "../../components/nav/Nav";
 import ProductsList from "../products/products_list/ProductsList";
 import Footer from "../../components/footer/Footer";
-import { Link } from "react-router-dom";
 
 const Home = (props) => {
   return (
     <main className="page-wrapper">
-      <Nav cart={props.cart} />
+      <Nav />
       <div className="page-content">
         <div id="home-hero">
           <img src={HOME} alt="leather bag" />

@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineShopping } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { useCartState } from "../../../context/CartContext";
 
-const NavCartIcon = (props) => {
+const NavCartIcon = () => {
   const [cartLoaded, setCartLoaded] = useState(false);
+  const cart = useCartState();
 
   useEffect(() => {
-    if (Object.keys(props.cart).length !== 0) {
+    if (Object.keys(cart).length !== 0) {
       setCartLoaded(true);
+    } else {
+      setCartLoaded(false);
     }
-  }, [props.cart]);
+  }, [cart]);
 
   return (
     <button className="nav-icon" id="cart-icon">
@@ -19,7 +23,7 @@ const NavCartIcon = (props) => {
           <div
             className="full-bubble"
             style={
-              props.cart.line_items.length > 0
+              cart.line_items.length > 0
                 ? { display: "block" }
                 : { display: "none" }
             }

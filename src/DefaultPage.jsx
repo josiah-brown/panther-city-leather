@@ -5,7 +5,7 @@ import Footer from "./components/footer/Footer";
 const DefaultPage = (props) => {
   return (
     <main className="page-wrapper">
-      <Nav cart={props.cart} />
+      <Nav />
       <div className="page-content">
         <section className="page-section" id="section-1">
           <p>Section 1</p>

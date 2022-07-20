@@ -5,8 +5,10 @@ import ProductsList from "./products_list/ProductsList.jsx";
 import "./products.css";
 
 const Products = (props) => {
+  const fetchProducts = props.fetchProducts();
+
   useEffect(() => {
-    props.fetchProducts();
+    fetchProducts();
   }, []);
 
   useEffect(() => {
@@ -15,7 +17,7 @@ const Products = (props) => {
 
   return (
     <main className="page-wrapper">
-      <Nav cart={props.cart} />
+      <Nav />
       <div className="page-content">
         <h1 className="h-main">PRODUCTS</h1>
         <section className="page-section" id="products-item-list">

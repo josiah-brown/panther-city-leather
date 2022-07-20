@@ -2,7 +2,7 @@ import Nav from "../../components/nav/Nav";
 import Footer from "../../components/footer/Footer";
 import "./contact.css";
 import CONTACT_IMG from "../../assets/contact-img.jpg";
-import CONTACT_IMG2 from "../../assets/contact-img2.jpg";
+// import CONTACT_IMG2 from "../../assets/contact-img2.jpg";
 import emailjs from "@emailjs/browser";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -86,7 +86,7 @@ const Contact = (props) => {
 
   return (
     <main className="page-wrapper">
-      <Nav cart={props.cart} />
+      <Nav />
 
       <div className="page-content">
         <section className="page-section" id="contact-content">

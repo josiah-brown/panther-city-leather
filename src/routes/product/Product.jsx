@@ -4,9 +4,11 @@ import Footer from "../../components/footer/Footer";
 import { useEffect, useState } from "react";
 import "./product.css";
 import { BsDot } from "react-icons/bs";
+import { useCartDispatch } from "../../context/CartContext";
 
 const Product = (props) => {
   const params = useParams();
+  const { addToCart } = useCartDispatch();
   const [productLoaded, setProductLoaded] = useState(false);
   const [currProduct, setCurrProduct] = useState({});
   const [variants, setVariants] = useState(null);
@@ -38,7 +40,7 @@ const Product = (props) => {
 
   const handleAddToCart = (e) => {
     e.preventDefault();
-    props.onAddToCart(currProduct.id, qty, variants);
+    addToCart(currProduct.id, qty, variants);
   };
 
   const getTotalPrice = () => {
@@ -168,7 +170,7 @@ const Product = (props) => {
 
   return (
     <main className="page-wrapper">
-      <Nav cart={props.cart} />
+      <Nav />
       <div className="page-content">
         <section className="page-section" id="product-page">
           {renderProduct()}

@@ -2,7 +2,7 @@ import React from "react";
 import Nav from "../../components/nav/Nav";
 import Footer from "../../components/footer/Footer";
 import { Link } from "react-router-dom";
-import { BsFillArrowLeftCircleFill } from "react-icons/bs";
+// import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import "./confirmation.css";
 
 const Confirmation = (props) => {
@@ -37,7 +37,7 @@ const Confirmation = (props) => {
 
   return (
     <div>
-      <Nav cart={props.cart} />
+      <Nav />
       {renderOrderSummary()}
       <Footer />
     </div>

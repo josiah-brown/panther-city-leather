@@ -7,7 +7,7 @@ import { GiTripleClaws } from "react-icons/gi";
 import "./nav.css";
 import NavCartIcon from "./nav_cart_icon/NavCartIcon";
 
-const Nav = (props) => {
+const Nav = () => {
   const [linksVisible, setLinksVisible] = useState(false);
 
   return (
@@ -118,7 +118,7 @@ const Nav = (props) => {
           </ul>
         </div>
 
-        <NavCartIcon cart={props.cart} />
+        <NavCartIcon />
       </div>
       <div className="nav-spacer"></div>
     </nav>

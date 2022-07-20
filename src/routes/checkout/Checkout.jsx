@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import commerce from "../../lib/commerce";
 import "./checkout.css";
 import Nav from "../../components/nav/Nav";
+import { useCartState } from "../../context/CartContext";
 
 const Checkout = (props) => {
   // STATE VARIABLES
   // Checkout token (generated when checkout is loaded)
   const [checkoutToken, setCheckoutToken] = useState({});
+  const cart = useCartState();
 
   // Contact details
   const [firstName, setFirstName] = useState("Jane");
@@ -35,9 +37,9 @@ const Checkout = (props) => {
   const [shippingOption, setShippingOption] = useState("");
 
   function generateCheckoutToken() {
-    if (props.cart.line_items.length) {
+    if (cart.line_items.length) {
       commerce.checkout
-        .generateToken(props.cart.id, { type: "cart" })
+        .generateToken(cart.id, { type: "cart" })
         .then((token) => {
           // console.log("Token: ", token);
           setCheckoutToken(token);
@@ -198,7 +200,7 @@ const Checkout = (props) => {
   function handleCaptureCheckout(e) {
     e.preventDefault();
     const orderData = {
-      line_items: sanitizedLineItems(props.cart.line_items),
+      line_items: sanitizedLineItems(cart.line_items),
       customer: {
         firstname: firstName,
         lastname: lastName,
@@ -238,7 +240,7 @@ const Checkout = (props) => {
   }
 
   function renderCheckoutForm() {
-    if (props.cart.line_items < 1) {
+    if (cart.line_items < 1) {
       return <h1>Your cart is empty.</h1>;
     }
 
@@ -483,16 +485,16 @@ const Checkout = (props) => {
   }
 
   useEffect(() => {
-    if (props.cart.line_items) {
+    if (cart.line_items) {
       console.log("Cart loaded successfully");
       generateCheckoutToken();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.cart]);
+  }, [cart]);
 
   return (
     <div>
-      <Nav cart={props.cart} />
+      <Nav />
       <h1>Checkout</h1>
       {/* {shippingOption ? renderCheckoutForm() : <h1>Loading...</h1>} */}
       {renderCheckoutForm()}

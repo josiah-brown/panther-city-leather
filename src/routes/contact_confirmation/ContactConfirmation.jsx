@@ -6,7 +6,7 @@ import "./contact-confirmation.css";
 const ContactConfirmation = (props) => {
   return (
     <main className="page-wrapper">
-      <Nav cart={props.cart} />
+      <Nav />
 
       <div className="page-content">
         <section className="page-section" id="confirm-content">
