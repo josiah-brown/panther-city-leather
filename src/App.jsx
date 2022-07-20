@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import commerce from "./lib/commerce";
 import { useCartDispatch } from "./context/CartContext";
+// import { useProductsDispatch } from "./context/ProductsContext";
 
 //*========== IMPORT ROUTES ==========*//
 import Home from "./routes/home/Home";
@@ -19,25 +20,15 @@ import ContactConfirmation from "./routes/contact_confirmation/ContactConfirmati
 // This is the parent component of the entire app.
 // Everything else will flow downward from here.
 const App = () => {
-  // Initialize state variables
-  const [products, setProducts] = useState([]);
+  // Initialize context variables
   const { refreshCart } = useCartDispatch();
+  // const { setProducts } = useProductsDispatch();
+
+  // Initialize state variables
+  // const [products, setProducts] = useState([]);
   const [order, setOrder] = useState({});
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
-  const fetchProducts = () => {
-    commerce.products
-      .list()
-      .then((products) => {
-        setProducts(products.data);
-        console.log("Products updated successfully.");
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log("There was an error fetching the products", error);
-      });
-  };
 
   const handleCaptureCheckout = (checkoutTokenId, newOrder) => {
     commerce.checkout
@@ -58,26 +49,13 @@ const App = () => {
       });
   };
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
   return (
     <div className="app-wrapper">
       <Routes>
-        <Route path="/" element={<Home products={products} />} />
+        <Route path="/" element={<Home />} />
         <Route path="about" element={<About />} />
-        <Route
-          path="products"
-          element={
-            <Products
-              products={products}
-              fetchProducts={fetchProducts}
-              loading={loading}
-            />
-          }
-        />
-        <Route path="products/:id" element={<Product products={products} />} />
+        <Route path="products" element={<Products />} />
+        <Route path="products/:id" element={<Product />} />
         <Route path="cart" element={<Cart />} />
         <Route
           path="checkout"

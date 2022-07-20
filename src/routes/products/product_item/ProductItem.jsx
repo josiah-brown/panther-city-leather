@@ -1,12 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./product-item.css";
 
-const ProductItem = ({ product, onAddToCart }) => {
-  const handleAddToCart = () => {
-    onAddToCart(product.id, 1);
-  };
+const ProductItem = (props) => {
+  const product = props.product;
 
   return (
     <div className="product__card">
@@ -26,15 +24,6 @@ const ProductItem = ({ product, onAddToCart }) => {
           </div>
         </div>
       </Link>
-
-      {/* <button
-        name="Add to cart"
-        type="button"
-        className="product__btn btn-def"
-        onClick={handleAddToCart}
-      >
-        Quick add
-      </button> */}
     </div>
   );
 };

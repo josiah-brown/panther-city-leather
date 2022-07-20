@@ -1,24 +1,22 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useDeferredValue, useEffect } from "react";
 import ProductItem from "../product_item/ProductItem";
 import "./products-list.css";
+import { useProductsState } from "../../../context/ProductsContext";
 
-const ProductsList = ({ products, onAddToCart }) => {
+const ProductsList = () => {
+  const { data, loading } = useProductsState();
+
+  const renderProducts = () => {
+    return data.map((product) => {
+      return <ProductItem key={product.id} product={product} />;
+    });
+  };
+
   return (
     <div className="products" id="products">
-      {products.map((product) => (
-        <ProductItem
-          key={product.id}
-          product={product}
-          onAddToCart={onAddToCart}
-        />
-      ))}
+      {loading ? <h1>Loading Products...</h1> : renderProducts()}
     </div>
   );
-};
-
-ProductsList.propTypes = {
-  products: PropTypes.array,
 };
 
 export default ProductsList;
