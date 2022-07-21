@@ -54,7 +54,7 @@ const App = () => {
         <Route path="products/:id" element={<Product />} />
         <Route path="cart" element={<Cart />} />
         <Route
-          path="checkout"
+          path="checkout/:id"
           element={<Checkout onCaptureCheckout={handleCaptureCheckout} />}
         />
         <Route

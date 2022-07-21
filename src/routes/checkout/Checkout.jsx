@@ -3,12 +3,18 @@ import commerce from "../../lib/commerce";
 import "./checkout.css";
 import Nav from "../../components/nav/Nav";
 import { useCartState } from "../../context/CartContext";
+import { useParams } from "react-router-dom";
 
 const Checkout = (props) => {
+  // URL PARAMS
+  const cartId = useParams().id;
+
+  // CONTEXT VARIABLES
+  const cart = useCartState();
+
   // STATE VARIABLES
   // Checkout token (generated when checkout is loaded)
   const [checkoutToken, setCheckoutToken] = useState({});
-  const cart = useCartState();
 
   // Contact details
   const [firstName, setFirstName] = useState("Jane");
@@ -39,36 +45,23 @@ const Checkout = (props) => {
   function generateCheckoutToken() {
     if (cart.line_items.length) {
       commerce.checkout
-        .generateToken(cart.id, { type: "cart" })
+        .generateToken(cartId, { type: "cart" })
         .then((token) => {
-          // console.log("Token: ", token);
           setCheckoutToken(token);
           return token;
         })
-        // .then(() => {
-        //   return console.log("1 - Token successfully generated.");
-        // })
         .then((token) => {
           fetchShippingCountries(token.id);
           return token;
         })
-        // .then(() => {
-        //   return console.log("2 - Shipping countries fetched successfully");
-        // })
         .then((token) => {
           fetchSubdivisions("US");
           return token;
         })
-        // .then(() => {
-        //   return console.log("3 - Subdivisions fetched successfully");
-        // })
         .then((token) => {
           fetchShippingOptions(token.id, "US", null);
           return token;
         })
-        // .then(() => {
-        //   return console.log("4 - Shipping options fetched successfully");
-        // })
         .catch((error) => {
           console.log("There was an error in generating a token", error);
         });

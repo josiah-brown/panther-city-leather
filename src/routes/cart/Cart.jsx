@@ -27,6 +27,7 @@ const Cart = () => {
     );
   };
 
+  // Render the cart table header on desktop
   const renderHeader = () => {
     return (
       <section
@@ -48,6 +49,7 @@ const Cart = () => {
     ));
   };
 
+  // Render the cart totals and action buttons
   const renderFooter = () => {
     return (
       <div className="cart-footer">
@@ -60,7 +62,7 @@ const Cart = () => {
         <Link to="/products" className="continue-btn btn-lg">
           CONTINUE SHOPPING
         </Link>
-        <Link to="/checkout" className="checkout-btn btn-lg">
+        <Link to={"/checkout/" + cart.id} className="checkout-btn btn-lg">
           CHECKOUT
         </Link>
       </div>

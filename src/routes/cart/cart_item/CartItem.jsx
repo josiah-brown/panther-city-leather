@@ -24,9 +24,11 @@ const CartItem = ({ item }) => {
           <img className="cart-item-img" src={item.image.url} alt={item.name} />
         </Link>
       </div>
+
       <div className="cart-item-content">
         <div className="cart-item-text">
           <h4 className="h-sub">{item.name.toUpperCase()}</h4>
+
           <div className="cart-item-variants h-sub">
             {item.selected_options.length > 0
               ? item.selected_options.map((option) => {
@@ -38,9 +40,11 @@ const CartItem = ({ item }) => {
                 })
               : null}
           </div>
+
           <div className="h-sub" id="item-total-mobile">
             {item.line_total.formatted_with_symbol}
           </div>
+
           <div className="h-sub" id="item-total-desktop">
             {item.price.formatted_with_symbol}
           </div>
@@ -54,7 +58,9 @@ const CartItem = ({ item }) => {
             >
               <AiOutlineMinus className="qty-icon" />
             </button>
+
             <p className="h-sub">{item.quantity}</p>
+
             <button
               type="button"
               className=" h-sub"
