@@ -1,0 +1,34 @@
+#checkout-progress-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 20%;
+
+    .bubble {
+      height: 1.2rem;
+      width: 1.2rem;
+      border-radius: 1rem;
+      background: rgba($color: #000000, $alpha: 0.5);
+    }
+
+    .step_name {
+      font-size: 0.5rem;
+    }
+  }
+
+  .bar-spacer {
+    width: 15%;
+    height: 2px;
+    background: rgba($color: #000000, $alpha: 0.5);
+    margin-top: -1.6rem;
+  }
+}

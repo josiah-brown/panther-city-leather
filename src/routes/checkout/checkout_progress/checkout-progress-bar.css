@@ -1,0 +1,51 @@
+#checkout-progress-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+}
+
+#checkout-progress-bar .step {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+  width: 20%;
+}
+
+#checkout-progress-bar .step .bubble {
+  height: 1.2rem;
+  width: 1.2rem;
+  border-radius: 1rem;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#checkout-progress-bar .step .step_name {
+  font-size: 0.5rem;
+}
+
+#checkout-progress-bar .bar-spacer {
+  width: 15%;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.5);
+  margin-top: -1.6rem;
+}
+/*# sourceMappingURL=checkout-progress-bar.css.map */

@@ -138,7 +138,10 @@ const Product = () => {
                       {group.options.map((variation) => {
                         return (
                           <option value={variation.id} key={variation.id}>
-                            {variation.name + " ($" + variation.price.raw + ")"}
+                            {variation.name +
+                              (variation.price.raw > 0
+                                ? " (+$" + variation.price.raw + ")"
+                                : "")}
                           </option>
                         );
                       })}

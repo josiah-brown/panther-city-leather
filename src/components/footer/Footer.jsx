@@ -21,7 +21,7 @@ const Footer = () => {
         </a>
       </div>
       <h2 id="footer-text" className="h-sub">
-        © {year} BROWN LEATHER GOODS
+        © {year} PANTHER CITY LEATHER
       </h2>
     </footer>
   );

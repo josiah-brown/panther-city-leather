@@ -59,6 +59,7 @@ export const CartProvider = ({ children }) => {
       try {
         const cart = await commerce.cart.retrieve();
         setCart(cart);
+        console.log(cart);
       } catch (err) {
         console.log(err);
       }
@@ -66,6 +67,16 @@ export const CartProvider = ({ children }) => {
 
     getCart();
   }, []);
+
+  // This is run after the cart has loaded and removes any items from the cart that are no longer valid.
+  // i.e. If the merchant changes or removes a product in Chec while it is in a cart
+  useEffect(() => {
+    state.line_items.forEach((item) => {
+      if (item.product_id === null) {
+        removeFromCart(item.id);
+      }
+    });
+  }, [state]);
 
   // setCart() takes in a payload (in this case the cart object)
   // and sets the current cart state to that payload.
