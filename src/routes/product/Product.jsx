@@ -69,6 +69,7 @@ const Product = () => {
     let variantsPrice = 0;
     for (const key in variants) {
       const optionId = variants[key];
+      // eslint-disable-next-line
       currProduct.variant_groups.forEach((group) => {
         group.options.forEach((option) => {
           if (group.id === key && option.id === optionId) {
@@ -194,6 +195,7 @@ const Product = () => {
         }
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [products.loading]);
 
   return (

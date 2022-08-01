@@ -10,13 +10,13 @@ const Footer = () => {
   return (
     <footer>
       <div className="social-icons">
-        <a href="https://www.google.com" target="_blank">
+        <a href="https://www.google.com" target="_blank" rel="noreferrer">
           <AiOutlineInstagram />
         </a>
-        <a href="https://www.google.com" target="_blank">
+        <a href="https://www.google.com" target="_blank" rel="noreferrer">
           <AiFillFacebook />
         </a>
-        <a href="https://www.google.com" target="_blank">
+        <a href="https://www.google.com" target="_blank" rel="noreferrer">
           <AiOutlineYoutube />
         </a>
       </div>

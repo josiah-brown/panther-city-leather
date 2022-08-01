@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import commerce from "../../lib/commerce";
+// import React, { useEffect, useState } from "react";
+// import commerce from "../../lib/commerce";
 import "./checkout.css";
 import Nav from "../../components/nav/Nav";
 import { CheckoutProvider } from "../../context/CheckoutContext";

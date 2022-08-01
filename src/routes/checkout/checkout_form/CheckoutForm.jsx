@@ -1,7 +1,7 @@
 import React from "react";
 import {
   useCheckoutState,
-  useCheckoutDispatch,
+  // useCheckoutDispatch,
 } from "../../../context/CheckoutContext";
 import CheckoutProgressBar from "../checkout_progress/CheckoutProgressBar";
 import InfoSection from "./info_section/InfoSection";
@@ -10,8 +10,8 @@ import "./checkout-form.css";
 
 const CheckoutForm = () => {
   const checkout = useCheckoutState();
-  const { updateOrderInfo } = useCheckoutDispatch();
-  const orderData = checkout.order_data;
+  // const { updateOrderInfo } = useCheckoutDispatch();
+  // const orderData = checkout.order_data;
 
   return (
     // Add progress bar component

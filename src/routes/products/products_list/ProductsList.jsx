@@ -1,4 +1,4 @@
-import React, { useDeferredValue, useEffect } from "react";
+import React from "react";
 import ProductItem from "../product_item/ProductItem";
 import "./products-list.css";
 import { useProductsState } from "../../../context/ProductsContext";

@@ -248,6 +248,7 @@ export const CheckoutProvider = ({ children }) => {
     } else {
       isMounted.current = true;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.checkout_token.id]);
 
   // useEffect(() => {
