@@ -76,6 +76,7 @@ export const CartProvider = ({ children }) => {
         removeFromCart(item.id);
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
   // setCart() takes in a payload (in this case the cart object)
