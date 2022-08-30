@@ -1,12 +1,11 @@
 import HOME from "../../assets/example-hero.jpg";
 import SHOP_IMG from "../../assets/wallet.webp";
-// import ABOUT_IMG from "../../assets/about.jpeg";
 import "./home.css";
 import Nav from "../../components/nav/Nav";
 import ProductsList from "../products/products_list/ProductsList";
 import Footer from "../../components/footer/Footer";
 
-const Home = (props) => {
+const Home = () => {
   return (
     <main className="page-wrapper">
       <Nav />
