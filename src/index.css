@@ -28,17 +28,6 @@ body {
   letter-spacing: 0.2rem;
 }
 
-/*========== LOADING ANIMATION ==========*/
-.loader-container {
-  width: 100vw;
-  height: 100vh;
-  /* position: fixed; */
-  background: #000;
-  /* url("https://media.giphy.com/media/8agqybiK5LW8qrG3vJ/giphy.gif") center
-    no-repeat; */
-  z-index: 1000;
-}
-
 /*========== UTILITY CLASSES ==========*/
 .page-wrapper {
   width: 100%;

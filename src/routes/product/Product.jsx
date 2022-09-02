@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 //========== COMPONENT IMPORTS ==========//
 import Nav from "../../components/nav/Nav";
 import Footer from "../../components/footer/Footer";
+import Loader from "../../components/loader/Loader";
 
 //========== ASSET IMPORTS ==========//
 import { BsDot } from "react-icons/bs";
@@ -29,6 +30,7 @@ const Product = () => {
   const [currProduct, setCurrProduct] = useState({});
   const [variants, setVariants] = useState(null);
   const [qty, setQty] = useState(1);
+  const [cartIsUpdating, setCartIsUpdating] = useState(false);
 
   // Updates the variants state when one of the variation dropdowns is changed
   const handleVariantsChange = (e) => {
@@ -60,6 +62,7 @@ const Product = () => {
   // Calls the cart context 'addToCart' method
   const handleAddToCart = (e) => {
     e.preventDefault();
+    setCartIsUpdating(true);
     addToCart(currProduct.id, qty, variants);
   };
 
@@ -87,6 +90,7 @@ const Product = () => {
     if (!products.loading && variants && currProduct !== {}) {
       return (
         <div id="product-content">
+          {cartIsUpdating ? <Loader /> : null}
           <img
             className="product-image"
             src={currProduct.image?.url}
