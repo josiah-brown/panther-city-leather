@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import commerce from "./lib/commerce";
 import { useCartDispatch } from "./context/CartContext";
-// import { CheckoutProvider } from "./context/CheckoutContext";
 
 //*========== IMPORT ROUTES ==========*//
 import Home from "./routes/home/Home";

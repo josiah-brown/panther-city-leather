@@ -10,13 +10,37 @@
     ></script>
     <script type="text/javascript">
       (function () {
-        // const api_key = process.env.EMAILJS_PUBLIC_KEY;
-        emailjs.init("AlmOFYKFPMZozZDmq"); // Obtain your user ID at the dashboard https://dashboard.emailjs.com/integration
+        emailjs.init(process.env.REACT_APP_EMAILJS_PUBLIC_KEY); // Obtain your user ID at the dashboard https://dashboard.emailjs.com/integration
       })();
     </script>
     <link rel="stylesheet" type="text/css" href="../src/index.css" />
+    <style>
+      .loader {
+        position: absolute;
+        top: calc(50% - 4em);
+        left: calc(50% - 4em);
+        width: 6em;
+        height: 6em;
+        border: 1.1em solid rgba(0, 0, 0, 0.2);
+        border-left: 1.1em solid #000000;
+        border-radius: 50%;
+        animation: load8 1.1s infinite linear;
+        transition: opacity 0.3s;
+      }
+
+      @keyframes load8 {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="loader"></div>
+    </div>
   </body>
 </html>
