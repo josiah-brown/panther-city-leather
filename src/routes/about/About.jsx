@@ -1,9 +1,8 @@
 import "./about.css";
 import Nav from "../../components/nav/Nav";
 import Footer from "../../components/footer/Footer";
-// import { AiFillPropertySafety } from "react-icons/ai";
 
-export default function About(props) {
+export default function About() {
   return (
     <main>
       <Nav />

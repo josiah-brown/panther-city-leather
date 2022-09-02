@@ -1,6 +1,6 @@
 import Commerce from "@chec/commerce.js";
 
-const checAPIKey = "pk_test_439924de203285ef5943734e2732afed0edb4d0e04b13"; // process.env.REACT_APP_CHEC_PUBLIC_KEY;
+const checAPIKey = process.env.REACT_APP_CHEC_PUBLIC_KEY;
 // const devEnvironment = process.env.NODE_ENV === "development";
 const devEnvironment = true;
 

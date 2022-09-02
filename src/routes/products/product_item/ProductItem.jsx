@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./product-item.css";
 
 const ProductItem = (props) => {
+  // eslint-disable-next-line
   const product = props.product;
 
   return (
