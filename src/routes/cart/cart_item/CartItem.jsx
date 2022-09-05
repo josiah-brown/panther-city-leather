@@ -36,6 +36,7 @@ const CartItem = ({ item }) => {
     if (updating) {
       setUpdating(!updating);
     }
+    // eslint-disable-next-line
   }, [item.quantity]);
 
   useEffect(() => {
@@ -45,6 +46,7 @@ const CartItem = ({ item }) => {
     } else if (qty < 50) {
       hideError();
     }
+    // eslint-disable-next-line
   }, [qty]);
 
   return (
