@@ -3,7 +3,6 @@ import { useCartDispatch } from "../../context/CartContext";
 import Loader from "../../components/loader/Loader";
 
 const ProductForm = (props) => {
-  console.log("Props: ", props);
   const product = props.product;
   const [variants, setVariants] = useState(() => {
     const tempVariant = {};

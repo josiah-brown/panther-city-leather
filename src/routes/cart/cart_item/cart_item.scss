@@ -65,24 +65,37 @@
         justify-content: space-between;
         border: 0.5px solid rgba($color: #000000, $alpha: 0.5);
         width: 35%;
-        padding: 0.25rem 0.5rem;
-
-        * {
-          font-size: 1.2rem;
-          font-weight: 100;
-        }
+        padding: 0.25rem 0.3rem;
 
         .qty-icon {
           font-size: 0.8rem;
           cursor: pointer;
         }
+
+        & > input {
+          min-width: 40px;
+          border: none;
+          text-align: center;
+          font-size: 1rem;
+          font-weight: 200;
+          font-family: var(--font-main);
+        }
       }
 
-      #item-remove {
-        margin-right: 2rem;
-        font-size: 0.6rem;
-        font-weight: 100;
-        letter-spacing: 0.15rem;
+      #error-and-remove {
+        .qty-error {
+          display: none;
+          font-size: 0.7rem;
+          letter-spacing: 0.05rem;
+          color: red;
+        }
+
+        #item-remove {
+          margin-right: 2rem;
+          font-size: 0.6rem;
+          font-weight: 100;
+          letter-spacing: 0.15rem;
+        }
       }
     }
   }
