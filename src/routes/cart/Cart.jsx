@@ -5,10 +5,13 @@ import Footer from "../../components/footer/Footer";
 import CartItem from "./cart_item/CartItem";
 import "./cart.css";
 import { useCartState, useCartDispatch } from "../../context/CartContext";
+import { useState } from "react";
+import Loader from "../../components/loader/Loader";
 
 const Cart = () => {
   const cart = useCartState();
   const { emptyCart } = useCartDispatch();
+  const [updating, setUpdating] = useState(false);
 
   // Displays message if cart is empty
   const renderEmptyMessage = () => {
@@ -53,8 +56,16 @@ const Cart = () => {
   const renderFooter = () => {
     return (
       <div className="cart-footer">
+        {updating ? <Loader /> : null}
         <div className="top-row">
-          <button onClick={emptyCart}>EMPTY CART</button>
+          <button
+            onClick={() => {
+              setUpdating(true);
+              emptyCart();
+            }}
+          >
+            EMPTY CART
+          </button>
           <p>
             TOTAL: <b>{cart.subtotal.formatted_with_symbol}</b>
           </p>

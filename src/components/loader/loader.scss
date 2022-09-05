@@ -2,19 +2,24 @@
   width: 100vw;
   height: 100vh;
   position: fixed;
-  background: rgba($color: #000, $alpha: 0.3);
+  left: 0;
+  top: 0;
+  background: rgba($color: #000, $alpha: 0.8);
+  z-index: 999;
+  user-select: none;
 
   .loader {
     position: fixed;
-    top: calc(50% - 4em);
-    left: calc(50% - 4em);
-    width: 6em;
-    height: 6em;
-    border: 1.1em solid rgba(0, 0, 0, 0.2);
-    border-left: 1.1em solid #000000;
+    top: calc(50% - 3.5em);
+    left: calc(50% - 3.5em);
+    width: 7em;
+    height: 7em;
+    border: 1.1em solid rgba(255, 255, 255, 0.4);
+    border-left: 1.1em solid rgba($color: #fff, $alpha: 0.8);
     border-radius: 50%;
     animation: load-animation 0.8s infinite linear;
     transition: opacity 0.3s;
+    z-index: 1000;
   }
 }
 
