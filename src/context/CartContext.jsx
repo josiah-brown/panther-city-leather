@@ -59,7 +59,6 @@ export const CartProvider = ({ children }) => {
       try {
         const cart = await commerce.cart.retrieve();
         setCart(cart);
-        console.log(cart);
       } catch (err) {
         console.log(err);
       }

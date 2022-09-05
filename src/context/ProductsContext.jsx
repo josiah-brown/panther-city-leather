@@ -41,7 +41,6 @@ export const ProductsProvider = ({ children }) => {
       try {
         const resp = await commerce.products.list();
         setProducts(resp.data);
-        // console.log("Products updated successfully.");
       } catch (err) {
         console.log("There was an error fetching the products", err);
       }

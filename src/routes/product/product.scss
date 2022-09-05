@@ -34,17 +34,6 @@
       }
     }
 
-    .product-about {
-      display: flex;
-      flex-direction: column;
-      align-items: left;
-      text-align: left;
-
-      & > p {
-        letter-spacing: 0.15rem;
-      }
-    }
-
     .product-form {
       width: 100%;
       margin: 0 auto;
