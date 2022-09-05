@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import { HiMenuAlt1 } from "react-icons/hi";
 import { AiOutlineMenu } from "react-icons/ai";
 import { BiX } from "react-icons/bi";
-import { GiTripleClaws } from "react-icons/gi";
+import PANTHER from "../../assets/panther.svg";
 import "./nav.css";
 import NavCartIcon from "./nav_cart_icon/NavCartIcon";
 
@@ -21,7 +20,6 @@ const Nav = () => {
           }}
         >
           <AiOutlineMenu />
-          {/* <HiMenuAlt1 /> */}
         </button>
         <ul
           className="nav-links-mobile"
@@ -90,8 +88,8 @@ const Nav = () => {
         </ul>
 
         <div className="nav-content-center">
-          <Link to="/" className="nav-icon" id="logo-icon">
-            <GiTripleClaws />
+          <Link to="/" id="logo-icon">
+            <img src={PANTHER} alt="panther logo" />
           </Link>
 
           <ul className="nav-links-desktop">

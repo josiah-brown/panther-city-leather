@@ -78,6 +78,17 @@ a {
   }
 }
 
+#logo-icon {
+  display: inline-block;
+  width: 15vw;
+
+  img {
+    color: var(--c-text);
+    cursor: pointer;
+    object-fit: cover;
+  }
+}
+
 // MEDIA QUERY DESKTOP
 @media (min-width: 960px) {
   .nav-links-mobile {
@@ -103,7 +114,7 @@ a {
       gap: 0.8rem;
 
       #logo-icon {
-        font-size: 4rem;
+        width: 5vw;
       }
 
       .nav-links-desktop {
