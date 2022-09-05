@@ -5,6 +5,10 @@
   height: fit-content;
   margin: 3rem 2rem;
 
+  & button {
+    color: black;
+  }
+
   .cart-item-img-container {
     overflow: hidden;
     width: 30%;

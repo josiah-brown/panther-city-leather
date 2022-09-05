@@ -15,6 +15,10 @@
   margin: 3rem 2rem;
 }
 
+.cart-item button {
+  color: black;
+}
+
 .cart-item .cart-item-img-container {
   overflow: hidden;
   width: 30%;
