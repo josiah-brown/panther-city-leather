@@ -66,9 +66,9 @@ a {
 
 #cart-icon-link {
   position: relative;
-  .full-bubble::after {
+
+  .bubble {
     position: absolute;
-    content: "";
     left: 0;
     top: 0;
     width: 0.8rem;

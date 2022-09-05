@@ -77,9 +77,8 @@ a {
   position: relative;
 }
 
-#cart-icon-link .full-bubble::after {
+#cart-icon-link .bubble {
   position: absolute;
-  content: "";
   left: 0;
   top: 0;
   width: 0.8rem;

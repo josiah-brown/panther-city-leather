@@ -21,10 +21,10 @@ const NavCartIcon = () => {
         <AiOutlineShopping />
         {cartLoaded ? (
           <div
-            className="full-bubble"
+            className="bubble"
             style={
               cart.line_items.length > 0
-                ? { display: "block" }
+                ? { display: "inline-block" }
                 : { display: "none" }
             }
           ></div>
