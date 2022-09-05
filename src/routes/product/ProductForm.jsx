@@ -1,12 +1,17 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useCartDispatch } from "../../context/CartContext";
 import Loader from "../../components/loader/Loader";
 
 const ProductForm = (props) => {
   console.log("Props: ", props);
   const product = props.product;
-  const [variants, setVariants] = useState(null);
+  const [variants, setVariants] = useState(() => {
+    const tempVariant = {};
+    product.variant_groups.forEach((group) => {
+      tempVariant[group.id] = group.options[0].id;
+    });
+    return tempVariant;
+  });
   const [qty, setQty] = useState(1);
   const [cartIsUpdating, setCartIsUpdating] = useState(false);
   const { addToCart } = useCartDispatch();
@@ -62,16 +67,6 @@ const ProductForm = (props) => {
     setCartIsUpdating(true);
     addToCart(product.id, qty, variants);
   };
-
-  useEffect(() => {
-    setVariants(() => {
-      const tempVariant = {};
-      product.variant_groups.forEach((group) => {
-        tempVariant[group.id] = group.options[0].id;
-      });
-      return tempVariant;
-    });
-  }, []);
 
   return (
     <form className="product-form">

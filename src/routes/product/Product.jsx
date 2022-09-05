@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 //========== COMPONENT IMPORTS ==========//
 import Nav from "../../components/nav/Nav";
 import Footer from "../../components/footer/Footer";
-import Loader from "../../components/loader/Loader";
 import ImageSlider from "../../components/image_slider/ImageSlider";
 import ProductHeading from "./ProductHeading";
 import ProductDescription from "./ProductDescription";
