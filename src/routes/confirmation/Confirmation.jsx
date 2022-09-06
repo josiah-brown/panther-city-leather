@@ -2,19 +2,28 @@ import React from "react";
 import Nav from "../../components/nav/Nav";
 import Footer from "../../components/footer/Footer";
 import { Link } from "react-router-dom";
-// import { BsFillArrowLeftCircleFill } from "react-icons/bs";
+import {
+  useCheckoutState,
+  useCheckoutDispatch,
+} from "../../context/CheckoutContext";
 import "./confirmation.css";
+import { useState } from "react";
+import { useEffect } from "react";
 
-const Confirmation = (props) => {
+const Confirmation = () => {
+  const checkout = useCheckoutState();
+  const { updateOrderInfo } = useCheckoutDispatch();
+  const [order, setOrder] = useState(checkout.confirmed_order);
+
   function renderOrderSummary() {
-    const order = props.order;
-    const onBackToHome = props.onBackToHome;
-
+    const onBackToHome = () => {
+      window.localStorage.removeItem("order_receipt");
+      setOrder({});
+    };
     if (!order) {
-      console.log("Not Order...");
+      console.log("No Order...");
       return null;
     }
-
     return (
       <div className="confirmation">
         <div className="confirmation__wrapper">
@@ -27,7 +36,6 @@ const Confirmation = (props) => {
             </p>
           </div>
           <Link type="button" to="/" onClick={onBackToHome}>
-            {/* <BsFillArrowLeftCircleFill /> */}
             <span>RETURN HOME</span>
           </Link>
         </div>
@@ -35,10 +43,18 @@ const Confirmation = (props) => {
     );
   }
 
+  useEffect(() => {
+    if (Object.keys(order).length > 0) {
+      updateOrderInfo("confirmed_order", {});
+    }
+    // eslint-disable-next-line
+  }, [order]);
+
   return (
     <div>
       <Nav />
       {renderOrderSummary()}
+
       <Footer />
     </div>
   );

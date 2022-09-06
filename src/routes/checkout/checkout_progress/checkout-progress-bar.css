@@ -31,11 +31,14 @@
   width: 20%;
 }
 
-#checkout-progress-bar .step .bubble {
+#checkout-progress-bar .step .progress-bubble {
   height: 1.2rem;
   width: 1.2rem;
   border-radius: 1rem;
-  background: rgba(0, 0, 0, 0.5);
+}
+
+#checkout-progress-bar .step .bubble-selected {
+  background-color: red;
 }
 
 #checkout-progress-bar .step .step_name {
@@ -45,7 +48,7 @@
 #checkout-progress-bar .bar-spacer {
   width: 15%;
   height: 2px;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.3);
   margin-top: -1.6rem;
 }
 /*# sourceMappingURL=checkout-progress-bar.css.map */

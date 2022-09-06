@@ -23,16 +23,18 @@ const ACTIONS = {
   UPDATE_ORDER_INFO: "UPDATE_ORDER_INFO",
 };
 
-const STEPS = {
+export const STEPS = {
   LOADING: "LOADING",
   INFO: "INFO",
   SHIPPING: "SHIPPING",
   PAYMENT: "PAYMENT",
+  CONFIRM: "CONFIRM",
 };
 
 const initialState = {
   checkout_token: {},
   curr_step: STEPS.LOADING,
+  confirmed_order: {},
   order_data: {
     line_items: [],
     customer: {
@@ -49,27 +51,27 @@ const initialState = {
       country: "US",
     },
     billing: {
-      name: "Bob Green",
-      street: "4390 Timberview Dr",
-      town_city: "Fort Worth",
-      county_state: "TX",
-      postal_zip_code: "76140",
-      country: "US",
+      name_b: "",
+      street_b: "",
+      town_city_b: "",
+      county_state_b: "",
+      postal_zip_code_b: "",
+      country_b: "US",
     },
     fulfillment: {
       shipping_options: [],
       shipping_countries: {},
       shipping_subdivisions: {},
-      shipping_method: "shippingOption.id",
+      shipping_option: "",
     },
     payment: {
       gateway: "test_gateway",
       card: {
         number: "4242 4242 4242 4242",
-        expiry_month: "11",
+        expiry_month: "01",
         expiry_year: "2023",
-        cvc: "123",
-        postal_zip_code: "76140",
+        ccv: "123",
+        postal_zip_code_p: "76140",
       },
     },
   },
@@ -94,11 +96,9 @@ const updateObject = (keyName, newVal, object) => {
 const reducer = (state, action) => {
   switch (action.type) {
     case ACTIONS.SET_TOKEN:
-      console.log("Setting token");
       return { ...state, checkout_token: action.token };
 
     case ACTIONS.SET_SHIPPING_COUNTRIES:
-      console.log("Setting countries");
       return {
         ...state,
         order_data: {
@@ -111,7 +111,6 @@ const reducer = (state, action) => {
       };
 
     case ACTIONS.SET_SHIPPING_SUBDIVISIONS:
-      console.log("Setting subs");
       return {
         ...state,
         order_data: {
@@ -124,7 +123,6 @@ const reducer = (state, action) => {
       };
 
     case ACTIONS.SET_SHIPPING_OPTIONS:
-      console.log("Setting Options");
       return {
         ...state,
         order_data: {
@@ -137,20 +135,18 @@ const reducer = (state, action) => {
       };
 
     case ACTIONS.SET_SHIPPING_OPTION:
-      console.log("Setting Option");
       return {
         ...state,
         order_data: {
           ...state.order_data,
           fulfillment: {
             ...state.order_data.fulfillment,
-            shipping_options: action.shipOption,
+            shipping_option: action.shipOption.id,
           },
         },
       };
 
     case ACTIONS.UPDATE_ORDER_INFO:
-      console.log("Updating an order variable");
       return updateObject(
         Object.keys(action.payload)[0],
         Object.values(action.payload)[0],
@@ -222,7 +218,7 @@ export const CheckoutProvider = ({ children }) => {
   // Effect applied on mount and cart change
   useEffect(() => {
     if (cart) {
-      if (cart.id) {
+      if (cart.id && cart.line_items.length) {
         commerce.checkout
           .generateToken(cart.id, { type: "cart" })
           .then((token) => {
