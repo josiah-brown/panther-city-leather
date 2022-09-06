@@ -117,7 +117,6 @@ export const CartProvider = ({ children }) => {
       .catch((err) => {
         console.error("There was an error adding the item to the cart", err);
       });
-    console.log("Item added");
   };
 
   // Updates the quantity of the specified item
