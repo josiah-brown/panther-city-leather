@@ -1,5 +1,6 @@
 // import React, { useEffect, useState } from "react";
 // import commerce from "../../lib/commerce";
+import { useEffect } from "react";
 import "./checkout.css";
 import Nav from "../../components/nav/Nav";
 import { CheckoutProvider } from "../../context/CheckoutContext";
@@ -65,6 +66,11 @@ const Checkout = () => {
   //   };
   //   props.onCaptureCheckout(checkoutToken.id, orderData);
   // }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <CheckoutProvider>

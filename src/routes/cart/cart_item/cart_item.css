@@ -138,6 +138,11 @@
   letter-spacing: 0.15rem;
 }
 
+.cart-item .cart-item-content .cart-item-content-bottom-row #error-and-remove #item-remove:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 @media (min-width: 960px) {
   .cart-item {
     margin: 2rem 10rem;

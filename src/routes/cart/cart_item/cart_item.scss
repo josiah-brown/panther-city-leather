@@ -96,6 +96,11 @@
           font-weight: 100;
           letter-spacing: 0.15rem;
         }
+
+        #item-remove:hover {
+          cursor: pointer;
+          text-decoration: underline;
+        }
       }
     }
   }
