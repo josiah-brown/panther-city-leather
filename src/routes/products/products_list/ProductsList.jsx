@@ -13,8 +13,8 @@ const ProductsList = () => {
   };
 
   return (
-    <div className="products" id="products">
-      {loading ? <h1>Loading Products...</h1> : renderProducts()}
+    <div className="products_list">
+      {loading ? <h1>Loading products...</h1> : renderProducts()}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-#products {
+.products_list {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr;
@@ -8,7 +8,7 @@
 }
 
 @media (min-width: 960px) {
-  #products {
+  .products_list {
     -ms-grid-columns: 1fr 1fr 1fr 1fr;
         grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 2rem;

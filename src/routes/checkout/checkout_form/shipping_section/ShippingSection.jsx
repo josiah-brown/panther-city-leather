@@ -12,69 +12,69 @@ const ShippingSection = () => {
   const shippingSubs = orderData.fulfillment.shipping_subdivisions;
 
   return (
-    <div className="checkout__section">
-      <h4 className="checkout__subheading">SHIPPING DETAILS</h4>
-      <label className="checkout__label" htmlFor="shippingName">
+    <div className="checkout_section">
+      <h4 className="checkout_subheading">SHIPPING DETAILS</h4>
+      <label className="checkout_label" htmlFor="shippingName">
         FULL NAME
       </label>
       <input
-        className="checkout__input"
+        className="checkout_input"
         type="text"
         onChange={(e) => {
           updateOrderInfo("name", e.target.value);
         }}
         value={orderData.shipping.name}
         name="shippingName"
-        placeholder="Enter your shipping full name"
+        placeholder="Enter shipping full name"
         required
       />
 
-      <label className="checkout__label" htmlFor="shippingStreet">
+      <label className="checkout_label" htmlFor="shippingStreet">
         STREET ADDRESS
       </label>
       <input
-        className="checkout__input"
+        className="checkout_input"
         type="text"
         onChange={(e) => {
           updateOrderInfo("street", e.target.value);
         }}
         value={orderData.shipping.street}
         name="shippingStreet"
-        placeholder="Enter your street address"
+        placeholder="Enter shipping street address"
         required
       />
 
-      <label className="checkout__label" htmlFor="shippingCity">
+      <label className="checkout_label" htmlFor="shippingCity">
         CITY
       </label>
       <input
-        className="checkout__input"
+        className="checkout_input"
         type="text"
         onChange={(e) => {
           updateOrderInfo("town_city", e.target.value);
         }}
         value={orderData.shipping.town_city}
         name="shippingCity"
-        placeholder="Enter your city"
+        placeholder="Enter shipping city"
         required
       />
 
-      <label className="checkout__label" htmlFor="shippingPostalZipCode">
+      <label className="checkout_label" htmlFor="shippingPostalZipCode">
         POSTAL/ZIP CODE
       </label>
       <input
-        className="checkout__input"
+        className="checkout_input"
         type="text"
         onChange={(e) => {
           updateOrderInfo("postal_zip_code", e.target.value);
         }}
         value={orderData.shipping.postal_zip_code}
         name="shippingPostalZipCode"
-        placeholder="Enter your postal/zip code"
+        placeholder="Enter shipping zip code"
         required
       />
 
-      <label className="checkout__label" htmlFor="shippingCountry">
+      <label className="checkout_label" htmlFor="shippingCountry">
         COUNTRY
       </label>
       <select
@@ -83,7 +83,7 @@ const ShippingSection = () => {
         }}
         value={orderData.shipping.country}
         name="shippingCountry"
-        className="checkout__select"
+        className="checkout_select"
       >
         <option className="checkout__option" disabled>
           Country
@@ -101,7 +101,7 @@ const ShippingSection = () => {
         ;
       </select>
 
-      <label className="checkout__label" htmlFor="shippingStateProvince">
+      <label className="checkout_label" htmlFor="shippingStateProvince">
         STATE
       </label>
       <select
@@ -110,7 +110,7 @@ const ShippingSection = () => {
         }}
         value={orderData.shipping.county_state}
         name="shippingStateProvince"
-        className="checkout__select"
+        className="checkout_select"
       >
         <option className="checkout__option" disabled>
           State

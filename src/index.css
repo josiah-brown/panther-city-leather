@@ -49,6 +49,8 @@ input[type="number"] {
   padding: 2rem 0;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
   text-align: center;
+  position: relative;
+  min-height: 120px;
 }
 
 .wrapper {

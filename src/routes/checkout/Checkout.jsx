@@ -12,7 +12,7 @@ const Checkout = () => {
   return (
     <React.Fragment>
       <Nav />
-      <h1>Checkout</h1>
+      <h1>CHECKOUT</h1>
       <CheckoutForm />
     </React.Fragment>
   );

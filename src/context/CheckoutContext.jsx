@@ -231,6 +231,22 @@ export const CheckoutProvider = ({ children }) => {
     }
   }, [cart]);
 
+  // useEffect(() => {
+  //   const f = async () => {
+  //     await setShippingCountries(state.checkout_token.id);
+  //     await setSubdivisions("US");
+  //     await setShippingOptions("US");
+  //   };
+  //   if (isMounted.current) {
+  //     const token = state.checkout_token;
+  //     if (token !== {} && token) {
+  //       f();
+  //     }
+  //   } else {
+  //     isMounted.current = true;
+  //   }
+  // }, [state.checkout_token.id]);
+
   // Effect only applied after mount and after token has loaded
   useEffect(() => {
     if (isMounted.current) {
@@ -246,14 +262,6 @@ export const CheckoutProvider = ({ children }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.checkout_token.id]);
-
-  // useEffect(() => {
-  //   if (isMounted.current) {
-  //     const token = state.checkout_token;
-  //     if (token !== {} && token) {
-  //     }
-  //   }
-  // }, [state.order_data.shipping_countries]);
 
   return (
     <CheckoutDispatchContext.Provider value={{ updateOrderInfo }}>

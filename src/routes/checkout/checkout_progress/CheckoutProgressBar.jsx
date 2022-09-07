@@ -64,9 +64,6 @@ const CheckoutProgressBar = () => {
 
   return (
     <React.Fragment>
-      <h1>{step}</h1>
-      <br></br>
-      <br></br>
       <div id="checkout-progress-bar">
         <div className="step" id="step-info">
           <div className="progress-bubble" style={defaultBubbleColor}></div>

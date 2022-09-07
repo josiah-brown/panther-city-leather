@@ -1,0 +1,33 @@
+.image_loader_container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba($color: #fff, $alpha: 0.8);
+  z-index: 999;
+  user-select: none;
+
+  .image_loader {
+    position: absolute;
+    top: calc(50% - 2.5em);
+    left: calc(50% - 2.5em);
+    width: 5em;
+    height: 5em;
+    border: 0.7em solid rgba(0, 0, 0, 0.4);
+    border-left: 0.7em solid rgba($color: #000, $alpha: 0.8);
+    border-radius: 50%;
+    animation: load-animation 0.8s infinite linear;
+    transition: opacity 0.3s;
+    z-index: 1000;
+  }
+}
+
+@keyframes load-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

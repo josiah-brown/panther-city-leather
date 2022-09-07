@@ -65,29 +65,33 @@ const CheckoutForm = () => {
       {currStep !== "LOADING" ? (
         <CheckoutProgressBar></CheckoutProgressBar>
       ) : null}
-      <form className="checkout__form">
+      <form className="checkout_form">
         {currStep === "INFO" ? <InfoSection></InfoSection> : null}
         {currStep === "SHIPPING" ? <ShippingSection></ShippingSection> : null}
         {currStep === "PAYMENT" ? <PaymentSection></PaymentSection> : null}
         {currStep === "CONFIRM" ? <ConfirmSection></ConfirmSection> : null}
-        {currStep !== "INFO" ? (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              handleStepClick(e.target.innerHTML);
-            }}
-          >
-            BACK
-          </button>
-        ) : null}
         {currStep !== "CONFIRM" ? (
           <button
+            className="checkout_nav_btn"
+            id="checkout_next_btn"
             onClick={(e) => {
               e.preventDefault();
               handleStepClick(e.target.innerHTML);
             }}
           >
             NEXT
+          </button>
+        ) : null}
+        {currStep !== "INFO" ? (
+          <button
+            className="checkout_nav_btn"
+            id="checkout_back_btn"
+            onClick={(e) => {
+              e.preventDefault();
+              handleStepClick(e.target.innerHTML);
+            }}
+          >
+            BACK
           </button>
         ) : null}
       </form>

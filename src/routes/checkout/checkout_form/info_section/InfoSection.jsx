@@ -10,13 +10,13 @@ const InfoSection = () => {
   const orderData = checkout.order_data;
 
   return (
-    <div className="checkout__section">
-      <h4 className="checkout__subheading">CONTACT INFO</h4>
-      <label className="checkout__label" htmlFor="firstName">
+    <div className="checkout_section">
+      <h4 className="checkout_subheading">CONTACT INFO</h4>
+      <label className="checkout_label" htmlFor="firstName">
         FIRST NAME
       </label>
       <input
-        className="checkout__input"
+        className="checkout_input"
         type="text"
         onChange={(e) => {
           updateOrderInfo("firstname", e.target.value);
@@ -27,11 +27,11 @@ const InfoSection = () => {
         required
       />
 
-      <label className="checkout__label" htmlFor="lastName">
+      <label className="checkout_label" htmlFor="lastName">
         LAST NAME
       </label>
       <input
-        className="checkout__input"
+        className="checkout_input"
         type="text"
         onChange={(e) => updateOrderInfo("lastname", e.target.value)}
         value={orderData.customer.lastname}
@@ -40,11 +40,11 @@ const InfoSection = () => {
         required
       />
 
-      <label className="checkout__label" htmlFor="email">
+      <label className="checkout_label" htmlFor="email">
         EMAIL
       </label>
       <input
-        className="checkout__input"
+        className="checkout_input"
         type="email"
         onChange={(e) => updateOrderInfo("email", e.target.value)}
         value={orderData.customer.email}

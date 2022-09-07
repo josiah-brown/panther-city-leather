@@ -15,59 +15,60 @@ const PaymentSection = () => {
 
   const renderAddressSection = () => {
     return (
-      <div className="checkout__section">
-        <h4 className="checkout__subheading">BILLING ADDRESS</h4>
+      <div className="checkout_section">
+        <h4 className="checkout_subheading">BILLING ADDRESS</h4>
 
-        <label className="checkout__label" htmlFor="shippingName">
+        <label className="checkout_label" htmlFor="shippingName">
           FULL NAME
         </label>
         <input
-          className="checkout__input"
+          className="checkout_input"
           type="text"
           onChange={(e) => {
             updateOrderInfo("name_b", e.target.value);
           }}
           value={orderData.billing.name_b}
           name="billingName"
-          placeholder="Enter your shipping full name"
+          placeholder="Enter billing full name"
           required
         />
 
-        <label className="checkout__label" htmlFor="shippingStreet">
+        <label className="checkout_label" htmlFor="shippingStreet">
           STREET ADDRESS
         </label>
         <input
-          className="checkout__input"
+          className="checkout_input"
           type="text"
           onChange={(e) => {
             updateOrderInfo("street_b", e.target.value);
           }}
           value={orderData.billing.street_b}
           name="billingStreet"
-          placeholder="Enter your street address"
+          placeholder="Enter billing street address"
           required
         />
 
-        <label className="checkout__label" htmlFor="shippingCity">
+        <label className="checkout_label" htmlFor="shippingCity">
           CITY
         </label>
         <input
-          className="checkout__input"
+          className="checkout_input"
           type="text"
           onChange={(e) => {
             updateOrderInfo("town_city_b", e.target.value);
           }}
           value={orderData.billing.town_city_b}
           name="billingCity"
-          placeholder="Enter your city"
+          placeholder="Enter billing city"
           required
         />
 
-        <label className="checkout__label" htmlFor="shippingPostalZipCode">
+        <label className="checkout_label" htmlFor="shippingPostalZipCode">
           POSTAL/ZIP CODE
         </label>
         <input
           type="number"
+          className="checkout_input"
           onChange={(e) => {
             if (e.target.value.length < 6) {
               updateOrderInfo("postal_zip_code_b", e.target.value);
@@ -75,11 +76,11 @@ const PaymentSection = () => {
           }}
           value={orderData.billing.postal_zip_code_b}
           name="billingPostalZipCode"
-          placeholder="Enter your postal/zip code"
+          placeholder="Enter billing zip code"
           required
         />
 
-        <label className="checkout__label" htmlFor="shippingCountry">
+        <label className="checkout_label" htmlFor="shippingCountry">
           COUNTRY
         </label>
         <select
@@ -88,7 +89,7 @@ const PaymentSection = () => {
           }}
           value={orderData.billing.country_b}
           name="billingCountry"
-          className="checkout__select"
+          className="checkout_select"
         >
           <option className="checkout__option" disabled>
             Country
@@ -106,7 +107,7 @@ const PaymentSection = () => {
           ;
         </select>
 
-        <label className="checkout__label" htmlFor="shippingStateProvince">
+        <label className="checkout_label" htmlFor="shippingStateProvince">
           STATE
         </label>
         <select
@@ -115,7 +116,7 @@ const PaymentSection = () => {
           }}
           value={orderData.billing.county_state_b}
           name="shippingStateProvince"
-          className="checkout__select"
+          className="checkout_select"
         >
           <option className="checkout__option" disabled>
             State
@@ -144,14 +145,14 @@ const PaymentSection = () => {
 
   const renderPaymentDetails = () => {
     return (
-      <React.Fragment>
-        <h4 className="checkout__subheading">PAYMENT DETAILS</h4>
+      <div className="checkout_section">
+        <h4 className="checkout_subheading">PAYMENT DETAILS</h4>
 
-        <label className="checkout__label" htmlFor="cardNum">
+        <label className="checkout_label" htmlFor="cardNum">
           Credit card number
         </label>
         <input
-          className="checkout__input"
+          className="checkout_input"
           type="text"
           name="cardNum"
           onChange={(e) => {
@@ -163,11 +164,12 @@ const PaymentSection = () => {
           placeholder="Enter card number"
         />
 
-        <label className="checkout__label" htmlFor="expMonth">
+        <label className="checkout_label" htmlFor="expMonth">
           Expiry month
         </label>
         <select
           name="expMonth"
+          className="checkout_select"
           onChange={(e) => {
             updateOrderInfo("expiry_month", e.target.value);
           }}
@@ -179,11 +181,12 @@ const PaymentSection = () => {
           })}
         </select>
 
-        <label className="checkout__label" htmlFor="expYear">
+        <label className="checkout_label" htmlFor="expYear">
           Expiry year
         </label>
         <select
           name="expYear"
+          className="checkout_select"
           onChange={(e) => {
             updateOrderInfo("expiry_year", e.target.value);
           }}
@@ -195,11 +198,11 @@ const PaymentSection = () => {
           })}
         </select>
 
-        <label className="checkout__label" htmlFor="ccv">
+        <label className="checkout_label" htmlFor="ccv">
           CCV
         </label>
         <input
-          className="checkout__input"
+          className="checkout_input"
           type="number"
           name="ccv"
           onChange={(e) => {
@@ -211,11 +214,11 @@ const PaymentSection = () => {
           placeholder="Enter 3-digit ccv"
         />
 
-        <label className="checkout__label" htmlFor="billingPostalZipcode">
+        <label className="checkout_label" htmlFor="billingPostalZipcode">
           Billing Zip Code
         </label>
         <input
-          className="checkout__input"
+          className="checkout_input"
           type="number"
           name="billingPostalZipcode"
           onChange={(e) => {
@@ -226,7 +229,7 @@ const PaymentSection = () => {
           value={orderData.payment.card.postal_zip_code_p}
           placeholder="Billing zip code"
         />
-      </React.Fragment>
+      </div>
     );
   };
 
@@ -240,14 +243,21 @@ const PaymentSection = () => {
 
   return (
     <React.Fragment>
-      <label htmlFor="sameAddressCheckbox">
-        Billing address is the same as shipping address
-      </label>
-      <input
-        type="checkbox"
-        id="sameAddressCheckbox"
-        onChange={handleCheckboxChange}
-      />
+      <div className="same_address_container">
+        <div className="checkbox_container">
+          <input
+            type="checkbox"
+            value="1"
+            id="sameAddressCheckbox"
+            onChange={handleCheckboxChange}
+          />
+          <label htmlFor="sameAddressCheckbox"></label>
+        </div>
+        <label htmlFor="sameAddressCheckbox">
+          Billing address is the same as shipping address
+        </label>
+      </div>
+
       {!sameAddress ? renderAddressSection() : null}
       {renderPaymentDetails()}
     </React.Fragment>

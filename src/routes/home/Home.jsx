@@ -4,8 +4,21 @@ import "./home.css";
 import Nav from "../../components/nav/Nav";
 import ProductsList from "../products/products_list/ProductsList";
 import Footer from "../../components/footer/Footer";
+import { useState } from "react";
+import { useProductsState } from "../../context/ProductsContext";
+import SectionLoader from "../../components/section_loader/SectionLoader";
+import { useEffect } from "react";
 
 const Home = () => {
+  const [productsLoaded, setProductsLoaded] = useState(false);
+  const productsState = useProductsState();
+
+  useEffect(() => {
+    if (!productsState.loading) {
+      setProductsLoaded(true);
+    }
+  }, [productsState]);
+
   return (
     <main className="page-wrapper">
       <Nav />
@@ -21,19 +34,25 @@ const Home = () => {
         </section>
 
         <section className="page-section" id="home-featured">
-          <h5 className="h-sub">FEATURED ITEMS</h5>
-          <br />
-          <h2 className="h-main">LEATHER WALLETS</h2>
-          <br />
-          <br />
-          <div className="featured-items">
-            <ProductsList />
-          </div>
-          <div id="home-featured-btn">
-            <a className="btn-def-black" href="/products">
-              SHOP ALL PRODUCTS
-            </a>
-          </div>
+          {productsLoaded ? (
+            <div className="content">
+              <h5 className="h-sub">FEATURED ITEMS</h5>
+              <br />
+              <h2 className="h-main">LEATHER WALLETS</h2>
+              <br />
+              <br />
+              <div className="featured-items">
+                <ProductsList />
+              </div>
+              <div id="home-featured-btn">
+                <a className="btn-def-black" href="/products">
+                  SHOP ALL PRODUCTS
+                </a>
+              </div>
+            </div>
+          ) : (
+            <SectionLoader />
+          )}
         </section>
 
         <section id="home-about" className="page-section">

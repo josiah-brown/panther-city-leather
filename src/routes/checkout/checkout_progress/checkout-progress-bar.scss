@@ -19,10 +19,6 @@
       border-radius: 1rem;
     }
 
-    .bubble-selected {
-      background-color: red;
-    }
-
     .step_name {
       font-size: 0.5rem;
     }
@@ -33,5 +29,22 @@
     height: 2px;
     background: rgba($color: #000000, $alpha: 0.3);
     margin-top: -1.6rem;
+  }
+}
+
+@media (min-width: 960px) {
+  #checkout-progress-bar {
+    width: 60%;
+
+    .step {
+      .progress-bubble {
+        width: 1.8rem;
+        height: 1.8rem;
+      }
+
+      .step_name {
+        font-size: 0.8rem;
+      }
+    }
   }
 }
