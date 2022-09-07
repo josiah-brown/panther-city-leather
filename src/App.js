@@ -1,4 +1,4 @@
-//*========== GENERAL IMPORTS ==========*//
+//*========== IMPORT MODULES ==========*//
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
@@ -15,22 +15,22 @@ import ContactConfirmation from "./routes/contact_confirmation/ContactConfirmati
 
 //*========== TOP LEVEL APP COMPONENT ==========*//
 // This is the parent component of the entire app.
-// Everything else will flow downward from here.
+// It should only contain Route elements.
+// No routes should have props as context will store
+// all necessary states.
 const App = () => {
   return (
-    <div className="app-wrapper">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="products" element={<Products />} />
-        <Route path="products/:id" element={<Product />} />
-        <Route path="cart" element={<Cart />} />
-        <Route path="checkout/:id" element={<Checkout />} />
-        <Route path="confirmation" element={<Confirmation />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/contact/confirmation" element={<ContactConfirmation />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="about" element={<About />} />
+      <Route path="products" element={<Products />} />
+      <Route path="products/:id" element={<Product />} />
+      <Route path="cart" element={<Cart />} />
+      <Route path="checkout/:id" element={<Checkout />} />
+      <Route path="confirmation" element={<Confirmation />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/contact/confirmation" element={<ContactConfirmation />} />
+    </Routes>
   );
 };
 

@@ -1,11 +1,14 @@
 // This file contains all functionality and state related to the cart
-// I am using React context to store the cart state
 
-// Import react modules
-import { createContext, useReducer, useContext, useEffect } from "react";
+//*========== IMPORT MODULES ==========*//
+import {
+  createContext,
+  useReducer,
+  useContext,
+  useEffect,
+  useCallback,
+} from "react";
 import { useNavigate } from "react-router-dom";
-
-// Import commerce.js
 import commerce from "../lib/commerce";
 
 // Initialize context for cart state and cart dispatch function.
@@ -34,14 +37,13 @@ const reducer = (state, action) => {
   switch (action.type) {
     case ACTIONS.SET_CART:
       return { ...state, ...action.payload };
-
     default:
       throw new Error(`Unknown action: ${action.type}`);
   }
 };
 
-// Wrapper component to be used at the top level of the app.
-// Any children have access to the cart and dispatch contexts.
+// This wrapper will wrap App at the top level.
+// Thus, any children have access to the cart state and methods
 export const CartProvider = ({ children }) => {
   // The useReducer() hook is similar to useState() but gives more control.
   // The 'state' variable stores the cart object.
@@ -49,38 +51,28 @@ export const CartProvider = ({ children }) => {
   // reducer specified upon initialization.
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // Initialize navigate const
+  // This react method is used to navigate to the cart page after
+  // adding an item to the cart.
   const navigate = useNavigate();
-
-  // getCart() is called once when the component mounts
-  useEffect(() => {
-    // Define function to retrieve cart from commercejs api and set cart to that object
-    const getCart = async () => {
-      try {
-        const cart = await commerce.cart.retrieve();
-        setCart(cart);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    getCart();
-  }, []);
-
-  // This is run after the cart has loaded and removes any items from the cart that are no longer valid.
-  // i.e. If the merchant changes or removes a product in Chec while it is in a cart
-  useEffect(() => {
-    state.line_items.forEach((item) => {
-      if (item.product_id === null) {
-        removeFromCart(item.id);
-      }
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state]);
 
   // setCart() takes in a payload (in this case the cart object)
   // and sets the current cart state to that payload.
   const setCart = (payload) => dispatch({ type: ACTIONS.SET_CART, payload });
+
+  // Remove the specified line item from the cart
+  const removeFromCart = useCallback((lineItemId) => {
+    commerce.cart
+      .remove(lineItemId)
+      .then((resp) => {
+        setCart(resp.cart);
+      })
+      .catch((err) => {
+        console.error(
+          "There was an error removing the item from the cart",
+          err
+        );
+      });
+  }, []);
 
   // Empties the cart
   const emptyCart = () => {
@@ -94,7 +86,7 @@ export const CartProvider = ({ children }) => {
       });
   };
 
-  // Refresh the current cart state
+  // Refresh the cart state via commerce api
   const refreshCart = () => {
     commerce.cart
       .refresh()
@@ -106,7 +98,7 @@ export const CartProvider = ({ children }) => {
       });
   };
 
-  // Called when an item is added to the cart
+  // Add specified quantity of item to cart and redirect to cart page
   const addToCart = (productId, quantity, variantObject = null) => {
     commerce.cart
       .add(productId, quantity, variantObject)
@@ -131,20 +123,34 @@ export const CartProvider = ({ children }) => {
       });
   };
 
-  // Remove the specified line item from the cart
-  const removeFromCart = (lineItemId) => {
-    commerce.cart
-      .remove(lineItemId)
-      .then((resp) => {
-        setCart(resp.cart);
-      })
-      .catch((err) => {
-        console.error(
-          "There was an error removing the item from the cart",
-          err
-        );
-      });
-  };
+  //*========== USEEFFECT HOOKS ==========*//
+  // getCart() is called once when the component mounts
+  useEffect(() => {
+    // Retrieves the cart from commercejs api and
+    // sets cart to the returned object
+    const getCart = async () => {
+      try {
+        const cart = await commerce.cart.retrieve();
+        setCart(cart);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    getCart();
+  }, []);
+
+  // This is run after the cart has loaded and removes any items from the cart
+  // that are no longer valid.
+  // i.e. If the merchant changes or removes a product in Chec while
+  // it is in a cart
+  useEffect(() => {
+    state.line_items.forEach((item) => {
+      if (item.product_id === null) {
+        removeFromCart(item.id);
+      }
+    });
+  }, [state, removeFromCart]);
 
   // Wrap the children in the cart and dispatch contexts.
   // All children will have access to the values specified by the 'Provider'.
