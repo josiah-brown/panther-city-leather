@@ -1,4 +1,3 @@
-//*========== IMPORT MODULES ==========*//
 import {
   createContext,
   useContext,
@@ -8,15 +7,13 @@ import {
 } from "react";
 import commerce from "../lib/commerce";
 
-//*========== IMPORT CONTEXT ==========*//
+// Import the cart state context
 // This works because the CheckoutProvider will always be nested inside CartProvider
 import { useCartState } from "./CartContext";
 
-// Initialize checkout state and dispatch contexts
 const CheckoutStateContext = createContext(null);
 const CheckoutDispatchContext = createContext(null);
 
-// Store all actions called by reducer
 const ACTIONS = {
   SET_TOKEN: "SET_TOKEN",
   SET_SHIPPING_COUNTRIES: "SET_SHIPPING_COUNTRIES",
@@ -26,8 +23,6 @@ const ACTIONS = {
   UPDATE_ORDER_INFO: "UPDATE_ORDER_INFO",
 };
 
-// Initialize all potential checkout steps.
-// These are used for navigation and validation during checkout process
 export const STEPS = {
   LOADING: "LOADING",
   INFO: "INFO",
@@ -36,7 +31,6 @@ export const STEPS = {
   CONFIRM: "CONFIRM",
 };
 
-// Initial state of the checkout object
 const initialState = {
   checkout_token: {},
   curr_step: STEPS.LOADING,
@@ -84,9 +78,7 @@ const initialState = {
 };
 
 // Takes in a nested object and a specified key value pair.
-// Outputs a nested object with the updated key value pair.
-// This currently assumes that all keys will be unique.
-// This is bad design and I plan to fix it later by searching for keys by path.
+// Outputs a nested object with the updated key value pair
 const updateObject = (keyName, newVal, object) => {
   const results = {};
   for (var key in object) {
@@ -101,12 +93,9 @@ const updateObject = (keyName, newVal, object) => {
   return results;
 };
 
-// Method called by dispatch().
-// Returns and stores the new state
 const reducer = (state, action) => {
   switch (action.type) {
     case ACTIONS.SET_TOKEN:
-      console.log("Setting token");
       return { ...state, checkout_token: action.token };
 
     case ACTIONS.SET_SHIPPING_COUNTRIES:
@@ -152,7 +141,7 @@ const reducer = (state, action) => {
           ...state.order_data,
           fulfillment: {
             ...state.order_data.fulfillment,
-            shipping_option: action.shipOption.id,
+            shipping_option: action.shipOption,
           },
         },
       };
@@ -169,7 +158,6 @@ const reducer = (state, action) => {
   }
 };
 
-// This checkout provider must be wrapped by the cart provider to function properly
 export const CheckoutProvider = ({ children }) => {
   // Use the global cart context
   const cart = useCartState();
@@ -179,9 +167,9 @@ export const CheckoutProvider = ({ children }) => {
   const setCheckoutToken = (token) =>
     dispatch({ type: ACTIONS.SET_TOKEN, token });
 
-  const setShippingCountries = (tokenId) => {
+  const setShippingCountries = (token) => {
     commerce.services
-      .localeListShippingCountries(tokenId)
+      .localeListShippingCountries(token.id)
       .then((countries) => {
         dispatch({
           type: ACTIONS.SET_SHIPPING_COUNTRIES,
@@ -205,8 +193,9 @@ export const CheckoutProvider = ({ children }) => {
   };
 
   const setShippingOptions = (country, stateProvince = null) => {
+    const token = state.checkout_token;
     commerce.checkout
-      .getShippingOptions(state.checkout_token.id, {
+      .getShippingOptions(token.id, {
         country: country,
         region: stateProvince,
       })
@@ -226,10 +215,7 @@ export const CheckoutProvider = ({ children }) => {
       payload: { [keyName]: newValue },
     });
 
-  //*========== USEEFFECT HOOKS ==========*//
   // Effect applied on mount and cart change
-  // It might be inefficient to generate a new token on cart update.
-  // Works for now though. Might come back to this later.
   useEffect(() => {
     if (cart) {
       if (cart.id && cart.line_items.length) {
@@ -250,8 +236,7 @@ export const CheckoutProvider = ({ children }) => {
     if (isMounted.current) {
       const token = state.checkout_token;
       if (token !== {} && token) {
-        console.log("Here");
-        setShippingCountries(state.checkout_token.id);
+        setShippingCountries(token);
         setSubdivisions("US");
         setShippingOptions("US");
         updateOrderInfo("curr_step", STEPS.INFO);
@@ -259,7 +244,16 @@ export const CheckoutProvider = ({ children }) => {
     } else {
       isMounted.current = true;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.checkout_token.id]);
+
+  // useEffect(() => {
+  //   if (isMounted.current) {
+  //     const token = state.checkout_token;
+  //     if (token !== {} && token) {
+  //     }
+  //   }
+  // }, [state.order_data.shipping_countries]);
 
   return (
     <CheckoutDispatchContext.Provider value={{ updateOrderInfo }}>
