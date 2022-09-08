@@ -46,9 +46,9 @@ const initialState = {
       name: "Bob Green",
       street: "4390 Timberview Dr",
       town_city: "Fort Worth",
-      county_state: "TX",
+      county_state: "",
       postal_zip_code: "76140",
-      country: "US",
+      country: "",
     },
     billing: {
       name_b: "",
@@ -105,7 +105,7 @@ const reducer = (state, action) => {
           ...state.order_data,
           fulfillment: {
             ...state.order_data.fulfillment,
-            shipping_countries: action.countries.countries,
+            shipping_countries: action.countries_.countries,
           },
         },
       };
@@ -117,7 +117,7 @@ const reducer = (state, action) => {
           ...state.order_data,
           fulfillment: {
             ...state.order_data.fulfillment,
-            shipping_subdivisions: action.subdivisions.subdivisions,
+            shipping_subdivisions: action.subs_.subdivisions,
           },
         },
       };
@@ -167,48 +167,6 @@ export const CheckoutProvider = ({ children }) => {
   const setCheckoutToken = (token) =>
     dispatch({ type: ACTIONS.SET_TOKEN, token });
 
-  const setShippingCountries = (token) => {
-    commerce.services
-      .localeListShippingCountries(token.id)
-      .then((countries) => {
-        dispatch({
-          type: ACTIONS.SET_SHIPPING_COUNTRIES,
-          countries,
-        });
-      })
-      .catch((err) => {
-        console.log("There was an error setting the shipping countries.", err);
-      });
-  };
-
-  const setSubdivisions = (countryCode) => {
-    commerce.services
-      .localeListSubdivisions(countryCode)
-      .then((subdivisions) => {
-        dispatch({ type: ACTIONS.SET_SHIPPING_SUBDIVISIONS, subdivisions });
-      })
-      .catch((error) => {
-        console.log("There was an error fetching the subdivisions", error);
-      });
-  };
-
-  const setShippingOptions = (country, stateProvince = null) => {
-    const token = state.checkout_token;
-    commerce.checkout
-      .getShippingOptions(token.id, {
-        country: country,
-        region: stateProvince,
-      })
-      .then((options) => {
-        const shipOption = options[0] || null;
-        dispatch({ type: ACTIONS.SET_SHIPPING_OPTIONS, options });
-        dispatch({ type: ACTIONS.SET_SHIPPING_OPTION, shipOption });
-      })
-      .catch((error) => {
-        console.log("There was an error fetching the shipping methods", error);
-      });
-  };
-
   const updateOrderInfo = (keyName, newValue) =>
     dispatch({
       type: ACTIONS.UPDATE_ORDER_INFO,
@@ -231,37 +189,82 @@ export const CheckoutProvider = ({ children }) => {
     }
   }, [cart]);
 
-  // useEffect(() => {
-  //   const f = async () => {
-  //     await setShippingCountries(state.checkout_token.id);
-  //     await setSubdivisions("US");
-  //     await setShippingOptions("US");
-  //   };
-  //   if (isMounted.current) {
-  //     const token = state.checkout_token;
-  //     if (token !== {} && token) {
-  //       f();
-  //     }
-  //   } else {
-  //     isMounted.current = true;
-  //   }
-  // }, [state.checkout_token.id]);
-
-  // Effect only applied after mount and after token has loaded
+  // Anytime the checkout token changes, the shipping countries update
   useEffect(() => {
     if (isMounted.current) {
-      const token = state.checkout_token;
-      if (token !== {} && token) {
-        setShippingCountries(token);
-        setSubdivisions("US");
-        setShippingOptions("US");
-        updateOrderInfo("curr_step", STEPS.INFO);
-      }
+      let countries = {};
+      commerce.services
+        .localeListShippingCountries(state.checkout_token.id)
+        .then((c) => {
+          countries = c;
+          return countries;
+        })
+        .then((countries_) => {
+          dispatch({
+            type: ACTIONS.SET_SHIPPING_COUNTRIES,
+            countries_,
+          });
+          updateOrderInfo("country", Object.keys(countries_.countries)[0]);
+        })
+        .catch((err) => {
+          console.log(
+            "There was an error setting the shipping countries.",
+            err
+          );
+        });
     } else {
       isMounted.current = true;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.checkout_token.id]);
+
+  // Anytime the countries change, the shipping subdivisions update
+  useEffect(() => {
+    const country = state.order_data.shipping.country;
+    if (country !== "") {
+      commerce.services
+        .localeListShippingSubdivisions(state.checkout_token.id, country)
+        .then((subs_) => {
+          dispatch({ type: ACTIONS.SET_SHIPPING_SUBDIVISIONS, subs_ });
+          updateOrderInfo("county_state", Object.keys(subs_.subdivisions)[0]);
+        })
+        .catch((err) => {
+          console.log("There was an error fetching the subdivisions", err);
+        });
+    }
+  }, [state.order_data.shipping.country, state.checkout_token.id]);
+
+  // Anytime the subdivisons change, the shipping options update
+  useEffect(() => {
+    const province = state.order_data.shipping.county_state;
+    if (province !== "") {
+      commerce.checkout
+        .getShippingOptions(state.checkout_token.id, {
+          country: state.order_data.shipping.country,
+          region: province,
+        })
+        .then((options) => {
+          const shipOption = options[0] || null;
+          dispatch({ type: ACTIONS.SET_SHIPPING_OPTIONS, options });
+          dispatch({ type: ACTIONS.SET_SHIPPING_OPTION, shipOption });
+        })
+        .catch((err) => {
+          console.log("There was an error fetching the shipping methods", err);
+        });
+    }
+    // eslint-disable-next-line
+  }, [state.checkout_token.id, state.order_data.shipping.county_state]);
+
+  // Once the checkout token has loaded, display the checkout form
+  // This is a slight gamble that the user will not click through the
+  // first page immediately. The fulfillment data on the next page will
+  // take around 3-7 seconds to populate.
+  useEffect(() => {
+    if (state.checkout_token.id !== "") {
+      if (state.curr_step === "LOADING") {
+        updateOrderInfo("curr_step", STEPS.INFO);
+      }
+    }
+  }, [state.curr_step, state.checkout_token.id]);
 
   return (
     <CheckoutDispatchContext.Provider value={{ updateOrderInfo }}>
