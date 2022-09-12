@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import {
-  useCheckoutState,
-  useCheckoutDispatch,
-  STEPS,
-} from "../../../context/CheckoutContext";
+import { useCheckoutState } from "../../../context/CheckoutContext";
 import CheckoutProgressBar from "../checkout_progress/CheckoutProgressBar";
 import InfoSection from "./info_section/InfoSection";
 import ShippingSection from "./shipping_section/ShippingSection";
@@ -15,42 +11,8 @@ import { useEffect } from "react";
 
 const CheckoutForm = () => {
   const checkout = useCheckoutState();
-  const { updateOrderInfo } = useCheckoutDispatch();
   const currStep = checkout.curr_step;
   const [loading, setLoading] = useState(true);
-
-  // Updates the checkout form displayed when the user clicks "NEXT" or "BACK"
-  const handleStepClick = (btn) => {
-    if (btn === "NEXT") {
-      switch (currStep) {
-        case "INFO":
-          updateOrderInfo("curr_step", STEPS.SHIPPING);
-          break;
-        case "SHIPPING":
-          updateOrderInfo("curr_step", STEPS.PAYMENT);
-          break;
-        case "PAYMENT":
-          updateOrderInfo("curr_step", STEPS.CONFIRM);
-          break;
-        default:
-          break;
-      }
-    } else if (btn === "BACK") {
-      switch (currStep) {
-        case "SHIPPING":
-          updateOrderInfo("curr_step", STEPS.INFO);
-          break;
-        case "PAYMENT":
-          updateOrderInfo("curr_step", STEPS.SHIPPING);
-          break;
-        case "CONFIRM":
-          updateOrderInfo("curr_step", STEPS.PAYMENT);
-          break;
-        default:
-          break;
-      }
-    }
-  };
 
   // Effect that shows the form only once the content has loaded
   useEffect(() => {
@@ -65,9 +27,13 @@ const CheckoutForm = () => {
       {currStep !== "LOADING" ? (
         <CheckoutProgressBar></CheckoutProgressBar>
       ) : null}
-      <form className="checkout_form">
+      <div className="checkout_form">
         {currStep === "INFO" ? <InfoSection></InfoSection> : null}
         {currStep === "SHIPPING" ? <ShippingSection></ShippingSection> : null}
+        {currStep === "PAYMENT" ? <PaymentSection></PaymentSection> : null}
+      </div>
+
+      {/* {currStep === "SHIPPING" ? <ShippingSection></ShippingSection> : null}
         {currStep === "PAYMENT" ? <PaymentSection></PaymentSection> : null}
         {currStep === "CONFIRM" ? <ConfirmSection></ConfirmSection> : null}
         {currStep !== "CONFIRM" ? (
@@ -93,8 +59,8 @@ const CheckoutForm = () => {
           >
             BACK
           </button>
-        ) : null}
-      </form>
+        ) : null} */}
+      {/* </form> */}
     </React.Fragment>
   );
 };

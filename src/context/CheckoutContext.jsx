@@ -38,24 +38,24 @@ const initialState = {
   order_data: {
     line_items: [],
     customer: {
-      firstname: "Bob",
-      lastname: "Green",
-      email: "bob@gmail.com",
+      firstname: "",
+      lastname: "",
+      email: "",
     },
     shipping: {
-      name: "Bob Green",
-      street: "4390 Timberview Dr",
-      town_city: "Fort Worth",
-      county_state: "",
-      postal_zip_code: "76140",
-      country: "",
+      name_s: "",
+      street_s: "",
+      city_s: "",
+      state_s: "",
+      zip_code_s: "",
+      country_s: "",
     },
     billing: {
       name_b: "",
       street_b: "",
-      town_city_b: "",
-      county_state_b: "",
-      postal_zip_code_b: "",
+      city_b: "",
+      state_b: "",
+      zip_code_b: "",
       country_b: "US",
     },
     fulfillment: {
@@ -63,6 +63,8 @@ const initialState = {
       shipping_countries: {},
       shipping_subdivisions: {},
       shipping_option: "",
+      billing_countries: {},
+      billing_states: {},
     },
     payment: {
       gateway: "test_gateway",
@@ -71,7 +73,7 @@ const initialState = {
         expiry_month: "01",
         expiry_year: "2023",
         ccv: "123",
-        postal_zip_code_p: "76140",
+        zip_code_p: "76140",
       },
     },
   },
@@ -173,7 +175,7 @@ export const CheckoutProvider = ({ children }) => {
       payload: { [keyName]: newValue },
     });
 
-  // Effect applied on mount and cart change
+  // Generate new token on mount and cart change
   useEffect(() => {
     if (cart) {
       if (cart.id && cart.line_items.length) {
@@ -182,8 +184,8 @@ export const CheckoutProvider = ({ children }) => {
           .then((token) => {
             setCheckoutToken(token);
           })
-          .catch((error) => {
-            console.log("There was an error in generating a token", error);
+          .catch((err) => {
+            console.log("There was an error in generating a token", err);
           });
       }
     }
@@ -204,7 +206,7 @@ export const CheckoutProvider = ({ children }) => {
             type: ACTIONS.SET_SHIPPING_COUNTRIES,
             countries_,
           });
-          updateOrderInfo("country", Object.keys(countries_.countries)[0]);
+          updateOrderInfo("country_s", Object.keys(countries_.countries)[0]);
         })
         .catch((err) => {
           console.log(
@@ -217,29 +219,67 @@ export const CheckoutProvider = ({ children }) => {
     }
   }, [state.checkout_token.id]);
 
-  // Anytime the countries change, the shipping subdivisions update
+  // Update the billing countries on new token generation
   useEffect(() => {
-    const country = state.order_data.shipping.country;
+    if (isMounted.current) {
+      commerce.services
+        .localeListCountries()
+        .then((c) => {
+          console.log(c);
+          updateOrderInfo("billing_countries", c.countries);
+          updateOrderInfo("country_b", c.countries["US"]);
+        })
+        .catch((err) => {
+          console.error("There was an error getting all countries.", err);
+        });
+    }
+  }, [state.checkout_token.id]);
+
+  // Update the shipping subdivisions on shipping country change
+  useEffect(() => {
+    const country = state.order_data.shipping.country_s;
     if (country !== "") {
       commerce.services
         .localeListShippingSubdivisions(state.checkout_token.id, country)
         .then((subs_) => {
           dispatch({ type: ACTIONS.SET_SHIPPING_SUBDIVISIONS, subs_ });
-          updateOrderInfo("county_state", Object.keys(subs_.subdivisions)[0]);
+          updateOrderInfo("state_s", Object.keys(subs_.subdivisions)[0]);
         })
         .catch((err) => {
-          console.log("There was an error fetching the subdivisions", err);
+          console.error(
+            "There was an error fetching the shipping subdivisions",
+            err
+          );
         });
     }
-  }, [state.order_data.shipping.country, state.checkout_token.id]);
+  }, [state.order_data.shipping.country_s, state.checkout_token.id]);
 
-  // Anytime the subdivisons change, the shipping options update
+  // Update the billing subdivisions on billing country change
   useEffect(() => {
-    const province = state.order_data.shipping.county_state;
+    let country = state.order_data.billing.country_b;
+    if (country !== "") {
+      commerce.services
+        .localeListSubdivisions(country)
+        .then((subs) => {
+          updateOrderInfo("billing_states", subs.subdivisions);
+          // updateOrderInfo("state_b", Object.keys(subs.subdivisions)[0]);
+        })
+        .catch((err) => {
+          console.error(
+            "There was an error fetching the billing subdivisions.",
+            err
+          );
+        });
+    }
+  }, [state.checkout_token.id, state.order_data.billing.country_b]);
+
+  // Anytime the shipping subdivisons change, the shipping options update
+  useEffect(() => {
+    const province = state.order_data.shipping.state_s;
     if (province !== "") {
       commerce.checkout
         .getShippingOptions(state.checkout_token.id, {
-          country: state.order_data.shipping.country,
+          country: state.order_data.shipping.country_s,
           region: province,
         })
         .then((options) => {
@@ -252,7 +292,7 @@ export const CheckoutProvider = ({ children }) => {
         });
     }
     // eslint-disable-next-line
-  }, [state.checkout_token.id, state.order_data.shipping.county_state]);
+  }, [state.checkout_token.id, state.order_data.shipping.state_s]);
 
   // Once the checkout token has loaded, display the checkout form
   // This is a slight gamble that the user will not click through the
