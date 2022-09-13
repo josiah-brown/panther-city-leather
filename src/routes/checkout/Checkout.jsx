@@ -13,7 +13,7 @@ const Checkout = () => {
   return (
     <main className="page-wrapper">
       <Nav />
-      <h1>CHECKOUT</h1>
+      {/* <h1>CHECKOUT</h1> */}
       <CheckoutForm />
       <Footer />
     </main>

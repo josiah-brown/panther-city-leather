@@ -9,7 +9,6 @@ const ConfirmForm = () => {
   const { updateOrderInfo } = useCheckoutDispatch();
 
   const onBackToHome = () => {
-    window.localStorage.removeItem("order_receipt");
     updateOrderInfo("confirmed_order", {});
   };
 

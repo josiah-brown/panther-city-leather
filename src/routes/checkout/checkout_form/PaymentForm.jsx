@@ -8,9 +8,9 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useCheckoutState } from "../../../context/CheckoutContext";
 import BackButton from "./checkout_buttons/BackButton";
 import commerce from "../../../lib/commerce";
-import { useState } from "react";
 import { useCheckoutDispatch } from "../../../context/CheckoutContext";
 import { useCartDispatch } from "../../../context/CartContext";
+import OrderSummary from "./OrderSummary";
 
 const stripePromise = loadStripe(
   "pk_test_51LhCgJDAXaCkD2WYhTIjCSmcKrgYfchLHtub45RRSiBSsiRJqekdzhnach1wKhuOEXC3Fa0P2yO3LJcNgJeXxd1300rKEpiPeh"
@@ -62,7 +62,7 @@ const PaymentForm = () => {
           town_city: checkout.order_data.shipping.city_s,
           county_state: checkout.order_data.shipping.state_s,
           postal_zip_code: String(checkout.order_data.shipping.zip_code_s),
-          country: checkout.order_data.shipping.country_s,
+          //   country: checkout.order_data.shipping.country_s,
         },
         fulfillment: {
           shipping_method: checkout.order_data.fulfillment.shipping_option.id,
@@ -87,10 +87,6 @@ const PaymentForm = () => {
       console.log(incomingOrder);
       updateOrderInfo("confirmed_order", incomingOrder);
       refreshCart();
-      window.sessionStorage.setItem(
-        "order_receipt",
-        JSON.stringify(incomingOrder)
-      );
       updateOrderInfo("curr_step", "CONFIRM");
     } catch (err) {
       console.error("There was an error capturing checkout.", err);
@@ -99,26 +95,29 @@ const PaymentForm = () => {
 
   return (
     <React.Fragment>
-      <h1>HELLO</h1>
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
           {({ elements, stripe }) => {
             return (
-              <form onSubmit={(e) => handleSubmit(e, elements, stripe)}>
+              <form
+                onSubmit={(e) => handleSubmit(e, elements, stripe)}
+                className="checkout_form"
+              >
+                <OrderSummary />
                 <CardElement />
-                <br />
-                <br />
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  <BackButton />
-                  <button type="submit" disabled={!stripe}>
+                <div className="checkout_btn_container">
+                  <button
+                    type="submit"
+                    disabled={!stripe}
+                    className="checkout_nav_btn checkout_dark_btn"
+                  >
                     Pay{" "}
                     {
                       checkout.checkout_token.live.subtotal
                         .formatted_with_symbol
                     }
                   </button>
+                  <BackButton />
                 </div>
               </form>
             );

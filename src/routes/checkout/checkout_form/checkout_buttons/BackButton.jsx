@@ -12,8 +12,11 @@ const BackButton = () => {
 
   const handleClick = () => {
     switch (currStep) {
-      case "PAYMENT":
+      case "BILLING":
         updateOrderInfo("curr_step", STEPS.SHIPPING);
+        break;
+      case "PAYMENT":
+        updateOrderInfo("curr_step", STEPS.BILLING);
         break;
       case "CONFIRM":
         updateOrderInfo("curr_step", STEPS.PAYMENT);
@@ -26,8 +29,7 @@ const BackButton = () => {
   const renderBtn = () => {
     return currStep !== "INFO" ? (
       <button
-        className="checkout_nav_btn"
-        id="checkout_next_btn"
+        className="checkout_nav_btn checkout_light_btn"
         type="button"
         onClick={handleClick}
       >

@@ -54,7 +54,7 @@ const ConfirmSection = () => {
           number: data.payment.card.number,
           expiry_month: data.payment.card.expiry_month,
           expiry_year: data.payment.card.expiry_year,
-          cvc: data.payment.card.ccv,
+          cvc: data.payment.card.cvc,
           postal_zip_code: data.payment.card.zip_code_p,
         },
       },

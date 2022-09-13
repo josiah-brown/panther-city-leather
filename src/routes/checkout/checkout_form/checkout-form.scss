@@ -93,19 +93,19 @@
     letter-spacing: 0.15rem;
   }
 
-  #checkout_next_btn {
+  #checkout_dark_btn {
     background: black;
     color: white;
   }
 
-  #checkout_next_btn:hover {
+  #checkout_dark_btn:hover {
     background: white;
     color: black;
     border: 1px solid black;
     cursor: pointer;
   }
 
-  #checkout_back_btn:hover {
+  #checkout_light_btn:hover {
     background: black;
     color: white;
     cursor: pointer;

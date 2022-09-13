@@ -15,7 +15,7 @@ const MySelect = ({ options, defaultText, label, ...props }) => {
   }, [field.value, field.name]);
 
   return (
-    <div>
+    <div className="checkout_form_select form_element">
       <label htmlFor={props.id || props.name}>{label}</label>
       <select {...field} {...props}>
         <option>{defaultText}</option>

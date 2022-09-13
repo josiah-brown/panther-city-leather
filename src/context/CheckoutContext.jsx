@@ -26,6 +26,7 @@ const ACTIONS = {
 export const STEPS = {
   LOADING: "LOADING",
   SHIPPING: "SHIPPING",
+  BILLING: "BILLING",
   PAYMENT: "PAYMENT",
   CONFIRM: "CONFIRM",
 };
@@ -71,7 +72,7 @@ const initialState = {
         number: "4242 4242 4242 4242",
         expiry_month: "01",
         expiry_year: "2023",
-        ccv: "123",
+        cvc: "123",
         zip_code_p: "76140",
       },
     },

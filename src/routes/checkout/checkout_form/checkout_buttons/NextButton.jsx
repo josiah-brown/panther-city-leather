@@ -15,6 +15,9 @@ const NextButton = ({ validForm }) => {
     const handleClick = () => {
       switch (currStep) {
         case "SHIPPING":
+          updateOrderInfo("curr_step", STEPS.BILLING);
+          break;
+        case "BILLING":
           updateOrderInfo("curr_step", STEPS.PAYMENT);
           break;
         case "PAYMENT":
@@ -29,11 +32,12 @@ const NextButton = ({ validForm }) => {
     if (validForm) {
       handleClick();
     }
+    // eslint-disable-next-line
   }, [validForm]);
 
   const renderBtn = () => {
     return currStep !== "CONFIRM" ? (
-      <button className="checkout_nav_btn" id="checkout_next_btn" type="submit">
+      <button className="checkout_nav_btn checkout_dark_btn" type="submit">
         NEXT
       </button>
     ) : null;

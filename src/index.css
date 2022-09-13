@@ -41,7 +41,7 @@ input[type="number"] {
 
 /*========== UTILITY CLASSES ==========*/
 .page-wrapper {
-  width: 100%;
+  width: 100vw;
   position: relative;
 }
 

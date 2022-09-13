@@ -11,6 +11,7 @@ import NextButton from "./checkout_buttons/NextButton";
 
 const ShippingForm = () => {
   const checkout = useCheckoutState();
+  const shipping = checkout.order_data.shipping;
   const { updateOrderInfo } = useCheckoutDispatch();
   const shippingCountries = checkout.order_data.fulfillment.shipping_countries;
   const shippingStates = checkout.order_data.fulfillment.shipping_subdivisions;
@@ -19,12 +20,12 @@ const ShippingForm = () => {
   return (
     <Formik
       initialValues={{
-        name_s: "",
-        street_s: "",
-        city_s: "",
-        state_s: "",
-        zip_code_s: "",
-        country_s: "",
+        name_s: shipping.name_s,
+        street_s: shipping.street_s,
+        city_s: shipping.city_s,
+        state_s: shipping.state_s,
+        zip_code_s: shipping.zip_code_s,
+        country_s: shipping.country_s,
       }}
       validationSchema={yup.object({
         name_s: yup
@@ -60,10 +61,10 @@ const ShippingForm = () => {
         }, 500);
       }}
     >
-      <Form>
-        <button type="button" onClick={() => console.log(checkout.order_data)}>
+      <Form className="checkout_form">
+        {/* <button type="button" onClick={() => console.log(checkout.order_data)}>
           GET DATA
-        </button>
+        </button> */}
 
         <MyTextInput
           label="FULL NAME"
@@ -107,7 +108,10 @@ const ShippingForm = () => {
           placeholder="Shipping zip code..."
         />
 
-        <NextButton validForm={validated} />
+        <div className="checkout_btn_container">
+          {/* Add return to cart button here */}
+          <NextButton validForm={validated} />
+        </div>
       </Form>
     </Formik>
   );

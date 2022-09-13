@@ -1,5 +1,96 @@
-input,
-label {
-  display: block;
+.checkout_form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: left;
+      -ms-flex-align: left;
+          align-items: left;
+  width: 60%;
+  margin: 2.2rem auto 1rem;
+}
+
+.checkout_form .form_element {
+  margin: 0.5rem 0 0.25rem;
+}
+
+.checkout_form .form_element label {
+  margin-bottom: 0.1 0.5rem;
+}
+
+.checkout_form .form_element input,
+.checkout_form .form_element select {
+  font-family: var(--font-main);
+  border: 1px solid black;
+  height: 2em;
+  padding-left: 0.3rem;
+}
+
+.checkout_form .checkout_form_text_input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.checkout_form .checkout_form_select {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.checkout_form .checkout_btn_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  gap: 0.3rem;
+  margin-top: 2rem;
+}
+
+.checkout_form .checkout_btn_container .checkout_nav_btn {
+  border: 1px solid black;
+  height: 2.1rem;
+  font-family: var(--font-main);
+  font-size: 1.1rem;
+  letter-spacing: 0.15rem;
+}
+
+.checkout_form .checkout_btn_container .checkout_dark_btn {
+  background: black;
+  color: white;
+}
+
+.checkout_form .checkout_btn_container .checkout_dark_btn:hover {
+  background: white;
+  color: black;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.checkout_form .checkout_btn_container .checkout_light_btn {
+  background: white;
+  color: black;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.checkout_form .checkout_btn_container .checkout_light_btn:hover {
+  background: black;
+  color: white;
 }
 /*# sourceMappingURL=checkout.css.map */

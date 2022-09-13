@@ -25,7 +25,7 @@ const PaymentSection = () => {
         number: "",
         expiry_month: "",
         expiry_year: "",
-        ccv: "",
+        cvc: "",
         zip_code_p: "",
       }}
       validationSchema={yup.object({
@@ -53,9 +53,9 @@ const PaymentSection = () => {
             (value) => valid.expirationYear(value).isValid
           )
           .required("Required"),
-        ccv: yup
+        cvc: yup
           .string()
-          .test("test-ccv", "Invalid ccv", (value) => valid.cvv(value).isValid)
+          .test("test-cvc", "Invalid cvc", (value) => valid.cvv(value).isValid)
           .required("Required"),
         zip_code_p: yup
           .string()
