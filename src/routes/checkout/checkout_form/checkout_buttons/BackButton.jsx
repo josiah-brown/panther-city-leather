@@ -12,9 +12,6 @@ const BackButton = () => {
 
   const handleClick = () => {
     switch (currStep) {
-      case "SHIPPING":
-        updateOrderInfo("curr_step", STEPS.INFO);
-        break;
       case "PAYMENT":
         updateOrderInfo("curr_step", STEPS.SHIPPING);
         break;

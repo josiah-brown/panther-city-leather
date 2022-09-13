@@ -12,24 +12,6 @@ const CheckoutProgressBar = () => {
 
   // Updates the color of the bubbles on step change
   useEffect(() => {
-    if (step === "INFO") {
-      document
-        .getElementById("step-info")
-        .getElementsByClassName("progress-bubble")[0].style.backgroundColor =
-        "rgba(0, 0, 0, 1.0)";
-      document
-        .getElementById("step-shipping")
-        .getElementsByClassName("progress-bubble")[0].style.backgroundColor =
-        "rgba(0, 0, 0, 0.5)";
-      document
-        .getElementById("step-payment")
-        .getElementsByClassName("progress-bubble")[0].style.backgroundColor =
-        "rgba(0, 0, 0, 0.5)";
-      document
-        .getElementById("step-confirm")
-        .getElementsByClassName("progress-bubble")[0].style.backgroundColor =
-        "rgba(0, 0, 0, 0.5)";
-    }
     if (step === "SHIPPING") {
       document
         .getElementById("step-shipping")
@@ -65,11 +47,6 @@ const CheckoutProgressBar = () => {
   return (
     <React.Fragment>
       <div id="checkout-progress-bar">
-        <div className="step" id="step-info">
-          <div className="progress-bubble" style={defaultBubbleColor}></div>
-          <div className="step_name">INFO</div>
-        </div>
-        <div className="bar-spacer"></div>
         <div className="step" id="step-shipping">
           <div className="progress-bubble" style={defaultBubbleColor}></div>
           <div className="step_name">SHIPPING</div>

@@ -14,9 +14,6 @@ const NextButton = ({ validForm }) => {
   useEffect(() => {
     const handleClick = () => {
       switch (currStep) {
-        case "INFO":
-          updateOrderInfo("curr_step", STEPS.SHIPPING);
-          break;
         case "SHIPPING":
           updateOrderInfo("curr_step", STEPS.PAYMENT);
           break;

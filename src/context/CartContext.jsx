@@ -1,12 +1,6 @@
 //*========== IMPORT MODULES ==========*//
 import { useState } from "react";
-import {
-  createContext,
-  useReducer,
-  useContext,
-  useEffect,
-  useCallback,
-} from "react";
+import { createContext, useContext, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import commerce from "../lib/commerce";
 

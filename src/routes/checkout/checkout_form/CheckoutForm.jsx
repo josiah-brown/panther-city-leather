@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCheckoutState } from "../../../context/CheckoutContext";
 import CheckoutProgressBar from "../checkout_progress/CheckoutProgressBar";
-import InfoSection from "./info_section/InfoSection";
-import ShippingSection from "./shipping_section/ShippingSection";
-import PaymentSection from "./payment_section/PaymentSection";
-import ConfirmSection from "./confirm_section/ConfirmSection";
-import "./checkout-form.css";
 import Loader from "../../../components/loader/Loader";
-import { useEffect } from "react";
+import ShippingForm from "./ShippingForm";
+import PaymentForm from "./PaymentForm";
+import ConfirmForm from "./ConfirmForm";
 
 const CheckoutForm = () => {
   const checkout = useCheckoutState();
@@ -27,42 +24,25 @@ const CheckoutForm = () => {
       {currStep !== "LOADING" ? (
         <CheckoutProgressBar></CheckoutProgressBar>
       ) : null}
-      <div className="checkout_form">
-        {currStep === "INFO" ? <InfoSection></InfoSection> : null}
-        {currStep === "SHIPPING" ? <ShippingSection></ShippingSection> : null}
-        {currStep === "PAYMENT" ? <PaymentSection></PaymentSection> : null}
-      </div>
-
-      {/* {currStep === "SHIPPING" ? <ShippingSection></ShippingSection> : null}
-        {currStep === "PAYMENT" ? <PaymentSection></PaymentSection> : null}
-        {currStep === "CONFIRM" ? <ConfirmSection></ConfirmSection> : null}
-        {currStep !== "CONFIRM" ? (
-          <button
-            className="checkout_nav_btn"
-            id="checkout_next_btn"
-            onClick={(e) => {
-              e.preventDefault();
-              handleStepClick(e.target.innerHTML);
-            }}
-          >
-            NEXT
-          </button>
-        ) : null}
-        {currStep !== "INFO" ? (
-          <button
-            className="checkout_nav_btn"
-            id="checkout_back_btn"
-            onClick={(e) => {
-              e.preventDefault();
-              handleStepClick(e.target.innerHTML);
-            }}
-          >
-            BACK
-          </button>
-        ) : null} */}
-      {/* </form> */}
+      {currStep === "SHIPPING" && <ShippingForm />}
+      {currStep === "PAYMENT" && <PaymentForm />}
+      {currStep === "CONFIRM" && <ConfirmForm />}
     </React.Fragment>
   );
 };
 
 export default CheckoutForm;
+
+// return (
+//   <React.Fragment>
+//     {loading ? <Loader /> : null}
+//     {currStep !== "LOADING" ? (
+//       <CheckoutProgressBar></CheckoutProgressBar>
+//     ) : null}
+//     <div className="checkout_form">
+//       {currStep === "INFO" ? <InfoSection></InfoSection> : null}
+//       {currStep === "SHIPPING" ? <ShippingSection></ShippingSection> : null}
+//       {currStep === "PAYMENT" ? <PaymentSection></PaymentSection> : null}
+//     </div>
+//   </React.Fragment>
+// );

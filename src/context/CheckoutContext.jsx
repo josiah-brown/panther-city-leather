@@ -25,7 +25,6 @@ const ACTIONS = {
 
 export const STEPS = {
   LOADING: "LOADING",
-  INFO: "INFO",
   SHIPPING: "SHIPPING",
   PAYMENT: "PAYMENT",
   CONFIRM: "CONFIRM",
@@ -225,7 +224,6 @@ export const CheckoutProvider = ({ children }) => {
       commerce.services
         .localeListCountries()
         .then((c) => {
-          console.log(c);
           updateOrderInfo("billing_countries", c.countries);
           updateOrderInfo("country_b", c.countries["US"]);
         })
@@ -301,7 +299,7 @@ export const CheckoutProvider = ({ children }) => {
   useEffect(() => {
     if (state.checkout_token.id !== "") {
       if (state.curr_step === "LOADING") {
-        updateOrderInfo("curr_step", STEPS.INFO);
+        updateOrderInfo("curr_step", STEPS.SHIPPING);
       }
     }
   }, [state.curr_step, state.checkout_token.id]);
