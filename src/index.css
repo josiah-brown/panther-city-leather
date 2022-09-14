@@ -88,3 +88,8 @@ input[type="number"] {
   width: fit-content;
   padding: 1rem 1.3rem;
 }
+
+.error {
+  color: #e83838;
+  font-size: 0.7rem;
+}

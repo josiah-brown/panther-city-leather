@@ -8,14 +8,23 @@ import {
   useCheckoutDispatch,
 } from "../../../context/CheckoutContext";
 import NextButton from "./checkout_buttons/NextButton";
+import { useNavigate } from "react-router-dom";
 
 const ShippingForm = () => {
   const checkout = useCheckoutState();
+  const { updateOrderInfo, generateNewToken, resetCheckoutState } =
+    useCheckoutDispatch();
   const shipping = checkout.order_data.shipping;
-  const { updateOrderInfo } = useCheckoutDispatch();
   const shippingCountries = checkout.order_data.fulfillment.shipping_countries;
   const shippingStates = checkout.order_data.fulfillment.shipping_subdivisions;
   const [validated, setValidated] = useState(false);
+  const navigate = useNavigate();
+
+  const backToCart = () => {
+    resetCheckoutState();
+    generateNewToken();
+    navigate("/cart");
+  };
 
   return (
     <Formik
@@ -30,7 +39,12 @@ const ShippingForm = () => {
       validationSchema={yup.object({
         name_s: yup
           .string()
-          .max(15, "Must be 15 characters or less")
+          .max(40, "Must be 40 characters or less")
+          .matches(
+            /^([A-Za-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff\s]*)$/gi,
+            "Name can only contain Latin letters."
+          )
+          .matches(/^\s*[\S]+(\s[\S]+)+\s*$/gms, "Please enter your full name.")
           .required("Required"),
         street_s: yup.string().required("Required"),
         city_s: yup
@@ -62,9 +76,7 @@ const ShippingForm = () => {
       }}
     >
       <Form className="checkout_form">
-        {/* <button type="button" onClick={() => console.log(checkout.order_data)}>
-          GET DATA
-        </button> */}
+        <h2 className="checkout_general_heading">SHIPPING INFO</h2>
 
         <MyTextInput
           label="FULL NAME"
@@ -109,8 +121,14 @@ const ShippingForm = () => {
         />
 
         <div className="checkout_btn_container">
-          {/* Add return to cart button here */}
           <NextButton validForm={validated} />
+          <button
+            type="button"
+            className="checkout_nav_btn checkout_light_btn"
+            onClick={backToCart}
+          >
+            BACK TO CART
+          </button>
         </div>
       </Form>
     </Formik>

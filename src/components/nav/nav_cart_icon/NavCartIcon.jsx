@@ -6,6 +6,7 @@ import { useCartState } from "../../../context/CartContext";
 const NavCartIcon = () => {
   const [cartLoaded, setCartLoaded] = useState(false);
   const cart = useCartState();
+  const [showCart, setShowCart] = useState(true);
 
   useEffect(() => {
     if (Object.keys(cart).length !== 0) {
@@ -15,8 +16,23 @@ const NavCartIcon = () => {
     }
   }, [cart]);
 
+  useEffect(() => {
+    if (
+      window.location.href.includes("cart") ||
+      window.location.href.includes("checkout")
+    ) {
+      setShowCart(false);
+    } else {
+      setShowCart(true);
+    }
+  }, [window.location.href]);
+
   return (
-    <button className="nav-icon" id="cart-icon">
+    <button
+      className="nav-icon"
+      id="cart-icon"
+      style={{ visibility: showCart ? "visible" : "hidden" }}
+    >
       <Link to="/cart" id="cart-icon-link">
         <AiOutlineShopping />
         {cartLoaded ? (

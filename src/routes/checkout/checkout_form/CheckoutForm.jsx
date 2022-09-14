@@ -6,6 +6,7 @@ import ShippingForm from "./ShippingForm";
 import BillingForm from "./BillingForm";
 import PaymentForm from "./PaymentForm";
 import ConfirmForm from "./ConfirmForm";
+import ErrorForm from "./ErrorForm";
 
 const CheckoutForm = () => {
   const checkout = useCheckoutState();
@@ -21,13 +22,14 @@ const CheckoutForm = () => {
   return (
     <React.Fragment>
       {loading ? <Loader /> : null}
-      {currStep !== "LOADING" ? (
+      {currStep !== "LOADING" && currStep !== "ERROR" ? (
         <CheckoutProgressBar></CheckoutProgressBar>
       ) : null}
       {currStep === "SHIPPING" && <ShippingForm />}
       {currStep === "BILLING" && <BillingForm />}
       {currStep === "PAYMENT" && <PaymentForm />}
       {currStep === "CONFIRM" && <ConfirmForm />}
+      {currStep === "ERROR" && <ErrorForm />}
     </React.Fragment>
   );
 };

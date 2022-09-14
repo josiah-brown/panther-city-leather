@@ -21,6 +21,7 @@ const ACTIONS = {
   SET_SHIPPING_OPTIONS: "SET_SHIPPING_OPTIONS",
   SET_SHIPPING_OPTION: "SET_SHIPPING_OPTION",
   UPDATE_ORDER_INFO: "UPDATE_ORDER_INFO",
+  RESET_CHECKOUT_STATE: "RESET_CHECKOUT_STATE",
 };
 
 export const STEPS = {
@@ -35,6 +36,7 @@ const initialState = {
   checkout_token: {},
   curr_step: STEPS.LOADING,
   confirmed_order: {},
+  order_error: {},
   order_data: {
     line_items: [],
     customer: {
@@ -56,7 +58,7 @@ const initialState = {
       city_b: "",
       state_b: "",
       zip_code_b: "",
-      country_b: "US",
+      country_b: "",
     },
     fulfillment: {
       shipping_options: [],
@@ -67,13 +69,13 @@ const initialState = {
       billing_states: {},
     },
     payment: {
-      gateway: "test_gateway",
+      gateway: "",
       card: {
-        number: "4242 4242 4242 4242",
-        expiry_month: "01",
-        expiry_year: "2023",
-        cvc: "123",
-        zip_code_p: "76140",
+        number: "",
+        expiry_month: "",
+        expiry_year: "",
+        cvc: "",
+        zip_code_p: "",
       },
     },
   },
@@ -155,13 +157,15 @@ const reducer = (state, action) => {
         state
       );
 
+    case ACTIONS.RESET_CHECKOUT_STATE:
+      return initialState;
+
     default:
       throw new Error(`Unknown action: ${action.type}`);
   }
 };
 
 export const CheckoutProvider = ({ children }) => {
-  // Use the global cart context
   const cart = useCartState();
   const [state, dispatch] = useReducer(reducer, initialState);
   const isMounted = useRef(false);
@@ -175,38 +179,43 @@ export const CheckoutProvider = ({ children }) => {
       payload: { [keyName]: newValue },
     });
 
+  const resetCheckoutState = () => {
+    dispatch({
+      type: ACTIONS.RESET_CHECKOUT_STATE,
+      payload: null,
+    });
+  };
+
+  const generateNewToken = () => {
+    console.log("Generating new token...");
+    commerce.checkout
+      .generateToken(cart.id, { type: "cart" })
+      .then((token) => {
+        setCheckoutToken(token);
+      })
+      .catch((err) => {
+        console.log("There was an error in generating a token", err);
+      });
+  };
+
   // Generate new token on mount and cart change
   useEffect(() => {
     if (cart) {
       if (cart.id && cart.line_items.length) {
-        commerce.checkout
-          .generateToken(cart.id, { type: "cart" })
-          .then((token) => {
-            setCheckoutToken(token);
-          })
-          .catch((err) => {
-            console.log("There was an error in generating a token", err);
-          });
+        generateNewToken();
       }
     }
   }, [cart]);
 
   // Anytime the checkout token changes, the shipping countries update
   useEffect(() => {
-    if (isMounted.current) {
-      let countries = {};
+    if (isMounted.current && state.checkout_token.id) {
+      console.log("Updating shipping countries...");
       commerce.services
         .localeListShippingCountries(state.checkout_token.id)
-        .then((c) => {
-          countries = c;
-          return countries;
-        })
         .then((countries_) => {
-          dispatch({
-            type: ACTIONS.SET_SHIPPING_COUNTRIES,
-            countries_,
-          });
-          updateOrderInfo("country_s", Object.keys(countries_.countries)[0]);
+          updateOrderInfo("shipping_countries", countries_.countries);
+          updateOrderInfo("country_s", "US");
         })
         .catch((err) => {
           console.log(
@@ -221,12 +230,13 @@ export const CheckoutProvider = ({ children }) => {
 
   // Update the billing countries on new token generation
   useEffect(() => {
-    if (isMounted.current) {
+    if (isMounted.current && state.checkout_token.id) {
+      console.log("Updating billing countries...");
       commerce.services
         .localeListCountries()
         .then((c) => {
           updateOrderInfo("billing_countries", c.countries);
-          updateOrderInfo("country_b", c.countries["US"]);
+          updateOrderInfo("country_b", "US");
         })
         .catch((err) => {
           console.error("There was an error getting all countries.", err);
@@ -238,10 +248,11 @@ export const CheckoutProvider = ({ children }) => {
   useEffect(() => {
     const country = state.order_data.shipping.country_s;
     if (country !== "") {
+      console.log("Updating shipping states...");
       commerce.services
         .localeListShippingSubdivisions(state.checkout_token.id, country)
         .then((subs_) => {
-          dispatch({ type: ACTIONS.SET_SHIPPING_SUBDIVISIONS, subs_ });
+          updateOrderInfo("shipping_subdivisions", subs_.subdivisions);
           updateOrderInfo("state_s", Object.keys(subs_.subdivisions)[0]);
         })
         .catch((err) => {
@@ -257,11 +268,12 @@ export const CheckoutProvider = ({ children }) => {
   useEffect(() => {
     let country = state.order_data.billing.country_b;
     if (country !== "") {
+      console.log("Updating billing states...");
       commerce.services
         .localeListSubdivisions(country)
         .then((subs) => {
           updateOrderInfo("billing_states", subs.subdivisions);
-          // updateOrderInfo("state_b", Object.keys(subs.subdivisions)[0]);
+          updateOrderInfo("state_b", Object.keys(subs.subdivisions)[0]);
         })
         .catch((err) => {
           console.error(
@@ -306,7 +318,9 @@ export const CheckoutProvider = ({ children }) => {
   }, [state.curr_step, state.checkout_token.id]);
 
   return (
-    <CheckoutDispatchContext.Provider value={{ updateOrderInfo }}>
+    <CheckoutDispatchContext.Provider
+      value={{ updateOrderInfo, resetCheckoutState, generateNewToken }}
+    >
       <CheckoutStateContext.Provider value={state}>
         {children}
       </CheckoutStateContext.Provider>

@@ -33,7 +33,17 @@ const BillingForm = () => {
       validationSchema={yup.object({
         name_b: yup.string().when("same_address", {
           is: false,
-          then: yup.string().required("Required"),
+          then: yup
+            .string()
+            .matches(
+              /^([A-Za-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff\s]*)$/gi,
+              "Name can only contain Latin letters."
+            )
+            .matches(
+              /^\s*[\S]+(\s[\S]+)+\s*$/gms,
+              "Please enter your full name."
+            )
+            .required("Required"),
         }),
         street_b: yup.string().when("same_address", {
           is: false,
@@ -79,11 +89,11 @@ const BillingForm = () => {
     >
       {({ values }) => (
         <Form className="checkout_form">
-          {/* <button type="button" onClick={() => console.log(checkout.order_data)}>
-          GET DATA
-        </button> */}
+          <h2 className="checkout_general_heading">BILLING INFO</h2>
 
-          <MyCheckbox name={"same_address"}>SAME ADDRESS</MyCheckbox>
+          <MyCheckbox name={"same_address"}>
+            SAME AS SHIPPING ADDRESS
+          </MyCheckbox>
 
           {!values.same_address && (
             <MyTextInput

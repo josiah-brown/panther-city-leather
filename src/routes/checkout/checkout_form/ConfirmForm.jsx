@@ -6,10 +6,10 @@ import { Link } from "react-router-dom";
 const ConfirmForm = () => {
   const checkout = useCheckoutState();
   const order = checkout.confirmed_order;
-  const { updateOrderInfo } = useCheckoutDispatch();
+  const { resetCheckoutState } = useCheckoutDispatch();
 
   const onBackToHome = () => {
-    updateOrderInfo("confirmed_order", {});
+    resetCheckoutState();
   };
 
   return (

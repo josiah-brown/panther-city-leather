@@ -11,6 +11,14 @@ import commerce from "../../../lib/commerce";
 import { useCheckoutDispatch } from "../../../context/CheckoutContext";
 import { useCartDispatch } from "../../../context/CartContext";
 import OrderSummary from "./OrderSummary";
+import STRIPE from "../../../assets/stripe_banner.svg";
+import AMEX from "../../../assets/amex.jpg";
+import DISCOVER from "../../../assets/discover.svg";
+import VISA from "../../../assets/visa.png";
+import MASTERCARD from "../../../assets/mc.svg";
+import { useState } from "react";
+import { useEffect } from "react";
+import Loader from "../../../components/loader/Loader";
 
 const stripePromise = loadStripe(
   "pk_test_51LhCgJDAXaCkD2WYhTIjCSmcKrgYfchLHtub45RRSiBSsiRJqekdzhnach1wKhuOEXC3Fa0P2yO3LJcNgJeXxd1300rKEpiPeh"
@@ -20,16 +28,23 @@ const PaymentForm = () => {
   const checkout = useCheckoutState();
   const { updateOrderInfo } = useCheckoutDispatch();
   const { refreshCart } = useCartDispatch();
+  const [email, setEmail] = useState(checkout.order_data.customer.email);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const resetErrorMessage = () => {
+    setErrorMessage("");
+  };
 
   const handleSubmit = async (e, elements, stripe) => {
     e.preventDefault();
 
+    setSubmitting(true);
+
     if (!stripe || !elements) {
-      console.log("Error here");
+      console.log("Error here", stripe, elements);
       return;
     }
-
-    console.log(stripe, elements);
 
     const cardElement = elements.getElement(CardElement);
 
@@ -40,13 +55,27 @@ const PaymentForm = () => {
 
     if (error) {
       console.log(error);
+      switch (error.type) {
+        case "validation_error":
+          setSubmitting(false);
+          setErrorMessage(error.message);
+          break;
+        case "insufficient_funds":
+          setSubmitting(false);
+          setErrorMessage(error.message);
+          break;
+
+        default:
+          console.error("There was an unknown error during checkout.", error);
+          break;
+      }
     } else {
       const orderData = {
         line_items: checkout.checkout_token.live.line_items,
         customer: {
-          firstname: checkout.order_data.shipping.name_s.split(" ")[0],
-          lastname: checkout.order_data.shipping.name_s.split(" ")[1],
-          email: "josiah.webdev@gmail.com",
+          firstname: checkout.order_data.billing.name_b.split(" ")[0],
+          lastname: checkout.order_data.billing.name_b.split(" ")[1],
+          email: checkout.order_data.customer.email,
         },
         shipping: {
           name: checkout.order_data.shipping.name_s,
@@ -57,12 +86,12 @@ const PaymentForm = () => {
           country: checkout.order_data.shipping.country_s,
         },
         billing: {
-          name: checkout.order_data.shipping.name_s,
-          street: checkout.order_data.shipping.street_s,
-          town_city: checkout.order_data.shipping.city_s,
-          county_state: checkout.order_data.shipping.state_s,
-          postal_zip_code: String(checkout.order_data.shipping.zip_code_s),
-          //   country: checkout.order_data.shipping.country_s,
+          name: checkout.order_data.billing.name_b,
+          street: checkout.order_data.billing.street_b,
+          town_city: checkout.order_data.billing.city_b,
+          county_state: checkout.order_data.billing.state_b,
+          postal_zip_code: String(checkout.order_data.billing.zip_code_b),
+          country: checkout.order_data.billing.country_b,
         },
         fulfillment: {
           shipping_method: checkout.order_data.fulfillment.shipping_option.id,
@@ -74,8 +103,6 @@ const PaymentForm = () => {
           },
         },
       };
-      console.log(orderData);
-      console.log(paymentMethod);
 
       onCaptureCheckout(checkout.checkout_token.id, orderData);
     }
@@ -84,17 +111,25 @@ const PaymentForm = () => {
   const onCaptureCheckout = async (tokenId, newOrder) => {
     try {
       const incomingOrder = await commerce.checkout.capture(tokenId, newOrder);
-      console.log(incomingOrder);
       updateOrderInfo("confirmed_order", incomingOrder);
       refreshCart();
       updateOrderInfo("curr_step", "CONFIRM");
     } catch (err) {
       console.error("There was an error capturing checkout.", err);
+      updateOrderInfo("order_error", err);
+      updateOrderInfo("curr_step", "ERROR");
     }
   };
 
+  useEffect(() => {
+    if (email !== "") {
+      updateOrderInfo("email", email);
+    }
+  }, [email]);
+
   return (
     <React.Fragment>
+      {submitting && <Loader />}
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
           {({ elements, stripe }) => {
@@ -104,7 +139,37 @@ const PaymentForm = () => {
                 className="checkout_form"
               >
                 <OrderSummary />
-                <CardElement />
+                <div className="card_container">
+                  <h2 className="payment_heading">PAYMENT</h2>
+                  <label className="payment_label">EMAIL</label>
+                  <input
+                    required
+                    placeholder="Email (to send receipt)"
+                    id="payment_email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <label className="payment_label">CARD INFO</label>
+                  <div
+                    className="payment_card_container"
+                    onClick={resetErrorMessage}
+                  >
+                    <CardElement onFocus={resetErrorMessage} />
+                    {errorMessage && (
+                      <div className="error">{errorMessage}</div>
+                    )}
+                  </div>
+                  <div className="payment_logos">
+                    <img src={STRIPE} className="stripe_logo" />
+                    <div className="card_logos">
+                      <img src={VISA} className="card_logo" />
+                      <img src={MASTERCARD} className="card_logo" />
+                      <img src={DISCOVER} className="card_logo" />
+                      <img src={AMEX} className="card_logo" />
+                    </div>
+                  </div>
+                </div>
+
                 <div className="checkout_btn_container">
                   <button
                     type="submit"
