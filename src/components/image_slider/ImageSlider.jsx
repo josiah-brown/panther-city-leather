@@ -1,10 +1,30 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { MdKeyboardArrowRight } from "react-icons/md";
 
-const ImageSlider = (props) => {
-  const slides = [...props.slides];
+const ImageSlider = ({ slides, specificOption }) => {
   const [currSlideIndex, setCurrSlideIndex] = useState(0);
+
+  // Anytime the user selects a specific option,
+  // this effect will change the image to the correct leather color
+  useEffect(() => {
+    if (specificOption !== "") {
+      setCurrSlideIndex(() => {
+        let outIndex = -1;
+        slides.forEach((slide, index) => {
+          if (slide.url.includes(specificOption.toLowerCase())) {
+            outIndex = index;
+          }
+        });
+        return outIndex;
+      });
+    }
+  }, [specificOption, slides]);
+
+  // useEffect(() => {
+  //   setImgChosen(null);
+  // }, [currSlideIndex]);
 
   const sliderStyles = {
     height: "100%",

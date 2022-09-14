@@ -53,10 +53,6 @@ input[type="number"] {
   min-height: 120px;
 }
 
-.wrapper {
-  margin: var(--margin-def);
-}
-
 .h-main {
   font-size: 1.3rem;
   font-weight: 600;
@@ -76,6 +72,11 @@ input[type="number"] {
   font-weight: 200;
   width: fit-content;
   padding: 1rem 1.3rem;
+}
+.btn-def-black:hover {
+  background: white;
+  color: black;
+  border: 1px solid black;
 }
 
 .btn-def-white {

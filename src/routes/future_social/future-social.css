@@ -1,0 +1,43 @@
+.future_social_wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 80%;
+  margin: 5rem auto;
+  text-align: center;
+  gap: 2rem;
+}
+
+.future_social_wrapper h2 {
+  font-size: 3rem;
+}
+
+.future_social_wrapper h4 {
+  font-weight: 500;
+}
+
+.future_social_wrapper a {
+  border: 1px solid black;
+  width: 100%;
+  padding: 0.7rem 0;
+  cursor: pointer;
+}
+
+.future_social_wrapper a:hover {
+  background: black;
+  color: white;
+}
+
+@media (min-width: 960px) {
+  .future_social_wrapper a {
+    width: 40%;
+  }
+}
+/*# sourceMappingURL=future-social.css.map */

@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useProductsState } from "../../context/ProductsContext";
 import SectionLoader from "../../components/section_loader/SectionLoader";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [productsLoaded, setProductsLoaded] = useState(false);
@@ -56,33 +57,20 @@ const Home = () => {
         </section>
 
         <section id="home-about" className="page-section">
-          <div className="wrapper">
-            <h5 className="h-sub">LEARN MORE</h5>
-            <br />
-            <h2 className="h-main">ABOUT THE SHOP</h2>
-            <br />
-
-            <p className="h-sub">
-              Panther City Leather was started by Isaac Brown in 2022. Every
-              single product is made with locally sourced materials and an
-              intense attention to detail. It is our hope that every PCL product
-              will be passed down for generations.
-            </p>
-            <br />
-            <p className="h-sub">
-              The company began in Fort Worth, Texas yet every item has a modern
-              twist on the classic country theme. Each design is carefully
-              studied and tweaked to result in a luxury, modern product that
-              should last for many years.
-            </p>
-            <br />
-            <p className="h-sub">
-              Thanks for checking out the shop. Check back soon for more
-              products!
-            </p>
-            <br />
-            <br />
-          </div>
+          <h5 className="h-sub">LEARN MORE</h5>
+          <br />
+          <h2 className="h-main">ABOUT THE SHOP</h2>
+          <br />
+          <p className="h-sub">
+            Panther City Leather was started by Isaac Brown in 2022. Every
+            single product is made with locally sourced materials and an intense
+            attention to detail. Click below to learn more about the shop and
+            materials.
+          </p>
+          <br />
+          <Link to={"/about"} className="btn-def-black">
+            LEARN MORE
+          </Link>{" "}
         </section>
 
         <section id="home-shop">

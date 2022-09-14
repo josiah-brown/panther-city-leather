@@ -3,6 +3,8 @@
 }
 
 #home-message div {
+  width: 80%;
+  margin: auto;
   text-align: center;
   line-height: 2rem;
 }
@@ -11,7 +13,7 @@
   margin: 2rem 0rem;
 }
 
-#home-about div {
+#home-about {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -24,14 +26,10 @@
           align-items: center;
 }
 
-#home-about div p {
+#home-about p {
   text-align: left;
   letter-spacing: 0.05rem;
-  width: 60%;
-}
-
-#home-about img {
-  display: none;
+  width: 80%;
 }
 
 #home-shop {
@@ -69,11 +67,17 @@
 }
 
 @media (min-width: 960px) {
-  #home-message {
-    padding: 10rem 0;
+  #home-hero img {
+    height: 84vh;
+    -o-object-fit: cover;
+       object-fit: cover;
   }
-  #home-about div.wrapper {
-    margin: 0 3rem;
+  #home-message {
+    padding: 5rem 0;
+  }
+  #home-about p {
+    width: 50%;
+    line-height: 1.3rem;
   }
   #home-shop {
     height: 80vh;

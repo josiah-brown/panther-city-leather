@@ -48,11 +48,11 @@
 .page-content .cart-footer .checkout-btn {
   background: black;
   color: white;
+  margin-bottom: -1rem;
 }
 
 .page-content .cart-footer .continue-btn {
   border: 1px solid black;
-  margin-bottom: -1rem;
 }
 
 .page-content .cart-footer .btn-lg {

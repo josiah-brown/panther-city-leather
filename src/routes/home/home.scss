@@ -6,6 +6,8 @@
 
 #home-message {
   div {
+    width: 80%;
+    margin: auto;
     text-align: center;
     line-height: 2rem;
   }
@@ -16,19 +18,14 @@
 }
 
 #home-about {
-  div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    p {
-      text-align: left;
-      letter-spacing: 0.05rem;
-      width: 60%;
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  img {
-    display: none;
+  p {
+    text-align: left;
+    letter-spacing: 0.05rem;
+    width: 80%;
   }
 }
 
@@ -59,13 +56,21 @@
 
 // MEDIA QUERY DESKTOP
 @media (min-width: 960px) {
+  #home-hero {
+    img {
+      height: 84vh;
+      object-fit: cover;
+    }
+  }
+
   #home-message {
-    padding: 10rem 0;
+    padding: 5rem 0;
   }
 
   #home-about {
-    div.wrapper {
-      margin: 0 3rem;
+    p {
+      width: 50%;
+      line-height: 1.3rem;
     }
   }
 

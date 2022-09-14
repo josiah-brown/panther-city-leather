@@ -10,13 +10,14 @@ const Footer = () => {
   return (
     <footer>
       <div className="social-icons">
-        <a href="https://www.google.com" target="_blank" rel="noreferrer">
+        {/* <a href="/social/empty" target="_blank" rel="noreferrer"> */}
+        <a href="/social/empty">
           <AiOutlineInstagram />
         </a>
-        <a href="https://www.google.com" target="_blank" rel="noreferrer">
+        <a href="/social/empty">
           <AiFillFacebook />
         </a>
-        <a href="https://www.google.com" target="_blank" rel="noreferrer">
+        <a href="/social/empty">
           <AiOutlineYoutube />
         </a>
       </div>

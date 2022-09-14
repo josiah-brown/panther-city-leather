@@ -20,23 +20,34 @@ import "./product.css";
 const Product = () => {
   // Get url params
   const params = useParams();
-
-  // Set context variables
   const products = useProductsState();
-
-  // Set state variables
   const [currProduct, setCurrProduct] = useState({});
+  const [variantImg, setVariantImg] = useState("");
+
+  const handleVariantImageChange = (optionInnerHTML) => {
+    setVariantImg(optionInnerHTML);
+  };
+
+  useEffect(() => {
+    console.log(variantImg);
+  }, [variantImg]);
 
   const renderProduct = () => {
     if (!products.loading && Object.keys(currProduct).length > 0) {
       return (
         <div id="product-content">
-          <ImageSlider slides={currProduct["assets"]} />
+          <ImageSlider
+            slides={currProduct["assets"]}
+            specificOption={variantImg}
+          />
           <div className="right-side">
             <ProductHeading product={currProduct} />
             <ProductDescription desc={currProduct.description} />
             <br />
-            <ProductForm product={currProduct} />
+            <ProductForm
+              product={currProduct}
+              handleVariantImageChange={handleVariantImageChange}
+            />
           </div>
         </div>
       );

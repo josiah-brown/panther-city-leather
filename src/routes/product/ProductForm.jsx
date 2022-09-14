@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { useCartDispatch } from "../../context/CartContext";
 import Loader from "../../components/loader/Loader";
 
-const ProductForm = (props) => {
-  const product = props.product;
+const ProductForm = ({ product, handleVariantImageChange }) => {
   const [variants, setVariants] = useState(() => {
     const tempVariant = {};
     product.variant_groups.forEach((group) => {
@@ -23,6 +22,12 @@ const ProductForm = (props) => {
       const updatedVariants = { ...variants, [groupId]: optionId };
       return updatedVariants;
     });
+    handleVariantImageChange(
+      Array.prototype.slice
+        .call(e.target.options)
+        .filter((opt) => opt.value === e.target.value)[0]
+        .innerHTML.split(" ")[0]
+    );
   };
 
   // Updates 'qty' state when changed via button or input

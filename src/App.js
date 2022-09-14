@@ -12,6 +12,7 @@ import Checkout from "./routes/checkout/Checkout";
 import Confirmation from "./routes/confirmation/Confirmation";
 import Contact from "./routes/contact/Contact";
 import ContactConfirmation from "./routes/contact_confirmation/ContactConfirmation";
+import FutureSocial from "./routes/future_social/FutureSocial";
 
 //*========== TOP LEVEL APP COMPONENT ==========*//
 // This is the parent component of the entire app.
@@ -30,6 +31,7 @@ const App = () => {
       <Route path="confirmation" element={<Confirmation />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/contact/confirmation" element={<ContactConfirmation />} />
+      <Route path="/social/empty" element={<FutureSocial />} />
     </Routes>
   );
 };

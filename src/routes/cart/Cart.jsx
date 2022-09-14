@@ -70,11 +70,11 @@ const Cart = () => {
             TOTAL: <b>{cart.subtotal.formatted_with_symbol}</b>
           </p>
         </div>
-        <Link to="/products" className="continue-btn btn-lg">
-          CONTINUE SHOPPING
-        </Link>
         <Link to={"/checkout/" + cart.id} className="checkout-btn btn-lg">
           CHECKOUT
+        </Link>
+        <Link to="/products" className="continue-btn btn-lg">
+          CONTINUE SHOPPING
         </Link>
       </div>
     );
