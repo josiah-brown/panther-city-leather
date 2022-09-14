@@ -21,7 +21,7 @@ import { useEffect } from "react";
 import Loader from "../../../components/loader/Loader";
 
 const stripePromise = loadStripe(
-  "pk_test_51LhCgJDAXaCkD2WYhTIjCSmcKrgYfchLHtub45RRSiBSsiRJqekdzhnach1wKhuOEXC3Fa0P2yO3LJcNgJeXxd1300rKEpiPeh"
+  String(process.env.REACT_APP_STRIPE_PUBLIC_KEY)
 );
 
 const PaymentForm = () => {
