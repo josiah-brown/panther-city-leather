@@ -25,7 +25,7 @@ const NavCartIcon = () => {
     } else {
       setShowCart(true);
     }
-  }, [window.location.href]);
+  }, []);
 
   return (
     <button

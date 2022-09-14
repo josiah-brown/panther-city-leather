@@ -16,7 +16,10 @@ const OrderSummary = () => {
           return (
             <div className="summary_item" key={generateId(10)}>
               <div className="summary_item_image">
-                <img src={items[item].image.url} />
+                <img
+                  src={items[item].image.url}
+                  alt={"Item #" + item + " in your cart"}
+                />
               </div>
               <div className="summary_item_text">
                 <p className="summary_item_name">{items[item].name}</p>

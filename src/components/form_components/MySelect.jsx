@@ -9,10 +9,9 @@ const MySelect = ({ options, defaultText, label, ...props }) => {
 
   useEffect(() => {
     if (field.value !== "" && field.value !== defaultText) {
-      console.log(field.value);
       updateOrderInfo(field.name, field.value);
     }
-  }, [field.value, field.name]);
+  }, [field.value, field.name, defaultText, updateOrderInfo]);
 
   return (
     <div className="checkout_form_select form_element">

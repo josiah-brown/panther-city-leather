@@ -25,7 +25,7 @@ const Checkout = () => {
       if ("SHIPPINGBILLINGPAYMENT".includes(currStep)) {
         resetCheckoutState();
         generateNewToken();
-      } else if (currStep == "CONFIRM") {
+      } else if (currStep === "CONFIRM") {
         resetCheckoutState();
         navigate("/");
       }

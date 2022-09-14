@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import {
   createContext,
   useContext,
@@ -173,11 +174,14 @@ export const CheckoutProvider = ({ children }) => {
   const setCheckoutToken = (token) =>
     dispatch({ type: ACTIONS.SET_TOKEN, token });
 
-  const updateOrderInfo = (keyName, newValue) =>
-    dispatch({
-      type: ACTIONS.UPDATE_ORDER_INFO,
-      payload: { [keyName]: newValue },
-    });
+  const updateOrderInfo = useCallback(
+    (keyName, newValue) =>
+      dispatch({
+        type: ACTIONS.UPDATE_ORDER_INFO,
+        payload: { [keyName]: newValue },
+      }),
+    []
+  );
 
   const resetCheckoutState = () => {
     dispatch({
@@ -205,6 +209,7 @@ export const CheckoutProvider = ({ children }) => {
         generateNewToken();
       }
     }
+    // eslint-disable-next-line
   }, [cart]);
 
   // Anytime the checkout token changes, the shipping countries update
@@ -226,7 +231,7 @@ export const CheckoutProvider = ({ children }) => {
     } else {
       isMounted.current = true;
     }
-  }, [state.checkout_token.id]);
+  }, [state.checkout_token.id, updateOrderInfo]);
 
   // Update the billing countries on new token generation
   useEffect(() => {
@@ -242,7 +247,7 @@ export const CheckoutProvider = ({ children }) => {
           console.error("There was an error getting all countries.", err);
         });
     }
-  }, [state.checkout_token.id]);
+  }, [state.checkout_token.id, updateOrderInfo]);
 
   // Update the shipping subdivisions on shipping country change
   useEffect(() => {
@@ -262,7 +267,11 @@ export const CheckoutProvider = ({ children }) => {
           );
         });
     }
-  }, [state.order_data.shipping.country_s, state.checkout_token.id]);
+  }, [
+    state.order_data.shipping.country_s,
+    state.checkout_token.id,
+    updateOrderInfo,
+  ]);
 
   // Update the billing subdivisions on billing country change
   useEffect(() => {
@@ -282,7 +291,11 @@ export const CheckoutProvider = ({ children }) => {
           );
         });
     }
-  }, [state.checkout_token.id, state.order_data.billing.country_b]);
+  }, [
+    state.checkout_token.id,
+    state.order_data.billing.country_b,
+    updateOrderInfo,
+  ]);
 
   // Anytime the shipping subdivisons change, the shipping options update
   useEffect(() => {
@@ -315,7 +328,7 @@ export const CheckoutProvider = ({ children }) => {
         updateOrderInfo("curr_step", STEPS.SHIPPING);
       }
     }
-  }, [state.curr_step, state.checkout_token.id]);
+  }, [state.curr_step, state.checkout_token.id, updateOrderInfo]);
 
   return (
     <CheckoutDispatchContext.Provider

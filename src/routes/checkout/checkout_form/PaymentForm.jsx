@@ -125,7 +125,7 @@ const PaymentForm = () => {
     if (email !== "") {
       updateOrderInfo("email", email);
     }
-  }, [email]);
+  }, [email, updateOrderInfo]);
 
   return (
     <React.Fragment>
@@ -160,12 +160,28 @@ const PaymentForm = () => {
                     )}
                   </div>
                   <div className="payment_logos">
-                    <img src={STRIPE} className="stripe_logo" />
+                    <img
+                      src={STRIPE}
+                      className="stripe_logo"
+                      alt="Stripe Logo"
+                    />
                     <div className="card_logos">
-                      <img src={VISA} className="card_logo" />
-                      <img src={MASTERCARD} className="card_logo" />
-                      <img src={DISCOVER} className="card_logo" />
-                      <img src={AMEX} className="card_logo" />
+                      <img src={VISA} className="card_logo" alt="Visa Logo" />
+                      <img
+                        src={MASTERCARD}
+                        className="card_logo"
+                        alt="Mastercard Logo"
+                      />
+                      <img
+                        src={DISCOVER}
+                        className="card_logo"
+                        alt="Discover Logo"
+                      />
+                      <img
+                        src={AMEX}
+                        className="card_logo"
+                        alt="American Express Logo"
+                      />
                     </div>
                   </div>
                 </div>
