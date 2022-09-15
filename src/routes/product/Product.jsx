@@ -28,10 +28,6 @@ const Product = () => {
     setVariantImg(optionInnerHTML);
   };
 
-  useEffect(() => {
-    console.log(variantImg);
-  }, [variantImg]);
-
   const renderProduct = () => {
     if (!products.loading && Object.keys(currProduct).length > 0) {
       return (

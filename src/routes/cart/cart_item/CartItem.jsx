@@ -8,6 +8,7 @@ import { useCartDispatch } from "../../../context/CartContext";
 import { useState } from "react";
 import Loader from "../../../components/loader/Loader";
 import { useEffect } from "react";
+import { MAX_CART_QTY } from "../../../utility_functions";
 
 const CartItem = ({ item }) => {
   const { updateCartQty, removeFromCart } = useCartDispatch();
@@ -40,10 +41,10 @@ const CartItem = ({ item }) => {
   }, [item.quantity]);
 
   useEffect(() => {
-    if (qty > 50) {
+    if (qty > MAX_CART_QTY) {
       displayError();
-      setQty(50);
-    } else if (qty < 50) {
+      setQty(MAX_CART_QTY);
+    } else if (qty < MAX_CART_QTY) {
       hideError();
     }
     // eslint-disable-next-line
@@ -106,10 +107,10 @@ const CartItem = ({ item }) => {
                 if (!isNaN(newValue)) {
                   if (newValue !== "") {
                     setQty(newValue);
-                  } else if (newValue !== 50) {
+                  } else if (newValue !== MAX_CART_QTY) {
                     setQty(newValue);
                   } else {
-                    setQty(50);
+                    setQty(MAX_CART_QTY);
                     displayError();
                   }
                 }
@@ -148,7 +149,7 @@ const CartItem = ({ item }) => {
           </div>
           <div id="error-and-remove">
             <div id={"qty-error" + item.id} className="qty-error">
-              Max of 50 allowed
+              Max of {MAX_CART_QTY} allowed
             </div>
             <button
               type="button"

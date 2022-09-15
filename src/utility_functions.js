@@ -8,3 +8,5 @@ export function generateId(len) {
   window.crypto.getRandomValues(arr);
   return Array.from(arr, dec2hex).join("");
 }
+
+export const MAX_CART_QTY = 25;

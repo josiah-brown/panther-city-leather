@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useCartDispatch } from "../../context/CartContext";
 import Loader from "../../components/loader/Loader";
+import { MAX_CART_QTY } from "../../utility_functions";
 
 const ProductForm = ({ product, handleVariantImageChange }) => {
   const [variants, setVariants] = useState(() => {
@@ -13,6 +14,7 @@ const ProductForm = ({ product, handleVariantImageChange }) => {
   const [qty, setQty] = useState(1);
   const [cartIsUpdating, setCartIsUpdating] = useState(false);
   const { addToCart } = useCartDispatch();
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Updates the variants state when one of the variation dropdowns is changed
   const handleVariantsChange = (e) => {
@@ -32,18 +34,37 @@ const ProductForm = ({ product, handleVariantImageChange }) => {
 
   // Updates 'qty' state when changed via button or input
   const handleQtyChange = (e) => {
-    const operation = e.target.textContent;
-    if (operation === "+") {
-      setQty((qty) => qty + 1);
-    } else if (operation === "-") {
-      // Make sure qty does not go negative
-      if (qty > 1) {
-        setQty((qty) => qty - 1);
+    console.log(e.target.value, typeof e.target.value);
+    if (e.target.tagName === "INPUT") {
+      let newQty = e.target.value;
+      if (Number(newQty) > MAX_CART_QTY) {
+        setErrorMessage("Quantity cannot exceed " + MAX_CART_QTY);
+      } else if (Number(newQty) <= -1) {
+        setErrorMessage("Quantity cannot be negative");
       } else {
-        return;
+        setErrorMessage("");
+        setQty(newQty <= MAX_CART_QTY ? newQty : 1);
       }
     } else {
-      console.log("There was an error changing the quantity");
+      const operation = e.target.textContent;
+      if (operation === "+") {
+        if (qty + 1 <= MAX_CART_QTY) {
+          setQty((qty) => qty + 1);
+          setErrorMessage("");
+        } else {
+          setErrorMessage("Quantity cannot exceed " + MAX_CART_QTY);
+        }
+      } else if (operation === "-") {
+        // Make sure qty does not go negative
+        if (qty > 1) {
+          setQty((qty) => qty - 1);
+          setErrorMessage("");
+        } else {
+          return;
+        }
+      } else {
+        console.log("There was an error changing the quantity");
+      }
     }
   };
 
@@ -106,11 +127,25 @@ const ProductForm = ({ product, handleVariantImageChange }) => {
         <span onClick={handleQtyChange} className="qty-change-btn">
           -
         </span>
-        <span>{qty}</span>
+        <input
+          type="number"
+          value={qty}
+          onChange={handleQtyChange}
+          onBlur={(e) => {
+            return e.target.value === "" ? setQty(1) : null;
+          }}
+          onKeyDown={(e) => {
+            let k = e.key;
+            if (k === "Enter") {
+              e.target.blur();
+            }
+          }}
+        />
         <span onClick={handleQtyChange} className="qty-change-btn">
           +
         </span>
       </div>
+      <div className="error">{errorMessage}</div>
       <br />
 
       <button onClick={handleAddToCart} id="add-to-cart-btn">

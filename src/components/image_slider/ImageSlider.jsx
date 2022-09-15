@@ -11,7 +11,7 @@ const ImageSlider = ({ slides, specificOption }) => {
   useEffect(() => {
     if (specificOption !== "") {
       setCurrSlideIndex(() => {
-        let outIndex = -1;
+        let outIndex = 0;
         slides.forEach((slide, index) => {
           if (slide.url.includes(specificOption.toLowerCase())) {
             outIndex = index;
