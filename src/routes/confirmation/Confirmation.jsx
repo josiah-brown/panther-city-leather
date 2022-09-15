@@ -47,8 +47,7 @@ const Confirmation = () => {
     if (Object.keys(order).length > 0) {
       updateOrderInfo("confirmed_order", {});
     }
-    // eslint-disable-next-line
-  }, [order]);
+  }, [order, updateOrderInfo]);
 
   return (
     <div>

@@ -264,7 +264,7 @@
   margin: 0 0 0.3rem;
 }
 
-.checkout_form .card_container #payment_email {
+.checkout_form .card_container .payment_email {
   margin: 0 0 1.2rem;
   border: 1px solid black;
   padding: 0.3rem;

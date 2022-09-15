@@ -6,7 +6,6 @@ import { useState } from "react";
 import ImageLoader from "../../../components/image_loader/ImageLoader";
 
 const ProductItem = (props) => {
-  // eslint-disable-next-line
   const product = props.product;
   const [imageLoading, setImageLoading] = useState(true);
 

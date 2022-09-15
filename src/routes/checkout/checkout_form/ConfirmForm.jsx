@@ -1,16 +1,10 @@
 import React from "react";
 import { useCheckoutState } from "../../../context/CheckoutContext";
-import { useCheckoutDispatch } from "../../../context/CheckoutContext";
 import { Link } from "react-router-dom";
 
 const ConfirmForm = () => {
   const checkout = useCheckoutState();
   const order = checkout.confirmed_order;
-  const { resetCheckoutState } = useCheckoutDispatch();
-
-  const onBackToHome = () => {
-    resetCheckoutState();
-  };
 
   return (
     <div className="confirmation">
@@ -23,7 +17,7 @@ const ConfirmForm = () => {
             You should receive a confirmation email shortly.
           </p>
         </div>
-        <Link type="button" to="/" onClick={onBackToHome}>
+        <Link type="button" to="/">
           <span>RETURN HOME</span>
         </Link>
       </div>

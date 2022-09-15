@@ -29,6 +29,9 @@ const PaymentForm = () => {
   const { updateOrderInfo } = useCheckoutDispatch();
   const { refreshCart } = useCartDispatch();
   const [email, setEmail] = useState(checkout.order_data.customer.email);
+  const [confirmEmail, setConfirmEmail] = useState(
+    checkout.order_data.customer.email
+  );
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -145,9 +148,19 @@ const PaymentForm = () => {
                   <input
                     required
                     placeholder="Email (to send receipt)"
-                    id="payment_email"
+                    className="payment_email"
                     value={email}
+                    type="email"
                     onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <label className="payment_label">CONFIRM EMAIL</label>
+                  <input
+                    required
+                    placeholder="Confirm email"
+                    className="payment_email"
+                    value={confirmEmail}
+                    type="email"
+                    onChange={(e) => setConfirmEmail(e.target.value)}
                   />
                   <label className="payment_label">CARD INFO</label>
                   <div

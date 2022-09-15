@@ -12,8 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 const ShippingForm = () => {
   const checkout = useCheckoutState();
-  const { updateOrderInfo, generateNewToken, resetCheckoutState } =
-    useCheckoutDispatch();
+  const { updateOrderInfo } = useCheckoutDispatch();
   const shipping = checkout.order_data.shipping;
   const shippingCountries = checkout.order_data.fulfillment.shipping_countries;
   const shippingStates = checkout.order_data.fulfillment.shipping_subdivisions;
@@ -21,8 +20,6 @@ const ShippingForm = () => {
   const navigate = useNavigate();
 
   const backToCart = () => {
-    resetCheckoutState();
-    generateNewToken();
     navigate("/cart");
   };
 
@@ -62,7 +59,6 @@ const ShippingForm = () => {
         country_s: yup.string().required("Required"),
       })}
       onSubmit={(values, { setSubmitting }) => {
-        console.log(values);
         setTimeout(() => {
           updateOrderInfo("name_s", values.name_s);
           updateOrderInfo("street_s", values.street_s);

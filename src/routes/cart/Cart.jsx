@@ -5,6 +5,7 @@ import Footer from "../../components/footer/Footer";
 import CartItem from "./cart_item/CartItem";
 import "./cart.css";
 import { useCartState, useCartDispatch } from "../../context/CartContext";
+import { useCheckoutDispatch } from "../../context/CheckoutContext";
 import { useState } from "react";
 import Loader from "../../components/loader/Loader";
 
@@ -12,6 +13,7 @@ const Cart = () => {
   const cart = useCartState();
   const { emptyCart } = useCartDispatch();
   const [updating, setUpdating] = useState(false);
+  const { generateNewToken } = useCheckoutDispatch();
 
   // Displays message if cart is empty
   const renderEmptyMessage = () => {
@@ -70,7 +72,13 @@ const Cart = () => {
             TOTAL: <b>{cart.subtotal.formatted_with_symbol}</b>
           </p>
         </div>
-        <Link to={"/checkout/" + cart.id} className="checkout-btn btn-lg">
+        <Link
+          to={"/checkout/" + cart.id}
+          className="checkout-btn btn-lg"
+          onClick={() => {
+            generateNewToken();
+          }}
+        >
           CHECKOUT
         </Link>
         <Link to="/products" className="continue-btn btn-lg">
@@ -82,7 +90,6 @@ const Cart = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

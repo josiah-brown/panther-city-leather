@@ -183,14 +183,14 @@ export const CheckoutProvider = ({ children }) => {
     []
   );
 
-  const resetCheckoutState = () => {
+  const resetCheckoutState = useCallback(() => {
     dispatch({
       type: ACTIONS.RESET_CHECKOUT_STATE,
       payload: null,
     });
-  };
+  }, []);
 
-  const generateNewToken = () => {
+  const generateNewToken = useCallback(() => {
     console.log("Generating new token...");
     commerce.checkout
       .generateToken(cart.id, { type: "cart" })
@@ -200,16 +200,6 @@ export const CheckoutProvider = ({ children }) => {
       .catch((err) => {
         console.log("There was an error in generating a token", err);
       });
-  };
-
-  // Generate new token on mount and cart change
-  useEffect(() => {
-    if (cart) {
-      if (cart.id && cart.line_items.length) {
-        generateNewToken();
-      }
-    }
-    // eslint-disable-next-line
   }, [cart]);
 
   // Anytime the checkout token changes, the shipping countries update
@@ -315,8 +305,11 @@ export const CheckoutProvider = ({ children }) => {
           console.log("There was an error fetching the shipping methods", err);
         });
     }
-    // eslint-disable-next-line
-  }, [state.checkout_token.id, state.order_data.shipping.state_s]);
+  }, [
+    state.checkout_token.id,
+    state.order_data.shipping.state_s,
+    state.order_data.shipping.country_s,
+  ]);
 
   // Once the checkout token has loaded, display the checkout form
   // This is a slight gamble that the user will not click through the
