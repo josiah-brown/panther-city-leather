@@ -1,0 +1,45 @@
+.error_404_wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 80%;
+  margin: 5rem auto;
+  text-align: center;
+  gap: 2rem;
+}
+
+.error_404_wrapper h2 {
+  font-size: 3rem;
+}
+
+.error_404_wrapper h4 {
+  font-weight: 500;
+}
+
+.error_404_wrapper a {
+  background: black;
+  width: 100%;
+  padding: 0.7rem 0;
+  color: white;
+  cursor: pointer;
+}
+
+.error_404_wrapper a:hover {
+  border: 1px solid black;
+  background: white;
+  color: black;
+}
+
+@media (min-width: 960px) {
+  .error_404_wrapper a {
+    width: 40%;
+  }
+}
+/*# sourceMappingURL=error-404.css.map */

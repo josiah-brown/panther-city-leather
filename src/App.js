@@ -1,6 +1,6 @@
 //*========== IMPORT MODULES ==========*//
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 //*========== IMPORT ROUTES ==========*//
 import Home from "./routes/home/Home";
@@ -13,6 +13,7 @@ import Confirmation from "./routes/confirmation/Confirmation";
 import Contact from "./routes/contact/Contact";
 import ContactConfirmation from "./routes/contact_confirmation/ContactConfirmation";
 import FutureSocial from "./routes/future_social/FutureSocial";
+import Error404 from "./routes/error_404/Error404";
 
 //*========== TOP LEVEL APP COMPONENT ==========*//
 // This is the parent component of the entire app.
@@ -31,7 +32,7 @@ const App = () => {
       <Route path="/contact" element={<Contact />} />
       <Route path="/contact/confirmation" element={<ContactConfirmation />} />
       <Route path="/social/empty" element={<FutureSocial />} />
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<Error404 />} />
     </Routes>
   );
 };

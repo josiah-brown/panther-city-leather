@@ -1,0 +1,39 @@
+.error_404_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  margin: 5rem auto;
+  text-align: center;
+  gap: 2rem;
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  h4 {
+    font-weight: 500;
+  }
+
+  a {
+    background: black;
+    width: 100%;
+    padding: 0.7rem 0;
+    color: white;
+    cursor: pointer;
+  }
+
+  a:hover {
+    border: 1px solid black;
+    background: white;
+    color: black;
+  }
+}
+
+@media (min-width: 960px) {
+  .error_404_wrapper {
+    a {
+      width: 40%;
+    }
+  }
+}
