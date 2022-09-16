@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: left;
-  width: 64%;
+  width: 74%;
   margin: 2.2rem auto 1rem;
 
   .checkbox-input {
@@ -36,7 +36,7 @@
     & select {
       font-family: var(--font-main);
       border: 1px solid black;
-      height: 2em;
+      height: 4em;
       padding-left: 0.3rem;
     }
   }
