@@ -52,6 +52,7 @@
   border: 1px solid black;
   height: 4em;
   padding-left: 0.3rem;
+  color: black;
 }
 
 .checkout_form .checkout_form_text_input {
