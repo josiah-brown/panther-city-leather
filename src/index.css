@@ -94,3 +94,13 @@ input[type="number"] {
   color: #e83838;
   font-size: 0.7rem;
 }
+
+@media (min-width: 960px) {
+  .h-main {
+    font-size: 2em;
+  }
+
+  .h-sub {
+    font-size: 1vw;
+  }
+}

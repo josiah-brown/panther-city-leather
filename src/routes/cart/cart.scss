@@ -103,7 +103,7 @@
     #cart-table-heading {
       display: flex;
       flex-direction: row;
-      margin: 3rem 10rem 0rem;
+      margin: 3rem 12vw 0rem;
       justify-content: space-between;
       position: relative;
 
@@ -115,7 +115,13 @@
     }
 
     .cart-footer {
-      margin: 0 10rem;
+      margin: 0 12vw;
+      gap: 1.5rem;
+
+      .btn-lg {
+        width: 50%;
+        margin: 0 auto;
+      }
     }
   }
 }

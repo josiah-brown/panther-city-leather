@@ -205,7 +205,7 @@ const PaymentForm = () => {
                     disabled={!stripe}
                     className="checkout_nav_btn checkout_dark_btn"
                   >
-                    Pay{" "}
+                    PAY{" "}
                     {
                       checkout.checkout_token.live.subtotal
                         .formatted_with_symbol

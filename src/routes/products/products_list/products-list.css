@@ -11,8 +11,8 @@
   .products_list {
     -ms-grid-columns: 1fr 1fr 1fr 1fr;
         grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 2rem;
-    padding: 0 3rem;
+    gap: 3vw;
+    padding: 0 5vw;
   }
 }
 /*# sourceMappingURL=products-list.css.map */
