@@ -64,8 +64,8 @@ input[type="number"] {
 }
 
 .btn-def-black {
-  color: var(--c-bg);
-  background: var(--c-text);
+  color: white;
+  background: black;
   font-family: var(--font-main);
   letter-spacing: 0.2rem;
   font-size: 0.8rem;
@@ -80,14 +80,20 @@ input[type="number"] {
 }
 
 .btn-def-white {
-  color: var(--c-text);
-  background: var(--c-bg);
+  color: black;
+  background: white;
   font-family: var(--font-main);
   letter-spacing: 0.2rem;
   font-size: 0.8rem;
   font-weight: 200;
   width: fit-content;
   padding: 1rem 1.3rem;
+}
+
+.btn-def-white:hover {
+  color: white;
+  background: black;
+  border-color: white;
 }
 
 .error {

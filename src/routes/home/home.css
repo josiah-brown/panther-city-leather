@@ -9,8 +9,21 @@
   line-height: 2rem;
 }
 
-#home-featured-btn {
-  margin: 2rem 0rem;
+#home-featured .content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#home-featured .content a {
+  margin: 3rem 0 2rem;
 }
 
 #home-about {
@@ -30,6 +43,11 @@
   text-align: left;
   letter-spacing: 0.05rem;
   width: 80%;
+  line-height: 1.7rem;
+}
+
+#home-about a {
+  margin: 1rem 0;
 }
 
 #home-shop {
@@ -77,7 +95,7 @@
   }
   #home-about p {
     width: 50%;
-    line-height: 1.3rem;
+    line-height: 1.9rem;
   }
   #home-shop {
     height: 80vh;

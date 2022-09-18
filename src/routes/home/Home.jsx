@@ -45,11 +45,9 @@ const Home = () => {
               <div className="featured-items">
                 <ProductsList />
               </div>
-              <div id="home-featured-btn">
-                <a className="btn-def-black" href="/products">
-                  SHOP ALL PRODUCTS
-                </a>
-              </div>
+              <Link to={"/products"} className="btn-def-black">
+                SHOP ALL PRODUCTS
+              </Link>
             </div>
           ) : (
             <SectionLoader />
@@ -62,15 +60,15 @@ const Home = () => {
           <h2 className="h-main">ABOUT THE SHOP</h2>
           <br />
           <p className="h-sub">
-            Panther City Leather was started by Isaac Brown in 2022. Every
-            single product is made with locally sourced materials and an intense
-            attention to detail. Click below to learn more about the shop and
-            materials.
+            My name is Isaac Brown, I am 16 years old and living in Fort Worth,
+            Texas. I am striving to create simple, beautiful, high quality
+            leather goods which will exceed expectations and last my customers a
+            lifetime.
           </p>
           <br />
           <Link to={"/about"} className="btn-def-black">
             LEARN MORE
-          </Link>{" "}
+          </Link>
         </section>
 
         <section id="home-shop">
@@ -79,11 +77,9 @@ const Home = () => {
             <h2 className="h-main">
               HANDMADE LEATHER <br /> GOODS
             </h2>
-            <div id="home-shop-btn">
-              <a className="btn-def-white" href="/products">
-                VIEW PRODUCTS
-              </a>
-            </div>
+            <Link to={"/products"} className="btn-def-white">
+              VIEW PRODUCTS
+            </Link>
           </div>
         </section>
       </div>
