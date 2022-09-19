@@ -64,6 +64,19 @@
         }
       }
 
+      .product_learn_more_btn {
+        width: 100%;
+        margin: -0.8rem 0 0rem;
+        font-size: 0.7rem;
+        color: steelblue;
+        text-align: left;
+        cursor: pointer;
+      }
+
+      .product_learn_more_btn:hover {
+        text-decoration: underline;
+      }
+
       .qtyCounter {
         display: flex;
         gap: 0.5rem;

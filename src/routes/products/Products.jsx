@@ -15,12 +15,10 @@ const Products = () => {
   return (
     <main className="page-wrapper">
       <Nav />
-      <div className="page-content">
-        <h1 className="h-main">PRODUCTS</h1>
-        <section className="page-section" id="products-item-list">
-          {products.loading ? <p>Loading...</p> : <ProductsList />}
-        </section>
-      </div>
+      <h1 className="h-main">PRODUCTS</h1>
+      <section className="page-section" id="products-item-list">
+        {products.loading ? <p>Loading...</p> : <ProductsList />}
+      </section>
       <Footer />
     </main>
   );

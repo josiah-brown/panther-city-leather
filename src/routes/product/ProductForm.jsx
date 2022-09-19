@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useCartDispatch } from "../../context/CartContext";
 import Loader from "../../components/loader/Loader";
 import { MAX_CART_QTY } from "../../utility_functions";
+import { Link } from "react-router-dom";
 
 const ProductForm = ({ product, handleVariantImageChange }) => {
   const [variants, setVariants] = useState(() => {
@@ -121,6 +122,10 @@ const ProductForm = ({ product, handleVariantImageChange }) => {
           </div>
         );
       })}
+      <br />
+      <Link to={"/about"} className="product_learn_more_btn">
+        About the leather →
+      </Link>
       <br />
 
       <div className="qtyCounter h-sub">

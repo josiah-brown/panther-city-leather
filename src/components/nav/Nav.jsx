@@ -88,8 +88,9 @@ const Nav = () => {
         </ul>
 
         <div className="nav-content-center">
-          <Link to="/" id="logo-icon">
-            <img src={PANTHER} alt="panther logo" />
+          <Link to="/" className="home_btn_container">
+            <img src={PANTHER} alt="panther logo" id="logo-icon" />
+            <h1 id="company_title">PANTHER CITY LEATHER</h1>
           </Link>
 
           <ul className="nav-links-desktop">

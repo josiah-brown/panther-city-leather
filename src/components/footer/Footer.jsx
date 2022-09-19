@@ -24,6 +24,12 @@ const Footer = () => {
       <h2 id="footer-text" className="h-sub">
         © {year} PANTHER CITY LEATHER
       </h2>
+      <h4>
+        Made by{" "}
+        <a href="https://www.josiahbrown.com" target="_blank" rel="noreferrer">
+          Josiah Brown
+        </a>
+      </h4>
     </footer>
   );
 };

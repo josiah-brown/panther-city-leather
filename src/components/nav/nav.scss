@@ -52,6 +52,11 @@ a {
 
 .nav-spacer {
   height: 10vh;
+  // display: none;
+}
+
+#company_title {
+  display: none;
 }
 
 .nav-links-desktop {
@@ -94,12 +99,13 @@ a {
   .nav-links-mobile {
     display: none;
   }
+
   #toggle-nav-icon {
     display: none;
   }
 
   .nav-spacer {
-    height: 140px;
+    height: 16vh;
   }
   .nav-content {
     height: fit-content;
@@ -113,8 +119,20 @@ a {
       align-items: center;
       gap: 0.8rem;
 
-      #logo-icon {
-        width: 5vw;
+      .home_btn_container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        #logo-icon {
+          width: 5vw;
+        }
+
+        #company_title {
+          display: block;
+          //   font-size: 1.5em;
+          margin: 0.25rem 0 1rem;
+        }
       }
 
       .nav-links-desktop {

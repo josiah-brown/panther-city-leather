@@ -38,4 +38,14 @@ footer .social-icons {
 footer #footer-text {
   text-align: center;
 }
+
+footer h4 {
+  font-size: 9px;
+  font-weight: 300;
+}
+
+footer h4 a {
+  color: steelblue;
+  cursor: pointer;
+}
 /*# sourceMappingURL=footer.css.map */

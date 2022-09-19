@@ -82,6 +82,7 @@ input[type="number"] {
 .btn-def-white {
   color: black;
   background: white;
+  border: 1px solid black;
   font-family: var(--font-main);
   letter-spacing: 0.2rem;
   font-size: 0.8rem;

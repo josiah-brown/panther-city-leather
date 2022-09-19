@@ -1,4 +1,10 @@
 h1 {
   text-align: center;
 }
+
+@media (min-width: 960px) {
+  h1 {
+    margin-top: 3.5rem;
+  }
+}
 /*# sourceMappingURL=products.css.map */
