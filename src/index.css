@@ -94,7 +94,6 @@ input[type="number"] {
 .btn-def-white:hover {
   color: white;
   background: black;
-  border-color: white;
 }
 
 .error {
