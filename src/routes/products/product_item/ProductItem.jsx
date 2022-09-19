@@ -32,7 +32,7 @@ const ProductItem = (props) => {
           <h4 className="product__name h-sub">{product.name.toUpperCase()}</h4>
           <div className="product__details">
             <p className="product__price h-sub">
-              FROM {product.price.formatted_with_symbol}
+              {product.price.formatted_with_symbol}
             </p>
           </div>
         </div>
