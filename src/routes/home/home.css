@@ -74,7 +74,10 @@
           justify-content: space-between;
   gap: 3rem;
   position: absolute;
-  top: 10rem;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
   width: 100%;
 }
 
@@ -97,28 +100,10 @@
     width: 50%;
     line-height: 1.9rem;
   }
-  #home-shop {
-    height: 80vh;
-    overflow: hidden;
-    position: relative;
-  }
   #home-shop img {
-    position: absolute;
-    left: 0;
-    top: -60vh;
-  }
-  #home-shop .home-shop-content {
-    top: 30vh;
-  }
-  #home-shop .home-shop-content h2 {
-    font-size: 3rem;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-  }
-  #home-shop .home-shop-content h2 br {
-    display: none;
+    max-height: 60vh;
+    -o-object-fit: cover;
+       object-fit: cover;
   }
 }
 /*# sourceMappingURL=home.css.map */

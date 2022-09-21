@@ -56,7 +56,9 @@
     justify-content: space-between;
     gap: 3rem;
     position: absolute;
-    top: 10rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
 
     h2 {
@@ -88,27 +90,9 @@
   }
 
   #home-shop {
-    height: 80vh;
-    overflow: hidden;
-    position: relative;
-
     img {
-      position: absolute;
-      left: 0;
-      top: -60vh;
-    }
-
-    .home-shop-content {
-      top: 30vh;
-
-      h2 {
-        font-size: 3rem;
-        user-select: none;
-
-        br {
-          display: none;
-        }
-      }
+      max-height: 60vh;
+      object-fit: cover;
     }
   }
 }

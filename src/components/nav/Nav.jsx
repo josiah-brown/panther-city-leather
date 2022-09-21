@@ -5,9 +5,16 @@ import { BiX } from "react-icons/bi";
 import PANTHER from "../../assets/panther.svg";
 import "./nav.css";
 import NavCartIcon from "./nav_cart_icon/NavCartIcon";
+import { useEffect } from "react";
 
 const Nav = () => {
   const [linksVisible, setLinksVisible] = useState(false);
+  const [currPath, setCurrPath] = useState("");
+
+  useEffect(() => {
+    console.log(window.location.href);
+    setCurrPath(window.location.href);
+  }, []);
 
   return (
     <nav>
@@ -88,14 +95,30 @@ const Nav = () => {
         </ul>
 
         <div className="nav-content-center">
-          <Link to="/" className="home_btn_container">
+          <Link
+            to="/"
+            className="home_btn_container"
+            onClick={() => {
+              if (currPath[currPath.length - 1] === "/") {
+                window.scrollTo(0, 0);
+              }
+            }}
+          >
             <img src={PANTHER} alt="panther logo" id="logo-icon" />
             <h1 id="company_title">PANTHER CITY LEATHER</h1>
           </Link>
 
           <ul className="nav-links-desktop">
             <li>
-              <Link className="hover-underline" to="/">
+              <Link
+                className="hover-underline"
+                to="/"
+                onClick={() => {
+                  if (currPath[currPath.length - 1] === "/") {
+                    window.scrollTo(0, 0);
+                  }
+                }}
+              >
                 HOME
               </Link>
             </li>

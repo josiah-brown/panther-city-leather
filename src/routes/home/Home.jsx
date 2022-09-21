@@ -1,5 +1,5 @@
-import HOME from "../../assets/example-hero.jpg";
-import SHOP_IMG from "../../assets/wallet.webp";
+import HOME from "../../assets/hero_bag_web.jpeg";
+import SHOP_IMG from "../../assets/hero_notebook_web.jpeg";
 import "./home.css";
 import Nav from "../../components/nav/Nav";
 import ProductsList from "../products/products_list/ProductsList";
@@ -30,7 +30,7 @@ const Home = () => {
 
         <section className="page-section" id="home-message">
           <div className="wrapper">
-            <p className="h-main">CURRENT LEAD TIME ON NEW ORDERS IS 5 DAYS</p>
+            <p className="h-main">WELCOME TO PANTHER CITY LEATHER</p>
           </div>
         </section>
 

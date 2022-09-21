@@ -1,12 +1,12 @@
 import Nav from "../../components/nav/Nav";
 import Footer from "../../components/footer/Footer";
 import "./contact.css";
-import CONTACT_IMG from "../../assets/contact-img.jpg";
+import CONTACT_IMG from "../../assets/glasses_web.jpeg";
 import emailjs from "@emailjs/browser";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-const Contact = (props) => {
+const Contact = () => {
   const navigate = useNavigate();
 
   // Validates form fields
