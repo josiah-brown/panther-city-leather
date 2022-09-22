@@ -1,8 +1,8 @@
 import "./about.css";
 import Nav from "../../components/nav/Nav";
 import Footer from "../../components/footer/Footer";
-import IMG1 from "../../assets/leather1.jpg";
-import IMG2 from "../../assets/leather2.jpg";
+import IMG1 from "../../assets/bridle_medium_brown.jpeg";
+import IMG2 from "../../assets/harness_buck_brown.jpeg";
 import IMG3 from "../../assets/contact-img.jpg";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
@@ -18,8 +18,8 @@ export default function About() {
       <div className="about_section">
         <h2 className="about_section_header">ABOUT THE LEATHER</h2>
         <p className="about_p">
-          Wickett and Craig Vegetable Tanned Leather is used for the majority of
-          our goods due to its quality and durability.
+          Wickett and Craig Vegetable Tanned Leather is a full grain leather and
+          used for the majority of our goods due to its quality and durability.
         </p>
         <p className="about_p">
           Wickett and Craig leather is tanned in the USA and is among the
@@ -31,7 +31,14 @@ export default function About() {
             <h4 className="about_leather_header">English Bridle</h4>
             <h4 className="about_leather_subheader">Black, Chestnut</h4>
             <div className="about_leather_content">
-              <img src={IMG1} alt="" className="about_leather_img" />
+              <div className="about_img_and_caption_wrapper">
+                <img src={IMG1} alt="" className="about_leather_img" />
+                <p className="img_caption">
+                  {
+                    "Wickett and Craig English Bridle in Medium Brown (not sold)"
+                  }
+                </p>
+              </div>
               <p className="about_leather_text">
                 <strong>English Bridle</strong> leather is a beautiful leather
                 with a smooth matte surface finish. It has a flexible waxy
@@ -43,7 +50,12 @@ export default function About() {
             <h4 className="about_leather_header">Harness</h4>
             <h4 className="about_leather_subheader">Buck Brown</h4>
             <div className="about_leather_content">
-              <img src={IMG2} alt="" className="about_leather_img" />
+              <div className="about_img_and_caption_wrapper">
+                <img src={IMG2} alt="" className="about_leather_img" />
+                <p className="img_caption">
+                  Wickett and Craig Harness in Buck Brown
+                </p>
+              </div>
               <p className="about_leather_text">
                 <strong>Harness</strong> leather has an even smoother feel than
                 English bridle and a slight sheen on the surface. The leather

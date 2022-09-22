@@ -81,11 +81,23 @@
         flex-direction: row;
         gap: 5%;
 
-        .about_leather_img {
+        .about_img_and_caption_wrapper {
           width: 30%;
           height: 30%;
           aspect-ratio: 1/1;
-          object-fit: cover;
+
+          .about_leather_img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+
+          .img_caption {
+            font-size: 0.55rem;
+            letter-spacing: 0;
+            line-height: 0.55rem;
+            font-weight: 200;
+          }
         }
 
         .about_leather_text {
@@ -93,6 +105,7 @@
           letter-spacing: 0.1em;
           line-height: 1.5rem;
           margin-top: -0.2rem;
+          width: 65%;
         }
       }
     }
@@ -139,9 +152,16 @@
         }
 
         .about_leather_content {
-          .about_leather_img {
+          .about_img_and_caption_wrapper {
             width: 15%;
             height: 15%;
+
+            .img_caption {
+              margin-top: 0.15rem;
+              font-size: 0.65rem;
+              letter-spacing: 0.05rem;
+              line-height: 0.65rem;
+            }
           }
 
           .about_leather_text {
