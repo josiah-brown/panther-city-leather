@@ -1,16 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.00d780d9.css",
-    "main.js": "/static/js/main.27bdc489.js",
+    "main.css": "/static/css/main.77c2bcb4.css",
+    "main.js": "/static/js/main.581b7f7d.js",
+    "static/media/glasses_web.jpeg": "/static/media/glasses_web.4fd083107b4e8dadd5c3.jpeg",
+    "static/media/hero_notebook_web.jpeg": "/static/media/hero_notebook_web.33dd572c1eb80b398ec9.jpeg",
+    "static/media/hero_bag_web.jpeg": "/static/media/hero_bag_web.7469fcbc4b9fea78a224.jpeg",
     "static/media/contact-img.jpg": "/static/media/contact-img.2078884f6f15611333ea.jpg",
-    "static/media/example-hero.jpg": "/static/media/example-hero.45d88cc6a2474839462a.jpg",
-    "static/media/wallet.webp": "/static/media/wallet.58c00c97bed13a17793b.webp",
+    "static/media/amex.jpg": "/static/media/amex.1208ba57b41361a09c9f.jpg",
+    "static/media/harness_buck_brown.jpeg": "/static/media/harness_buck_brown.e9870286d7ad56274fa5.jpeg",
+    "static/media/bridle_medium_brown.jpeg": "/static/media/bridle_medium_brown.1a83a75925eedbcf2dcb.jpeg",
+    "static/media/visa.png": "/static/media/visa.a05453b4b203ed08557d.png",
+    "static/media/discover.svg": "/static/media/discover.450aa8f9a5171be7e410eb76c22ab84c.svg",
+    "static/media/stripe_banner.svg": "/static/media/stripe_banner.c4f72bcfe0e8abaa8d473df092e1ed88.svg",
+    "static/media/panther.svg": "/static/media/panther.df1505ea369b00c495f51cb89579504f.svg",
     "index.html": "/index.html",
-    "main.00d780d9.css.map": "/static/css/main.00d780d9.css.map",
-    "main.27bdc489.js.map": "/static/js/main.27bdc489.js.map"
+    "static/media/mc.svg": "/static/media/mc.b720e3b5a9bf9bce7ef42d6682f56356.svg",
+    "main.77c2bcb4.css.map": "/static/css/main.77c2bcb4.css.map",
+    "main.581b7f7d.js.map": "/static/js/main.581b7f7d.js.map"
   },
   "entrypoints": [
-    "static/css/main.00d780d9.css",
-    "static/js/main.27bdc489.js"
+    "static/css/main.77c2bcb4.css",
+    "static/js/main.581b7f7d.js"
   ]
 }
