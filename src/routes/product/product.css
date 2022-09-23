@@ -32,12 +32,12 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   text-align: center;
-  gap: 0.4rem;
   margin: 1rem 0 2rem;
 }
 
 #product-content .right-side .product-heading > h4 {
   font-weight: 400;
+  margin-bottom: 0.4rem;
 }
 
 #product-content .right-side .product-heading > p {
@@ -99,7 +99,6 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  gap: 0.5rem;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -110,6 +109,10 @@
   width: fit-content;
   padding: 0 1rem;
   border: 1px solid black;
+}
+
+#product-content .right-side .product-form .qtyCounter > * + * {
+  margin-left: 0.5rem;
 }
 
 #product-content .right-side .product-form .qtyCounter .qty-change-btn {

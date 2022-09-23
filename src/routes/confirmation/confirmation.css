@@ -7,11 +7,14 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 2rem;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   text-align: center;
+}
+
+.confirmation__wrapper > * + * {
+  margin-top: 2rem;
 }
 
 .confirmation__wrapper > h4 {

@@ -38,13 +38,16 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  gap: 1rem;
   margin: 2rem 0 1rem;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
   width: 70%;
+}
+
+.about_section .about_cta_btns > * + * {
+  margin-top: 1rem;
 }
 
 .about_section .about_cta_btns a {
@@ -66,8 +69,11 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 2rem;
   margin: 1rem 0 2rem;
+}
+
+.about_section .about_leather_types > * + * {
+  margin-top: 2rem;
 }
 
 .about_section .about_leather_types .about_leather_type {
@@ -111,7 +117,10 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  gap: 5%;
+}
+
+.about_section .about_leather_types .about_leather_type .about_leather_content > * + * {
+  margin-left: 5%;
 }
 
 .about_section .about_leather_types .about_leather_type .about_leather_content .about_img_and_caption_wrapper {
@@ -180,7 +189,6 @@
     margin: 2rem 0;
   }
   .about_section .about_cta_btns {
-    gap: 1.3rem;
     margin: 3rem 0;
     width: 40%;
   }

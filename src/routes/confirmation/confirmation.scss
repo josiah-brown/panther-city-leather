@@ -2,9 +2,12 @@
   margin: 3rem 10vw;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
   align-items: center;
   text-align: center;
+
+  & > * + * {
+    margin-top: 2rem;
+  }
 
   & > h4 {
     font-size: 1.8rem;

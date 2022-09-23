@@ -40,16 +40,22 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
     margin-left: 2rem;
     width: 65%;
+
+    & > * + * {
+      margin-top: 0.5rem;
+    }
 
     .cart-item-text {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       text-align: left;
-      gap: 0.3rem;
+
+      & > * + * {
+        margin-top: 0.3rem;
+      }
 
       #item-total-desktop {
         display: none;
@@ -168,13 +174,16 @@
       .cart-item-content-bottom-row {
         flex-direction: column;
         align-items: flex-end;
-        gap: 0.7rem;
         width: -webkit-fit-content;
         width: -moz-fit-content;
         width: fit-content;
         position: absolute;
         right: 0;
         margin-right: 20vw;
+
+        & > * + * {
+          margin-top: 0.7rem;
+        }
 
         .cart-item-qty {
           width: 6rem;

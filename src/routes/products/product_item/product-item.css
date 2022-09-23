@@ -46,8 +46,11 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   text-align: center;
-  gap: 0.4rem;
   margin: 1rem 0 2rem;
+}
+
+.product__info .product__name {
+  margin-bottom: 0.4rem;
 }
 
 .product__name {

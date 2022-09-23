@@ -13,7 +13,10 @@ footer {
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin: 2rem 0;
-  gap: 1rem;
+}
+
+footer > * + * {
+  margin-top: 1rem;
 }
 
 footer .social-icons {
@@ -31,8 +34,11 @@ footer .social-icons {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  gap: 3.5rem;
   width: 100%;
+}
+
+footer .social-icons > * + * {
+  margin-left: 3.5rem;
 }
 
 footer #footer-text {

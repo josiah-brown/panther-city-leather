@@ -80,7 +80,6 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  gap: 3rem;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -93,6 +92,7 @@
   color: white;
   font-weight: 200;
   text-align: center;
+  margin-bottom: 3rem;
 }
 
 @media (min-width: 960px) {

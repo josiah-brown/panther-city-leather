@@ -10,7 +10,6 @@ const Footer = () => {
   return (
     <footer>
       <div className="social-icons">
-        {/* <a href="/social/empty" target="_blank" rel="noreferrer"> */}
         <a href="/social/empty">
           <AiOutlineInstagram />
         </a>

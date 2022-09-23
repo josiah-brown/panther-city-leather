@@ -15,8 +15,11 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 2rem;
   margin: var(--margin-def);
+}
+
+.page-content .cart-footer > * + * {
+  margin-top: 2rem;
 }
 
 .page-content .cart-footer .top-row {
@@ -137,11 +140,13 @@
   }
   .page-content .cart-footer {
     margin: 0 12vw;
-    gap: 1.5rem;
+  }
+  .page-content .cart-footer .top-row {
+    margin-bottom: 2.5rem;
   }
   .page-content .cart-footer .btn-lg {
     width: 50%;
-    margin: 0 auto;
+    margin: 0 auto 1.5rem;
   }
 }
 /*# sourceMappingURL=cart.css.map */

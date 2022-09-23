@@ -51,7 +51,7 @@ a {
 }
 
 .nav-spacer {
-  height: 10vh;
+  height: 11vh;
 }
 
 #company_title {
@@ -105,7 +105,7 @@ a {
   }
 
   .nav-spacer {
-    height: 16vh;
+    height: 18vh;
   }
   .nav-content {
     height: -webkit-fit-content;
@@ -119,13 +119,6 @@ a {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      // gap: 0.8rem;
-
-      // @supports not (gap: 0.8rem) {
-      // & > .home_btn_container {
-      //   margin-top: 0.8rem;
-      // }
-      // }
 
       .home_btn_container {
         display: flex;
@@ -148,14 +141,11 @@ a {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        // gap: 3rem;
         font-size: 0.8rem;
 
-        // @supports not (gap: 3rem) {
         & > * + * {
           margin-left: 3rem;
         }
-        // }
 
         li {
           position: relative;

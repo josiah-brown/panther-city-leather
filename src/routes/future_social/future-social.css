@@ -12,15 +12,16 @@
   width: 80%;
   margin: 5rem auto;
   text-align: center;
-  gap: 2rem;
 }
 
 .future_social_wrapper h2 {
   font-size: 3rem;
+  margin-bottom: 2rem;
 }
 
 .future_social_wrapper h4 {
   font-weight: 500;
+  margin-bottom: 2rem;
 }
 
 .future_social_wrapper a {

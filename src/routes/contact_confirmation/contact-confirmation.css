@@ -6,12 +6,19 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 3rem;
   width: 80%;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   margin: 3rem auto;
+}
+
+#confirm-content h1 {
+  margin-bottom: 3rem;
+}
+
+#confirm-content p {
+  margin-bottom: 3rem;
 }
 
 #confirm-content #return-home-btn {

@@ -4,7 +4,10 @@ footer {
   align-items: center;
   justify-content: space-between;
   margin: 2rem 0;
-  gap: 1rem;
+
+  & > * + * {
+    margin-top: 1rem;
+  }
 
   .social-icons {
     font-size: 1.5rem;
@@ -12,8 +15,11 @@ footer {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 3.5rem;
     width: 100%;
+
+    & > * + * {
+      margin-left: 3.5rem;
+    }
   }
 
   #footer-text {

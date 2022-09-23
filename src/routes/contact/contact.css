@@ -14,8 +14,11 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 2rem;
   margin: 0 auto;
+}
+
+#contact-content .contact-form-container > * + * {
+  margin-top: 2rem;
 }
 
 #contact-content .contact-form-container .contact-form {
@@ -27,7 +30,10 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 2rem;
+}
+
+#contact-content .contact-form-container .contact-form > * + * {
+  margin-top: 2rem;
 }
 
 #contact-content .contact-form-container .contact-form .contact-form-row {

@@ -27,8 +27,11 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 1rem;
   width: 20%;
+}
+
+#checkout-progress-bar .step > * + * {
+  margin-top: 1rem;
 }
 
 #checkout-progress-bar .step .progress-bubble {

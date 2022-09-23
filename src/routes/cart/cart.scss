@@ -11,8 +11,11 @@
   .cart-footer {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
     margin: var(--margin-def);
+
+    & > * + * {
+      margin-top: 2rem;
+    }
 
     .top-row {
       display: flex;
@@ -81,6 +84,8 @@
       padding: 1rem 1.5rem;
       display: block;
       margin: 3rem auto 1rem;
+      width: -webkit-fit-content;
+      width: -moz-fit-content;
       width: fit-content;
     }
 
@@ -116,11 +121,14 @@
 
     .cart-footer {
       margin: 0 12vw;
-      gap: 1.5rem;
+
+      .top-row {
+        margin-bottom: 2.5rem;
+      }
 
       .btn-lg {
         width: 50%;
-        margin: 0 auto;
+        margin: 0 auto 1.5rem;
       }
     }
   }

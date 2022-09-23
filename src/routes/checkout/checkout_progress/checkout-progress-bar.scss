@@ -10,8 +10,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
     width: 20%;
+
+    & > * + * {
+      margin-top: 1rem;
+    }
 
     .progress-bubble {
       height: 1.2rem;
