@@ -100,7 +100,7 @@ a {
   color: var(--c-text);
   cursor: pointer;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 @media (min-width: 960px) {
@@ -135,6 +135,11 @@ a {
         -ms-flex-align: center;
             align-items: center;
     gap: 0.8rem;
+  }
+  @supports not (gap: 0.8rem) {
+    .nav-content .nav-content-center > .home_btn_container {
+      margin-top: 0.8rem;
+    }
   }
   .nav-content .nav-content-center .home_btn_container {
     display: -webkit-box;
@@ -171,6 +176,11 @@ a {
             justify-content: space-between;
     gap: 3rem;
     font-size: 0.8rem;
+  }
+  @supports not (gap: 3rem) {
+    .nav-content .nav-content-center .nav-links-desktop > * + * {
+      margin-left: 3rem;
+    }
   }
   .nav-content .nav-content-center .nav-links-desktop li {
     position: relative;

@@ -89,6 +89,7 @@ a {
   img {
     color: var(--c-text);
     cursor: pointer;
+    -o-object-fit: cover;
     object-fit: cover;
   }
 }
@@ -107,6 +108,8 @@ a {
     height: 16vh;
   }
   .nav-content {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
     height: fit-content;
     display: block;
 
@@ -117,6 +120,12 @@ a {
       justify-content: center;
       align-items: center;
       gap: 0.8rem;
+
+      @supports not (gap: 0.8rem) {
+        & > .home_btn_container {
+          margin-top: 0.8rem;
+        }
+      }
 
       .home_btn_container {
         display: flex;
@@ -140,6 +149,12 @@ a {
         justify-content: space-between;
         gap: 3rem;
         font-size: 0.8rem;
+
+        @supports not (gap: 3rem) {
+          & > * + * {
+            margin-left: 3rem;
+          }
+        }
 
         li {
           position: relative;
