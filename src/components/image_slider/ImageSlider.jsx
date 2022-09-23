@@ -103,7 +103,7 @@ const ImageSlider = ({ slides, specificOption }) => {
         <MdKeyboardArrowRight />
       </div>
       <div className="slide_img_wrapper">
-        <img style={imageStyles} className="slide_img" />
+        <img style={imageStyles} className="slide_img" alt="product" />
       </div>
       <div style={dotContainerStyles}>
         {slides.map((_, slideIndex) => (
