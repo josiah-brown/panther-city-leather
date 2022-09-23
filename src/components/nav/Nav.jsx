@@ -15,6 +15,13 @@ const Nav = () => {
     setCurrPath(window.location.href);
   }, []);
 
+  useEffect(() => {
+    if (window.location.href.includes("checkout")) {
+      document.getElementById("toggle-nav-icon").style.visibility = "hidden";
+      document.getElementById("nav-links-desktop").style.visibility = "hidden";
+    }
+  }, []);
+
   return (
     <nav>
       <div className="nav-content">
@@ -107,7 +114,7 @@ const Nav = () => {
             <h1 id="company_title">PANTHER CITY LEATHER</h1>
           </Link>
 
-          <ul className="nav-links-desktop">
+          <ul className="nav-links-desktop" id="nav-links-desktop">
             <li>
               <Link
                 className="hover-underline"
