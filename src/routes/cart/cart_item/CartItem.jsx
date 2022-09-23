@@ -54,9 +54,8 @@ const CartItem = ({ item }) => {
     <div className="cart-item">
       {updating ? <Loader /> : null}
       <div className="cart-item-img-container">
-        <Link to={"/products/" + item.product_id}>
-          <img className="cart-item-img" src={item.image.url} alt={item.name} />
-        </Link>
+        <img className="cart-item-img" src={item.image.url} alt={item.name} />
+        <Link to={"/products/" + item.product_id}></Link>
       </div>
 
       <div className="cart-item-content">

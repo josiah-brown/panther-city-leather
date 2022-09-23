@@ -179,22 +179,30 @@ const PaymentForm = () => {
                       alt="Stripe Logo"
                     />
                     <div className="card_logos">
-                      <img src={VISA} className="card_logo" alt="Visa Logo" />
-                      <img
-                        src={MASTERCARD}
-                        className="card_logo"
-                        alt="Mastercard Logo"
-                      />
-                      <img
-                        src={DISCOVER}
-                        className="card_logo"
-                        alt="Discover Logo"
-                      />
-                      <img
-                        src={AMEX}
-                        className="card_logo"
-                        alt="American Express Logo"
-                      />
+                      <div className="card_logo_wrapper">
+                        <img src={VISA} className="card_logo" alt="Visa Logo" />
+                      </div>
+                      <div className="card_logo_wrapper">
+                        <img
+                          src={MASTERCARD}
+                          className="card_logo"
+                          alt="Mastercard Logo"
+                        />
+                      </div>
+                      <div className="card_logo_wrapper">
+                        <img
+                          src={DISCOVER}
+                          className="card_logo"
+                          alt="Discover Logo"
+                        />
+                      </div>
+                      <div className="card_logo_wrapper">
+                        <img
+                          src={AMEX}
+                          className="card_logo"
+                          alt="American Express Logo"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

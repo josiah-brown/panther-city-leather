@@ -3,12 +3,6 @@
 }
 
 #product-content {
-  .product-image {
-    width: 100%;
-    aspect-ratio: 1/1.2;
-    object-fit: cover;
-  }
-
   .right-side {
     width: 80%;
     display: flex;
@@ -83,6 +77,8 @@
         align-items: center;
         font-size: 1.2rem;
         height: 3rem;
+        width: -webkit-fit-content;
+        width: -moz-fit-content;
         width: fit-content;
         padding: 0 1rem;
         border: 1px solid black;

@@ -168,8 +168,15 @@
 
 .checkout_form .summary_container .summary_items .summary_item .summary_item_image {
   width: 20%;
-  aspect-ratio: 1/1;
   overflow: hidden;
+}
+
+@supports not (aspect-ratio: 1/1) {
+  .checkout_form .summary_container .summary_items .summary_item .summary_item_image {
+    height: 0;
+    position: relative;
+    padding-top: 20%;
+  }
 }
 
 .checkout_form .summary_container .summary_items .summary_item .summary_item_image img {
@@ -177,6 +184,15 @@
   aspect-ratio: 1/1;
   -o-object-fit: cover;
   object-fit: cover;
+}
+
+@supports not (aspect-ratio: 1/1) {
+  .checkout_form .summary_container .summary_items .summary_item .summary_item_image img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+  }
 }
 
 .checkout_form .summary_container .summary_items .summary_item .summary_item_text {
@@ -305,11 +321,32 @@
           flex-direction: row;
 }
 
-.checkout_form .card_container .payment_logos .card_logos .card_logo {
-  width: 1.4rem;
+.checkout_form .card_container .payment_logos .card_logos .card_logo_wrapper {
+  width: 1.6rem;
+}
+
+@supports not (aspect-ratio: 1/1) {
+  .checkout_form .card_container .payment_logos .card_logos .card_logo_wrapper {
+    height: 0;
+    padding-top: 1.6rem;
+    position: relative;
+  }
+}
+
+.checkout_form .card_container .payment_logos .card_logos .card_logo_wrapper .card_logo {
+  width: 100%;
   aspect-ratio: 1/1;
   -o-object-fit: contain;
   object-fit: contain;
+}
+
+@supports not (aspect-ratio: 1/1) {
+  .checkout_form .card_container .payment_logos .card_logos .card_logo_wrapper .card_logo {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
 }
 
 .error_wrapper {
@@ -424,12 +461,6 @@
   }
   .checkout_form .summary_container .summary_items {
     gap: 3rem;
-  }
-  .checkout_form .summary_container .summary_items .summary_item .summary_item_image img {
-    width: 100%;
-    aspect-ratio: 1/1;
-    -o-object-fit: cover;
-    object-fit: cover;
   }
   .checkout_form .summary_container .summary_items .summary_item .summary_item_text {
     width: 50%;

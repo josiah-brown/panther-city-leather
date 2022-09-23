@@ -2,13 +2,6 @@
   padding-top: 0;
 }
 
-#product-content .product-image {
-  width: 100%;
-  aspect-ratio: 1/1.2;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
 #product-content .right-side {
   width: 80%;
   display: -webkit-box;

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import "./image-slider.css";
 
 const ImageSlider = ({ slides, specificOption }) => {
   const [currSlideIndex, setCurrSlideIndex] = useState(0);
@@ -22,10 +23,6 @@ const ImageSlider = ({ slides, specificOption }) => {
     }
   }, [specificOption, slides]);
 
-  // useEffect(() => {
-  //   setImgChosen(null);
-  // }, [currSlideIndex]);
-
   const sliderStyles = {
     height: "100%",
     width: "100%",
@@ -33,11 +30,6 @@ const ImageSlider = ({ slides, specificOption }) => {
   };
 
   const imageStyles = {
-    height: "100%",
-    width: "100%",
-    backgroundPosition: "center",
-    aspectRatio: "1/1.2",
-    backgroundSize: "cover",
     backgroundImage: `url(${slides[currSlideIndex]["url"]})`,
   };
 
@@ -110,9 +102,11 @@ const ImageSlider = ({ slides, specificOption }) => {
       <div style={rightArrowStyles} onClick={moveRight}>
         <MdKeyboardArrowRight />
       </div>
-      <div style={imageStyles}></div>
+      <div className="slide_img_wrapper">
+        <img style={imageStyles} className="slide_img" />
+      </div>
       <div style={dotContainerStyles}>
-        {slides.map((slide, slideIndex) => (
+        {slides.map((_, slideIndex) => (
           <div
             key={slideIndex}
             style={

@@ -14,7 +14,6 @@ const Checkout = () => {
   // THERE IS A BUG ON RELOAD THAT DOESNT REFRESH DROP DOWNS
   useBeforeunload((e) => {
     e.preventDefault();
-    // console.log(e.target);
     navigate("/");
   });
 

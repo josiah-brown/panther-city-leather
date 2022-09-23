@@ -32,7 +32,9 @@ export default function About() {
             <h4 className="about_leather_subheader">Black, Chestnut</h4>
             <div className="about_leather_content">
               <div className="about_img_and_caption_wrapper">
-                <img src={IMG1} alt="" className="about_leather_img" />
+                <div className="about_leather_img_wrapper">
+                  <img src={IMG1} alt="" className="about_leather_img" />
+                </div>
                 <p className="img_caption">
                   {
                     "Wickett and Craig English Bridle in Medium Brown (not sold)"
@@ -51,7 +53,9 @@ export default function About() {
             <h4 className="about_leather_subheader">Buck Brown</h4>
             <div className="about_leather_content">
               <div className="about_img_and_caption_wrapper">
-                <img src={IMG2} alt="" className="about_leather_img" />
+                <div className="about_leather_img_wrapper">
+                  <img src={IMG2} alt="" className="about_leather_img" />
+                </div>
                 <p className="img_caption">
                   Wickett and Craig Harness in Buck Brown
                 </p>
