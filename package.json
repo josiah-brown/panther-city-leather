@@ -1,6 +1,6 @@
 {
-  "name": "isaac-leather-website",
-  "version": "0.1.0",
+  "name": "panther-city-leather",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@chec/commerce.js": "^2.8.0",

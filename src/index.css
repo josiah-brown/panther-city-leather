@@ -1,11 +1,6 @@
-/*========== FONTS ==========*/
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;600;700&display=swap");
 
-/*========== DEFAULT STYLES ==========*/
 :root {
-  --c-bg: #fff;
-  --c-text: #000;
-
   --font-main: "Montserrat", sans-serif;
 
   --trans-def: all 300ms ease;
@@ -22,24 +17,22 @@
 
 html,
 body {
-  color: var(--c-text);
-  background: var(--c-bg);
+  color: black;
+  background: white;
   font-family: var(--font-main);
   letter-spacing: 0.2rem;
 }
 
-/* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-/* Firefox */
+
 input[type="number"] {
   -moz-appearance: textfield;
 }
 
-/*========== UTILITY CLASSES ==========*/
 .page-wrapper {
   width: 100vw;
   position: relative;

@@ -22,8 +22,12 @@
           align-items: center;
 }
 
+#home-featured .content > h2 {
+  margin: 1rem 0 2rem;
+}
+
 #home-featured .content a {
-  margin: 3rem 0 2rem;
+  margin: 1rem 0 2rem;
 }
 
 #home-about {
@@ -39,6 +43,10 @@
           align-items: center;
 }
 
+#home-about h2 {
+  margin: 1rem 0;
+}
+
 #home-about p {
   text-align: left;
   letter-spacing: 0.05rem;
@@ -47,7 +55,7 @@
 }
 
 #home-about a {
-  margin: 1rem 0;
+  margin: 2em 0;
 }
 
 #home-shop {
@@ -82,7 +90,7 @@
 }
 
 #home-shop .home-shop-content h2 {
-  color: var(--c-bg);
+  color: white;
   font-weight: 200;
   text-align: center;
 }
@@ -95,6 +103,9 @@
   }
   #home-message {
     padding: 5rem 0;
+  }
+  #home-featured .content a {
+    margin: 3rem 0 2rem;
   }
   #home-about p {
     width: 50%;

@@ -42,10 +42,7 @@ const Home = () => {
           {productsLoaded ? (
             <div className="content">
               <h5 className="h-sub">FEATURED ITEMS</h5>
-              <br />
               <h2 className="h-main">LEATHER WALLETS</h2>
-              <br />
-              <br />
               <div className="featured-items">
                 <ProductsList />
               </div>
@@ -60,16 +57,13 @@ const Home = () => {
 
         <section id="home-about" className="page-section">
           <h5 className="h-sub">LEARN MORE</h5>
-          <br />
           <h2 className="h-main">ABOUT THE SHOP</h2>
-          <br />
           <p className="h-sub">
             My name is Isaac Brown, I am 16 years old and living in Fort Worth,
             Texas. I am striving to create simple, beautiful, high quality
             leather goods which will exceed expectations and last my customers a
             lifetime.
           </p>
-          <br />
           <Link to={"/about"} className="btn-def-black">
             LEARN MORE
           </Link>

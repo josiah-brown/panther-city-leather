@@ -39,7 +39,6 @@ const Product = () => {
           <div className="right-side">
             <ProductHeading product={currProduct} />
             <ProductDescription desc={currProduct.description} />
-            <br />
             <ProductForm
               product={currProduct}
               handleVariantImageChange={handleVariantImageChange}

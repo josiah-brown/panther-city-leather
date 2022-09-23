@@ -53,7 +53,7 @@
 
 #product-content .right-side .product-form {
   width: 100%;
-  margin: 0 auto;
+  margin: 1rem auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -91,7 +91,7 @@
 
 #product-content .right-side .product-form .product_learn_more_btn {
   width: 100%;
-  margin: -0.8rem 0 0rem;
+  margin: 0.2rem 0 1rem;
   font-size: 0.7rem;
   color: steelblue;
   text-align: left;
@@ -141,6 +141,7 @@
   width: 100%;
   font-family: var(--font-main);
   letter-spacing: 0.2rem;
+  margin-top: 1rem;
   cursor: pointer;
 }
 

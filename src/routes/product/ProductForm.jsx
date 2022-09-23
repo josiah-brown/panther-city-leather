@@ -122,11 +122,9 @@ const ProductForm = ({ product, handleVariantImageChange }) => {
           </div>
         );
       })}
-      <br />
       <Link to={"/about"} className="product_learn_more_btn">
         About the leather →
       </Link>
-      <br />
 
       <div className="qtyCounter h-sub">
         <span onClick={handleQtyChange} className="qty-change-btn">
@@ -151,8 +149,6 @@ const ProductForm = ({ product, handleVariantImageChange }) => {
         </span>
       </div>
       <div className="error">{errorMessage}</div>
-      <br />
-
       <button onClick={handleAddToCart} id="add-to-cart-btn">
         Add To Cart - ${getTotalPrice()} USD
       </button>
