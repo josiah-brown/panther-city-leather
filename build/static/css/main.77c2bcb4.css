@@ -73,7 +73,7 @@
   width: 100%;
 }
 #home-shop .home-shop-content h2 {
-  color: var(--c-bg);
+  color: white;
   font-weight: 200;
   text-align: center;
 }
@@ -101,7 +101,7 @@ button {
   border: none;
 }
 a {
-  color: var(--c-text);
+  color: black;
 }
 .nav-links-mobile {
   background: #fff;
@@ -158,7 +158,7 @@ a {
   display: none;
 }
 .nav-icon {
-  color: var(--c-text);
+  color: black;
   cursor: pointer;
   font-size: 2rem;
 }
@@ -179,7 +179,7 @@ a {
   width: 15vw;
 }
 #logo-icon img {
-  color: var(--c-text);
+  color: black;
   cursor: pointer;
   -o-object-fit: cover;
   object-fit: cover;
@@ -246,7 +246,7 @@ a {
     position: relative;
   }
   .nav-content .nav-content-center .nav-links-desktop li a:after {
-    background: var(--c-text);
+    background: black;
     bottom: -1rem;
     content: "";
     height: 0;
@@ -2021,9 +2021,9 @@ h1 {
 body,
 html {
   background: #fff;
-  background: var(--c-bg);
+  background: white;
   color: #000;
-  color: var(--c-text);
+  color: black;
   font-family: Montserrat, sans-serif;
   font-family: var(--font-main);
   letter-spacing: 0.2rem;
