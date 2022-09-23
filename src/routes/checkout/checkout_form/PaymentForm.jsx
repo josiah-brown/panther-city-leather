@@ -130,6 +130,7 @@ const PaymentForm = () => {
       updateOrderInfo("confirmed_order", incomingOrder);
       refreshCart();
       updateOrderInfo("curr_step", "CONFIRM");
+      window.scrollTo(0, 0);
     } catch (err) {
       console.error("There was an error capturing checkout.", err);
       updateOrderInfo("order_error", err);

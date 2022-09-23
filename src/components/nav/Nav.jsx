@@ -12,7 +12,6 @@ const Nav = () => {
   const [currPath, setCurrPath] = useState("");
 
   useEffect(() => {
-    console.log(window.location.href);
     setCurrPath(window.location.href);
   }, []);
 
