@@ -23,13 +23,22 @@ const ImageSlider = ({ slides, specificOption }) => {
     }
   }, [specificOption, slides]);
 
+  // useEffect(() => {
+  //   setImgChosen(null);
+  // }, [currSlideIndex]);
+
   const sliderStyles = {
-    height: "100%",
-    width: "100%",
-    position: "relative",
+    // height: "100%",
+    // width: "100%",
+    // position: "relative",
   };
 
   const imageStyles = {
+    // height: "100%",
+    // width: "100%",
+    // backgroundPosition: "center",
+    // aspectRatio: "1/1.2",
+    // backgroundSize: "cover",
     backgroundImage: `url(${slides[currSlideIndex]["url"]})`,
   };
 
@@ -95,7 +104,7 @@ const ImageSlider = ({ slides, specificOption }) => {
   };
 
   return (
-    <div style={sliderStyles}>
+    <div style={sliderStyles} className="slider">
       <div style={leftArrowStyles} onClick={moveLeft}>
         <MdKeyboardArrowLeft />
       </div>
@@ -103,7 +112,7 @@ const ImageSlider = ({ slides, specificOption }) => {
         <MdKeyboardArrowRight />
       </div>
       <div className="slide_img_wrapper">
-        <img style={imageStyles} className="slide_img" alt="product" />
+        <div style={imageStyles} className="slide_img"></div>
       </div>
       <div style={dotContainerStyles}>
         {slides.map((_, slideIndex) => (
