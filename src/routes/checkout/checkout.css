@@ -176,7 +176,7 @@
   width: 100%;
   aspect-ratio: 1/1;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .checkout_form .summary_container .summary_items .summary_item .summary_item_text {
@@ -309,7 +309,7 @@
   width: 1.4rem;
   aspect-ratio: 1/1;
   -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 
 .error_wrapper {
@@ -429,7 +429,7 @@
     width: 100%;
     aspect-ratio: 1/1;
     -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
   }
   .checkout_form .summary_container .summary_items .summary_item .summary_item_text {
     width: 50%;

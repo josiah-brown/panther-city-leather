@@ -21,11 +21,13 @@ const ProductItem = (props) => {
         {imageLoading ? (
           <ImageLoader />
         ) : (
-          <img
-            className="product__image"
-            src={product.image?.url}
-            alt={product.name}
-          />
+          <div className="product__image__wrapper">
+            <img
+              className="product__image"
+              src={product.image?.url}
+              alt={product.name}
+            />
+          </div>
         )}
 
         <div className="product__info">

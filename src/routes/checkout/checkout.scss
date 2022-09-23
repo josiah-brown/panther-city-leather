@@ -124,6 +124,7 @@
           img {
             width: 100%;
             aspect-ratio: 1/1;
+            -o-object-fit: cover;
             object-fit: cover;
           }
         }
@@ -139,24 +140,32 @@
           .summary_item_name {
             font-size: 0.8rem;
             font-weight: 500;
+            width: -webkit-fit-content;
+            width: -moz-fit-content;
             width: fit-content;
             margin: -0.2rem 0 0.2rem;
           }
 
           .summary_item_option {
             font-size: 0.6rem;
+            width: -webkit-fit-content;
+            width: -moz-fit-content;
             width: fit-content;
             font-weight: 300;
           }
 
           .summary_item_qty {
             font-size: 0.6rem;
+            width: -webkit-fit-content;
+            width: -moz-fit-content;
             width: fit-content;
             font-weight: 300;
           }
         }
 
         .summary_item_price {
+          width: -webkit-fit-content;
+          width: -moz-fit-content;
           width: fit-content;
           text-align: right;
           font-size: 0.7rem;
@@ -225,6 +234,7 @@
         .card_logo {
           width: 1.4rem;
           aspect-ratio: 1/1;
+          -o-object-fit: contain;
           object-fit: contain;
         }
       }
@@ -345,6 +355,7 @@
             img {
               width: 100%;
               aspect-ratio: 1/1;
+              -o-object-fit: cover;
               object-fit: cover;
             }
           }

@@ -63,6 +63,8 @@ input[type="number"] {
   letter-spacing: 0.2rem;
   font-size: 0.8rem;
   font-weight: 200;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   padding: 1rem 1.3rem;
 }
@@ -80,6 +82,8 @@ input[type="number"] {
   letter-spacing: 0.2rem;
   font-size: 0.8rem;
   font-weight: 200;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   padding: 1rem 1.3rem;
 }
