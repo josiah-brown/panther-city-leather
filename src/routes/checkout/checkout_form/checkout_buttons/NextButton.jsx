@@ -27,6 +27,7 @@ const NextButton = ({ validForm }) => {
           console.error("There was an error updating the checkout step.");
           break;
       }
+      window.scrollTo(0, 0);
     };
 
     if (validForm) {

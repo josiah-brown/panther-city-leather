@@ -49,6 +49,19 @@ const PaymentForm = () => {
       return;
     }
 
+    try {
+      let emailR = document.getElementById("email_receipt").value;
+      let emailC = document.getElementById("email_confirm").value;
+
+      if (emailR !== emailC) {
+        setErrorMessage("Emails do not match");
+        setSubmitting(false);
+        return;
+      }
+    } catch (err) {
+      console.error("There was an error with the emails", err);
+    }
+
     const cardElement = elements.getElement(CardElement);
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -147,6 +160,7 @@ const PaymentForm = () => {
                   <label className="payment_label">EMAIL</label>
                   <input
                     required
+                    id="email_receipt"
                     placeholder="Email (to send receipt)"
                     className="payment_email"
                     value={email}
@@ -156,6 +170,7 @@ const PaymentForm = () => {
                   <label className="payment_label">CONFIRM EMAIL</label>
                   <input
                     required
+                    id="email_confirm"
                     placeholder="Confirm email"
                     className="payment_email"
                     value={confirmEmail}
@@ -168,9 +183,6 @@ const PaymentForm = () => {
                     onClick={resetErrorMessage}
                   >
                     <CardElement onFocus={resetErrorMessage} />
-                    {errorMessage && (
-                      <div className="error">{errorMessage}</div>
-                    )}
                   </div>
                   <div className="payment_logos">
                     <img
@@ -205,6 +217,7 @@ const PaymentForm = () => {
                       </div>
                     </div>
                   </div>
+                  {errorMessage && <div className="error">{errorMessage}</div>}
                 </div>
 
                 <div className="checkout_btn_container">
