@@ -107,6 +107,29 @@
       margin: 0 0 1.5rem;
     }
 
+    .shipping_to_wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      font-size: 0.8rem;
+      margin: 0rem 0 2rem;
+      padding: 1rem 0;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+
+      & > * + * {
+        margin-top: 0.3rem;
+      }
+
+      .shipping_to_header {
+        font-weight: 600;
+      }
+
+      .shipping_to_content {
+        text-align: left;
+      }
+    }
+
     .summary_items {
       display: flex;
       flex-direction: column;
@@ -386,6 +409,11 @@
       .summary_heading {
         font-size: 1.4rem;
         margin: 1rem 0 2.5rem;
+      }
+
+      .shipping_to_wrapper {
+        font-size: 1rem;
+        margin: 0rem 0 3rem;
       }
 
       .summary_items {

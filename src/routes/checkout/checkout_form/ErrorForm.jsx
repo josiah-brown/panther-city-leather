@@ -4,9 +4,11 @@ import { useCheckoutDispatch } from "../../../context/CheckoutContext";
 import { useCartDispatch } from "../../../context/CartContext";
 import { Link } from "react-router-dom";
 
-const ErrorForm = () => {
+const ErrorForm = ({ customError }) => {
   const checkout = useCheckoutState();
-  const error = checkout.order_error.data.error.message;
+  const error = customError
+    ? customError
+    : checkout.order_error.data.error.message;
   const { resetCheckoutState } = useCheckoutDispatch();
   const { refreshCart } = useCartDispatch();
 

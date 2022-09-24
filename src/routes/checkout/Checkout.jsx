@@ -3,27 +3,36 @@ import "./checkout.css";
 import Nav from "../../components/nav/Nav";
 import Footer from "../../components/footer/Footer";
 import CheckoutForm from "./checkout_form/CheckoutForm";
-import { useCheckoutDispatch } from "../../context/CheckoutContext";
+// import {
+//   useCheckoutState,
+//   useCheckoutDispatch,
+// } from "../../context/CheckoutContext";
 import { useBeforeunload } from "react-beforeunload";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import ErrorForm from "./checkout_form/ErrorForm";
+// import { BiWindowAlt } from "react-icons/bi";
 
 const Checkout = () => {
-  const { resetCheckoutState } = useCheckoutDispatch();
-  const navigate = useNavigate();
+  // const { resetOrderData, updateOrderInfo } = useCheckoutDispatch();
+  // const navigate = useNavigate();
+  // const checkout = useCheckoutState();
 
-  // THERE IS A BUG ON RELOAD THAT DOESNT REFRESH DROP DOWNS
   useBeforeunload((e) => {
     e.preventDefault();
-    navigate("/");
+    window.sessionStorage.setItem("is_reloaded", "true");
   });
 
-  // This resets the checkout data if the user leaves in the middle of checkout
-  useEffect(() => {
-    return () => {
-      console.log("Exit checkout effect called");
-      resetCheckoutState();
-    };
-  }, [resetCheckoutState]);
+  // // This resets the checkout data if the user leaves in the middle of checkout
+  // useEffect(() => {
+  //   console.log(
+  //     "Mounting checkout...",
+  //     window.sessionStorage.getItem("is_reloaded")
+  //   );
+
+  //   return () => {
+  //     console.log("Unmounting checkout...");
+  //   };
+  // }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -32,7 +41,15 @@ const Checkout = () => {
   return (
     <main className="page-wrapper">
       <Nav />
-      <CheckoutForm />
+      {window.sessionStorage.getItem("is_reloaded") === "true" ? (
+        <ErrorForm
+          customError={
+            "Page refreshed during checkout. Return home and try again."
+          }
+        />
+      ) : (
+        <CheckoutForm />
+      )}
       <Footer />
     </main>
   );

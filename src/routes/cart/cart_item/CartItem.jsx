@@ -52,7 +52,7 @@ const CartItem = ({ item }) => {
 
   return (
     <div className="cart-item">
-      {updating ? <Loader /> : null}
+      {updating ? <Loader m={"Updating Cart..."} /> : null}
       <div className="cart-item-img-container">
         <img className="cart-item-img" src={item.image.url} alt={item.name} />
         <Link to={"/products/" + item.product_id}></Link>

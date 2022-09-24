@@ -11,6 +11,14 @@ const OrderSummary = () => {
       <div className="summary_heading">
         <h2>ORDER SUMMARY</h2>
       </div>
+      <div className="shipping_to_wrapper">
+        <div className="shipping_to_header">SHIPPING TO...</div>
+        <div className="shipping_to_content">
+          <p>{checkout.order_data.shipping.name_s}</p>
+          <p>{checkout.order_data.shipping.street_s}</p>
+          <p>{`${checkout.order_data.shipping.city_s}, ${checkout.order_data.shipping.state_s}, ${checkout.order_data.shipping.country_s}, ${checkout.order_data.shipping.zip_code_s}`}</p>
+        </div>
+      </div>
       <div className="summary_items">
         {Object.keys(items).map((item) => {
           return (
@@ -42,6 +50,19 @@ const OrderSummary = () => {
         })}
       </div>
       <div className="summary_footer">
+        <div className="h-sub">
+          FREE SHIPPING
+          <span>
+            {" "}
+            <span> </span>
+          </span>{" "}
+          -
+          <span>
+            {" "}
+            <span> </span>
+          </span>{" "}
+          $0.00
+        </div>
         <div className="summary_spacer"></div>
         <span>TOTAL: </span>
         <span>{checkout.checkout_token.live.total.formatted_with_symbol}</span>

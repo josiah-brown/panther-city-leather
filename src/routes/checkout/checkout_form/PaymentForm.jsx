@@ -146,7 +146,7 @@ const PaymentForm = () => {
 
   return (
     <React.Fragment>
-      {submitting && <Loader />}
+      {submitting && <Loader m={"Submitting order. Do not refresh page."} />}
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
           {({ elements, stripe }) => {

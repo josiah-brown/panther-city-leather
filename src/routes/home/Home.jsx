@@ -6,6 +6,7 @@ import ProductsList from "../products/products_list/ProductsList";
 import Footer from "../../components/footer/Footer";
 import { useState } from "react";
 import { useProductsState } from "../../context/ProductsContext";
+import { useCheckoutDispatch } from "../../context/CheckoutContext";
 import SectionLoader from "../../components/section_loader/SectionLoader";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -13,6 +14,12 @@ import { Link } from "react-router-dom";
 const Home = () => {
   const [productsLoaded, setProductsLoaded] = useState(false);
   const productsState = useProductsState();
+  const { resetOrderData } = useCheckoutDispatch();
+
+  useEffect(() => {
+    resetOrderData();
+    window.sessionStorage.setItem("is_reloaded", "false");
+  }, [resetOrderData]);
 
   useEffect(() => {
     if (!productsState.loading) {
@@ -34,7 +41,7 @@ const Home = () => {
 
         <section className="page-section" id="home-message">
           <div className="wrapper">
-            <p className="h-main">WELCOME TO PANTHER CITY LEATHER</p>
+            <p className="h-main">FREE SHIPPING ON ALL ORDERS!</p>
           </div>
         </section>
 

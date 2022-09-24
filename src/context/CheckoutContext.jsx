@@ -4,7 +4,7 @@ import {
   useContext,
   useEffect,
   useReducer,
-  useRef,
+  // useRef,
 } from "react";
 import commerce from "../lib/commerce";
 
@@ -23,6 +23,7 @@ const ACTIONS = {
   SET_SHIPPING_OPTION: "SET_SHIPPING_OPTION",
   UPDATE_ORDER_INFO: "UPDATE_ORDER_INFO",
   RESET_CHECKOUT_STATE: "RESET_CHECKOUT_STATE",
+  RESET_ORDER_DATA: "RESET_ORDER_DATA",
 };
 
 export const STEPS = {
@@ -63,11 +64,127 @@ const initialState = {
     },
     fulfillment: {
       shipping_options: [],
-      shipping_countries: {},
-      shipping_subdivisions: {},
+      shipping_countries: { US: "United States" },
+      shipping_subdivisions: {
+        AK: "Alaska",
+        AL: "Alabama",
+        AR: "Arkansas",
+        AS: "American Samoa",
+        AZ: "Arizona",
+        CA: "California",
+        CO: "Colorado",
+        CT: "Connecticut",
+        DC: "District of Columbia",
+        DE: "Delaware",
+        FL: "Florida",
+        GA: "Georgia",
+        GU: "Guam",
+        HI: "Hawaii",
+        IA: "Iowa",
+        ID: "Idaho",
+        IL: "Illinois",
+        IN: "Indiana",
+        KS: "Kansas",
+        KY: "Kentucky",
+        LA: "Louisiana",
+        MA: "Massachusetts",
+        MD: "Maryland",
+        ME: "Maine",
+        MI: "Michigan",
+        MN: "Minnesota",
+        MO: "Missouri",
+        MP: "Northern Mariana Islands",
+        MS: "Mississippi",
+        MT: "Montana",
+        NC: "North Carolina",
+        ND: "North Dakota",
+        NE: "Nebraska",
+        NH: "New Hampshire",
+        NJ: "New Jersey",
+        NM: "New Mexico",
+        NV: "Nevada",
+        NY: "New York",
+        OH: "Ohio",
+        OK: "Oklahoma",
+        OR: "Oregon",
+        PA: "Pennsylvania",
+        PR: "Puerto Rico",
+        RI: "Rhode Island",
+        SC: "South Carolina",
+        SD: "South Dakota",
+        TN: "Tennessee",
+        TX: "Texas",
+        UM: "United States Minor Outlying Islands",
+        UT: "Utah",
+        VA: "Virginia",
+        VI: "Virgin Islands, U.S.",
+        VT: "Vermont",
+        WA: "Washington",
+        WI: "Wisconsin",
+        WV: "West Virginia",
+        WY: "Wyoming",
+      },
       shipping_option: "",
-      billing_countries: {},
-      billing_states: {},
+      billing_countries: { US: "United States" },
+      billing_states: {
+        AK: "Alaska",
+        AL: "Alabama",
+        AR: "Arkansas",
+        AS: "American Samoa",
+        AZ: "Arizona",
+        CA: "California",
+        CO: "Colorado",
+        CT: "Connecticut",
+        DC: "District of Columbia",
+        DE: "Delaware",
+        FL: "Florida",
+        GA: "Georgia",
+        GU: "Guam",
+        HI: "Hawaii",
+        IA: "Iowa",
+        ID: "Idaho",
+        IL: "Illinois",
+        IN: "Indiana",
+        KS: "Kansas",
+        KY: "Kentucky",
+        LA: "Louisiana",
+        MA: "Massachusetts",
+        MD: "Maryland",
+        ME: "Maine",
+        MI: "Michigan",
+        MN: "Minnesota",
+        MO: "Missouri",
+        MP: "Northern Mariana Islands",
+        MS: "Mississippi",
+        MT: "Montana",
+        NC: "North Carolina",
+        ND: "North Dakota",
+        NE: "Nebraska",
+        NH: "New Hampshire",
+        NJ: "New Jersey",
+        NM: "New Mexico",
+        NV: "Nevada",
+        NY: "New York",
+        OH: "Ohio",
+        OK: "Oklahoma",
+        OR: "Oregon",
+        PA: "Pennsylvania",
+        PR: "Puerto Rico",
+        RI: "Rhode Island",
+        SC: "South Carolina",
+        SD: "South Dakota",
+        TN: "Tennessee",
+        TX: "Texas",
+        UM: "United States Minor Outlying Islands",
+        UT: "Utah",
+        VA: "Virginia",
+        VI: "Virgin Islands, U.S.",
+        VT: "Vermont",
+        WA: "Washington",
+        WI: "Wisconsin",
+        WV: "West Virginia",
+        WY: "Wyoming",
+      },
     },
     payment: {
       gateway: "",
@@ -161,6 +278,13 @@ const reducer = (state, action) => {
     case ACTIONS.RESET_CHECKOUT_STATE:
       return initialState;
 
+    case ACTIONS.RESET_ORDER_DATA:
+      console.log("Resetting order data...");
+      return {
+        checkout_token: state.checkout_token,
+        ...initialState,
+      };
+
     default:
       throw new Error(`Unknown action: ${action.type}`);
   }
@@ -169,7 +293,7 @@ const reducer = (state, action) => {
 export const CheckoutProvider = ({ children }) => {
   const cart = useCartState();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const isMounted = useRef(false);
+  // const isMounted = useRef(false);
 
   const setCheckoutToken = (token) =>
     dispatch({ type: ACTIONS.SET_TOKEN, token });
@@ -190,6 +314,13 @@ export const CheckoutProvider = ({ children }) => {
     });
   }, []);
 
+  const resetOrderData = useCallback(() => {
+    dispatch({
+      type: ACTIONS.RESET_ORDER_DATA,
+      payload: null,
+    });
+  }, []);
+
   const generateNewToken = useCallback(() => {
     console.log("Generating new token...");
     commerce.checkout
@@ -203,100 +334,106 @@ export const CheckoutProvider = ({ children }) => {
   }, [cart]);
 
   // Anytime the checkout token changes, the shipping countries update
-  useEffect(() => {
-    if (isMounted.current && state.checkout_token.id) {
-      console.log("Updating shipping countries...");
-      commerce.services
-        .localeListShippingCountries(state.checkout_token.id)
-        .then((countries_) => {
-          updateOrderInfo("shipping_countries", countries_.countries);
-          updateOrderInfo("country_s", "US");
-        })
-        .catch((err) => {
-          console.log(
-            "There was an error setting the shipping countries.",
-            err
-          );
-        });
-    } else {
-      isMounted.current = true;
-    }
-  }, [state.checkout_token.id, updateOrderInfo]);
+  // useEffect(() => {
+  //   if (isMounted.current && state.checkout_token.id) {
+  //     console.log("Updating shipping countries...");
+  //     commerce.services
+  //       .localeListShippingCountries(state.checkout_token.id)
+  //       .then((countries_) => {
+  //         console.log(countries_);
+  //         updateOrderInfo("shipping_countries", countries_.countries);
+  //         updateOrderInfo("country_s", "US");
+  //       })
+  //       .catch((err) => {
+  //         console.log(
+  //           "There was an error setting the shipping countries.",
+  //           err
+  //         );
+  //       });
+  //   } else {
+  //     isMounted.current = true;
+  //   }
+  // }, [state.checkout_token.id, updateOrderInfo]);
 
   // Update the billing countries on new token generation
-  useEffect(() => {
-    if (isMounted.current && state.checkout_token.id) {
-      console.log("Updating billing countries...");
-      commerce.services
-        .localeListCountries()
-        .then((c) => {
-          updateOrderInfo("billing_countries", c.countries);
-          updateOrderInfo("country_b", "US");
-        })
-        .catch((err) => {
-          console.error("There was an error getting all countries.", err);
-        });
-    }
-  }, [state.checkout_token.id, updateOrderInfo]);
+  // useEffect(() => {
+  //   if (isMounted.current && state.checkout_token.id) {
+  //     console.log("Updating billing countries...");
+  //     commerce.services
+  //       .localeListCountries()
+  //       .then((c) => {
+  //         updateOrderInfo("billing_countries", c.countries);
+  //         updateOrderInfo("country_b", "US");
+  //       })
+  //       .catch((err) => {
+  //         console.error("There was an error getting all countries.", err);
+  //       });
+  //   }
+  // }, [state.checkout_token.id, updateOrderInfo]);
 
   // Update the shipping subdivisions on shipping country change
-  useEffect(() => {
-    const country = state.order_data.shipping.country_s;
-    if (country !== "") {
-      console.log("Updating shipping states...");
-      commerce.services
-        .localeListShippingSubdivisions(state.checkout_token.id, country)
-        .then((subs_) => {
-          updateOrderInfo("shipping_subdivisions", subs_.subdivisions);
-          updateOrderInfo("state_s", Object.keys(subs_.subdivisions)[0]);
-        })
-        .catch((err) => {
-          console.error(
-            "There was an error fetching the shipping subdivisions",
-            err
-          );
-        });
-    }
-  }, [
-    state.order_data.shipping.country_s,
-    state.checkout_token.id,
-    updateOrderInfo,
-  ]);
+  // useEffect(() => {
+  //   const country = state.order_data.shipping.country_s;
+  //   if (country !== "") {
+  //     console.log("Updating shipping states...");
+  //     commerce.services
+  //       .localeListShippingSubdivisions(state.checkout_token.id, country)
+  //       .then((subs_) => {
+  //         console.log(subs_);
+  //         updateOrderInfo("shipping_subdivisions", subs_.subdivisions);
+  //         updateOrderInfo("state_s", Object.keys(subs_.subdivisions)[0]);
+  //       })
+  //       .catch((err) => {
+  //         console.error(
+  //           "There was an error fetching the shipping subdivisions",
+  //           err
+  //         );
+  //       });
+  //   }
+  // }, [
+  //   state.order_data.shipping.country_s,
+  //   state.checkout_token.id,
+  //   updateOrderInfo,
+  // ]);
 
   // Update the billing subdivisions on billing country change
-  useEffect(() => {
-    let country = state.order_data.billing.country_b;
-    if (country !== "") {
-      console.log("Updating billing states...");
-      commerce.services
-        .localeListSubdivisions(country)
-        .then((subs) => {
-          updateOrderInfo("billing_states", subs.subdivisions);
-          updateOrderInfo("state_b", Object.keys(subs.subdivisions)[0]);
-        })
-        .catch((err) => {
-          console.error(
-            "There was an error fetching the billing subdivisions.",
-            err
-          );
-        });
-    }
-  }, [
-    state.checkout_token.id,
-    state.order_data.billing.country_b,
-    updateOrderInfo,
-  ]);
+  // useEffect(() => {
+  //   let country = state.order_data.billing.country_b;
+  //   if (country !== "") {
+  //     console.log("Updating billing states...");
+  //     commerce.services
+  //       .localeListSubdivisions(country)
+  //       .then((subs) => {
+  //         updateOrderInfo("billing_states", subs.subdivisions);
+  //         updateOrderInfo("state_b", Object.keys(subs.subdivisions)[0]);
+  //       })
+  //       .catch((err) => {
+  //         console.error(
+  //           "There was an error fetching the billing subdivisions.",
+  //           err
+  //         );
+  //       });
+  //   }
+  // }, [
+  //   state.checkout_token.id,
+  //   state.order_data.billing.country_b,
+  //   updateOrderInfo,
+  // ]);
 
   // Anytime the shipping subdivisons change, the shipping options update
   useEffect(() => {
-    const province = state.order_data.shipping.state_s;
-    if (province !== "") {
+    // const province = state.order_data.shipping.state_s;
+    if (cart.line_items.length && state.checkout_token.id) {
+      console.log("Updating shipping options");
       commerce.checkout
         .getShippingOptions(state.checkout_token.id, {
-          country: state.order_data.shipping.country_s,
-          region: province,
+          // country: state.order_data.shipping.country_s,
+          // region: province,
+          country: "US",
+          region: "TX",
         })
         .then((options) => {
+          console.log(options);
           const shipOption = options[0] || null;
           dispatch({ type: ACTIONS.SET_SHIPPING_OPTIONS, options });
           dispatch({ type: ACTIONS.SET_SHIPPING_OPTION, shipOption });
@@ -307,8 +444,9 @@ export const CheckoutProvider = ({ children }) => {
     }
   }, [
     state.checkout_token.id,
-    state.order_data.shipping.state_s,
-    state.order_data.shipping.country_s,
+    cart.line_items.length,
+    // state.order_data.shipping.state_s,
+    // state.order_data.shipping.country_s,
   ]);
 
   // Once the checkout token has loaded, display the checkout form
@@ -325,7 +463,12 @@ export const CheckoutProvider = ({ children }) => {
 
   return (
     <CheckoutDispatchContext.Provider
-      value={{ updateOrderInfo, resetCheckoutState, generateNewToken }}
+      value={{
+        updateOrderInfo,
+        resetCheckoutState,
+        generateNewToken,
+        resetOrderData,
+      }}
     >
       <CheckoutStateContext.Provider value={state}>
         {children}

@@ -21,6 +21,18 @@
     transition: opacity 0.3s;
     z-index: 1000;
   }
+
+  .loader_message {
+    position: fixed;
+    top: 65%;
+    left: calc(50% - 4rem);
+    color: white;
+    width: 8rem;
+    text-align: center;
+    z-index: 1000;
+    font-size: 1rem;
+    font-weight: 600;
+  }
 }
 
 @keyframes load-animation {
