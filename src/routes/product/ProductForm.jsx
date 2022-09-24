@@ -96,7 +96,7 @@ const ProductForm = ({ product, handleVariantImageChange }) => {
 
   return (
     <form className="product-form">
-      {cartIsUpdating ? <Loader /> : null}
+      {cartIsUpdating ? <Loader m={"Adding to cart..."} /> : null}
       {product.variant_groups.map((group) => {
         return (
           <div key={group.id + "container"} className="product-form-row">
