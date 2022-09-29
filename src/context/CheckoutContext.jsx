@@ -279,7 +279,6 @@ const reducer = (state, action) => {
       return initialState;
 
     case ACTIONS.RESET_ORDER_DATA:
-      console.log("Resetting order data...");
       return {
         checkout_token: state.checkout_token,
         ...initialState,
@@ -322,7 +321,6 @@ export const CheckoutProvider = ({ children }) => {
   }, []);
 
   const generateNewToken = useCallback(() => {
-    console.log("Generating new token...");
     commerce.checkout
       .generateToken(cart.id, { type: "cart" })
       .then((token) => {
@@ -424,7 +422,6 @@ export const CheckoutProvider = ({ children }) => {
   useEffect(() => {
     // const province = state.order_data.shipping.state_s;
     if (cart.line_items.length && state.checkout_token.id) {
-      console.log("Updating shipping options");
       commerce.checkout
         .getShippingOptions(state.checkout_token.id, {
           // country: state.order_data.shipping.country_s,
@@ -433,7 +430,6 @@ export const CheckoutProvider = ({ children }) => {
           region: "TX",
         })
         .then((options) => {
-          console.log(options);
           const shipOption = options[0] || null;
           dispatch({ type: ACTIONS.SET_SHIPPING_OPTIONS, options });
           dispatch({ type: ACTIONS.SET_SHIPPING_OPTION, shipOption });

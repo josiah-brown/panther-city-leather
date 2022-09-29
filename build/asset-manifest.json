@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.77c2bcb4.css",
-    "main.js": "/static/js/main.581b7f7d.js",
+    "main.css": "/static/css/main.91831f69.css",
+    "main.js": "/static/js/main.58c9229b.js",
     "static/media/glasses_web.jpeg": "/static/media/glasses_web.4fd083107b4e8dadd5c3.jpeg",
     "static/media/hero_notebook_web.jpeg": "/static/media/hero_notebook_web.33dd572c1eb80b398ec9.jpeg",
     "static/media/hero_bag_web.jpeg": "/static/media/hero_bag_web.7469fcbc4b9fea78a224.jpeg",
@@ -15,11 +15,11 @@
     "static/media/panther.svg": "/static/media/panther.df1505ea369b00c495f51cb89579504f.svg",
     "index.html": "/index.html",
     "static/media/mc.svg": "/static/media/mc.b720e3b5a9bf9bce7ef42d6682f56356.svg",
-    "main.77c2bcb4.css.map": "/static/css/main.77c2bcb4.css.map",
-    "main.581b7f7d.js.map": "/static/js/main.581b7f7d.js.map"
+    "main.91831f69.css.map": "/static/css/main.91831f69.css.map",
+    "main.58c9229b.js.map": "/static/js/main.58c9229b.js.map"
   },
   "entrypoints": [
-    "static/css/main.77c2bcb4.css",
-    "static/js/main.581b7f7d.js"
+    "static/css/main.91831f69.css",
+    "static/js/main.58c9229b.js"
   ]
 }

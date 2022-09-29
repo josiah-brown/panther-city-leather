@@ -30,7 +30,6 @@ const Contact = () => {
         return false;
       }
     }
-    console.log("Form validated");
     return true;
   };
 

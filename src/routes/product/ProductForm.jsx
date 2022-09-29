@@ -35,7 +35,6 @@ const ProductForm = ({ product, handleVariantImageChange }) => {
 
   // Updates 'qty' state when changed via button or input
   const handleQtyChange = (e) => {
-    console.log(e.target.value, typeof e.target.value);
     if (e.target.tagName === "INPUT") {
       let newQty = e.target.value;
       if (Number(newQty) > MAX_CART_QTY) {
