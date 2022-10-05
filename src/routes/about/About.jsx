@@ -6,6 +6,7 @@ import IMG2 from "../../assets/harness_buck_brown.jpeg";
 import IMG3 from "../../assets/contact-img.jpg";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 export default function About() {
   useEffect(() => {
@@ -15,6 +16,18 @@ export default function About() {
   return (
     <main className="page-wrapper">
       <Nav />
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>About The Shop - Panther City Leather</title>
+        <meta
+          name="keywords"
+          content="leather, fort worth, handmade, about, maker, leather wallet, texas, panther city leather, isaac brown"
+        />
+        <meta
+          name="description"
+          content="Panther City Leather specializes in high-quality, made-to-last, handmade leather goods. All products are made to order in Fort Worth, Texas by Isaac Brown."
+        />
+      </Helmet>
       <div className="about_section">
         <h2 className="about_section_header">ABOUT THE LEATHER</h2>
         <p className="about_p">
