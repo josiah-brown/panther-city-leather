@@ -13,7 +13,7 @@
     "card-validator": "^8.1.1",
     "formik": "^2.2.9",
     "normalize.css": "^8.0.1",
-    "nth-check": "2.0.1",
+    "nth-check": ">=2.0.1",
     "prop-types": "^15.8.1",
     "react": "^18.1.0",
     "react-beforeunload": "^2.5.3",
