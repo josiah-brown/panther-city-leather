@@ -48,8 +48,8 @@ const Home = () => {
         <section className="page-section" id="home-featured">
           {productsLoaded ? (
             <div className="content">
-              <h5 className="h-sub">FEATURED ITEMS</h5>
-              <h2 className="h-main">LEATHER WALLETS</h2>
+              {/* <h5 className="h-sub">FEATURED</h5> */}
+              <h2 className="h-main">FEATURED PRODUCTS</h2>
               <div className="featured-items">
                 <ProductsList />
               </div>
