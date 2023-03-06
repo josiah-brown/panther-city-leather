@@ -24,3 +24,5 @@ yarn-debug.log*
 yarn-error.log*
 
 /src/assets/testing_only
+
+/build

@@ -1,4 +1,4 @@
-import HOME from "../../assets/hero_bag_web.jpeg";
+import HOME from "../../assets/hero_purse_min.jpeg";
 import SHOP_IMG from "../../assets/hero_notebook_web.jpeg";
 import "./home.css";
 import Nav from "../../components/nav/Nav";
