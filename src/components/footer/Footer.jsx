@@ -10,10 +10,18 @@ const Footer = () => {
   return (
     <footer>
       <div className="social-icons">
-        <a href="/social/empty">
+        <a
+          href="https://www.instagram.com/panthercityleather_/"
+          target="_blank"
+          rel="noreferrer"
+        >
           <AiOutlineInstagram />
         </a>
-        <a href="/social/empty">
+        <a
+          href="https://www.instagram.com/panthercityleather_/"
+          target="_blank"
+          rel="noreferrer"
+        >
           <AiFillFacebook />
         </a>
         <a href="/social/empty">
