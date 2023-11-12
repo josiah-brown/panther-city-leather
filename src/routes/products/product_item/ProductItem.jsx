@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./product-item.css";
@@ -6,18 +6,20 @@ import ImageLoader from "../../../components/image_loader/ImageLoader";
 
 const ProductItem = (props) => {
   const product = props.product;
-  // console.log(props);
+  const [imgURL, setImgURL] = useState(null);
+
+  useEffect(() => {
+    if (product.image?.url) {
+      setImgURL(product.image.url);
+    }
+  }, [product.image?.url]);
 
   return (
     <div className="product__card">
       <Link to={"/products/" + product.id}>
-        {product.image?.url ? (
+        {imgURL ? (
           <div className="product__image__wrapper">
-            <img
-              className="product__image"
-              src={product.image?.url}
-              alt={product?.name}
-            />
+            <img className="product__image" src={imgURL} alt={product?.name} />
           </div>
         ) : (
           <ImageLoader />
