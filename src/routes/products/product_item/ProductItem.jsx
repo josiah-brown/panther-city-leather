@@ -6,7 +6,7 @@ import ImageLoader from "../../../components/image_loader/ImageLoader";
 
 const ProductItem = (props) => {
   const product = props.product;
-  console.log(props);
+  // console.log(props);
 
   return (
     <div className="product__card">
@@ -16,7 +16,7 @@ const ProductItem = (props) => {
             <img
               className="product__image"
               src={product.image?.url}
-              alt={product.name}
+              alt={product?.name}
             />
           </div>
         ) : (
