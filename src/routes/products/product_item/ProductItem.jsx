@@ -7,10 +7,15 @@ import ImageLoader from "../../../components/image_loader/ImageLoader";
 const ProductItem = (props) => {
   const product = props.product;
   const [imgURL, setImgURL] = useState(null);
+  // console.log(props);
 
   useEffect(() => {
     if (product.image?.url) {
-      setImgURL(product.image.url);
+      if (product.image.url.includes("|")) {
+        setImgURL(product.image.url.split("|").join("%7C"));
+      } else {
+        setImgURL(product.image.url);
+      }
     }
   }, [product.image?.url]);
 
