@@ -2,25 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./product-item.css";
-import { useState } from "react";
 import ImageLoader from "../../../components/image_loader/ImageLoader";
 
 const ProductItem = (props) => {
   const product = props.product;
-  const [imageLoading, setImageLoading] = useState(true);
-
-  let image = new Image();
-  image.src = product.image?.url;
-  image.onload = () => {
-    setImageLoading(false);
-  };
+  console.log(props);
 
   return (
     <div className="product__card">
       <Link to={"/products/" + product.id}>
-        {imageLoading ? (
-          <ImageLoader />
-        ) : (
+        {product.image?.url ? (
           <div className="product__image__wrapper">
             <img
               className="product__image"
@@ -28,6 +19,8 @@ const ProductItem = (props) => {
               alt={product.name}
             />
           </div>
+        ) : (
+          <ImageLoader />
         )}
 
         <div className="product__info">
